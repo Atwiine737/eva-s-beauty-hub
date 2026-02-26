@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Eva's Beauty Hub - Curating premium beauty products and services to celebrate individuality and self-expression.">
+    <title>Eva's Beauty Hub | Premium Beauty Products & Services</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div id="toast-container" class="toast-container"></div>
+    <div id="activity-simulator" class="activity-simulator"></div>
+    
+    <header>
+        <nav class="navbar">
+            <div class="logo">Eva's Beauty Hub</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#orders">Orders</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li class="theme-switch-container">
+                    <button id="theme-toggle" class="theme-toggle-btn" title="Toggle Dark/Light Mode">
+                        <span class="mode-icon">🌙</span>
+                    </button>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>Celebrate Your Individuality</h1>
+                <p>Eva's Beauty Hub curates premium beauty products and services to help women feel confident and beautiful, celebrating individuality and self-expression.</p>
+                <a href="#products" class="btn">Explore Our Collection</a>
+            </div>
+        </section>
+
+        <section id="about" class="section bg-light">
+            <h2 class="section-title">About Eva's Beauty Hub</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Welcome to <strong>Eva's Beauty Hub</strong> – your sanctuary for premium beauty products and personalized services. Founded with a passion for helping women celebrate their unique beauty, we believe that true beauty comes from confidence and self-expression.</p>
+                    <p>Our carefully curated collection features only the finest beauty products, sourced globally to ensure quality and authenticity. From skincare essentials to makeup masterpieces, we're committed to helping you look and feel your absolute best.</p>
+                    <div class="about-features">
+                        <div class="feature-item">
+                            <span class="feature-icon">✨</span>
+                            <h4>Premium Quality</h4>
+                            <p>Only the finest beauty products</p>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">💕</span>
+                            <h4>Expert Care</h4>
+                            <p>Professional consultations included</p>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🚚</span>
+                            <h4>Fast Delivery</h4>
+                            <p>Quick delivery across Kampala</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="products" class="section">
+            <h2 class="section-title">Our Premium Products</h2>
+            <div class="search-filter-container">
+                <input type="text" id="productSearch" class="product-search" placeholder="🔍 Search products...">
+            </div>
+            <div class="category-filter-container">
+                <button class="category-filter-btn active" data-category="all">All Products</button>
+                <button class="category-filter-btn" data-category="skincare">Skincare</button>
+                <button class="category-filter-btn" data-category="makeup">Makeup</button>
+                <button class="category-filter-btn" data-category="hair-care">Hair Care</button>
+                <button class="category-filter-btn" data-category="nails">Nails</button>
+                <button class="category-filter-btn" data-category="accessories">Accessories</button>
+            </div>
+            <div id="product-container" class="product-grid">
+                <!-- Products will be dynamically loaded here -->
+            </div>
+        </section>
+
+        <section id="services" class="section bg-light">
+            <div class="location-badge">
+                <p>📍 <strong>Visit Us:</strong> Nakawa, Kampala, Uganda</p>
+            </div>
+            <div class="services-content">
+                <p>At Eva's Beauty Hub, we go beyond products. We offer personalized beauty services designed to enhance your natural beauty and boost your confidence. Our expert team is dedicated to providing you with the best experience.</p>
+                <div class="services-list">
+                    <div class="service-description">
+                        <h3>Professional Makeup</h3>
+                        <p>Whether it's for a wedding, a party, or a photoshoot, our professional makeup artists will help you achieve the perfect look that reflects your individuality.</p>
+                    </div>
+                    <div class="service-description">
+                        <h3>Make up Consultation</h3>
+                        <p>Personalized sessions to help you find the best makeup techniques and products that complement your features and skin tone.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonials" class="section">
+            <h2 class="section-title">What Our Customers Say</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p>"Eva's Beauty Hub is my go-to for all my beauty needs. The quality is exceptional and the customer service is amazing!"</p>
+                    <h4>Sarah M.</h4>
+                    <p class="testimonial-role">Verified Buyer</p>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p>"I love the personalized consultations. The team really helped me find products that work perfectly for my skin!"</p>
+                    <h4>Jessica K.</h4>
+                    <p class="testimonial-role">Verified Buyer</p>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p>"Fast delivery, beautiful packaging, and premium products. Highly recommended to every woman who loves beauty!"</p>
+                    <h4>Angela T.</h4>
+                    <p class="testimonial-role">Verified Buyer</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="trust" class="section bg-light">
+            <h2 class="section-title">Why Choose Us</h2>
+            <div class="trust-badges">
+                <div class="trust-badge">
+                    <div class="badge-icon">🛡️</div>
+                    <h3>100% Authentic</h3>
+                    <p>Genuine products sourced from verified suppliers</p>
+                </div>
+                <div class="trust-badge">
+                    <div class="badge-icon">💯</div>
+                    <h3>Quality Guaranteed</h3>
+                    <p>All products meet international beauty standards</p>
+                </div>
+                <div class="trust-badge">
+                    <div class="badge-icon">🔒</div>
+                    <h3>Secure Payment</h3>
+                    <p>Safe and secure mobile money transactions</p>
+                </div>
+                <div class="trust-badge">
+                    <div class="badge-icon">⏱️</div>
+                    <h3>Fast Service</h3>
+                    <p>Quick response and delivery within Kampala</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq" class="section">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <h3 class="faq-question">How do I place an order?</h3>
+                    <p class="faq-answer">Click the "Place New Order" button, fill in your details, select your product, and submit. You'll receive an order confirmation on WhatsApp.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">What payment methods do you accept?</h3>
+                    <p class="faq-answer">We accept Mobile Money payments to +256 752546261 (A. Evalyne). You can also place orders via WhatsApp for more flexible payment options.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">How long does delivery take?</h3>
+                    <p class="faq-answer">We offer fast delivery within Kampala. Most orders are delivered within 24-48 hours of payment confirmation.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">Are your products authentic?</h3>
+                    <p class="faq-answer">Yes! All our products are 100% authentic, sourced directly from verified suppliers and meet international quality standards.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">Can I cancel or modify my order?</h3>
+                    <p class="faq-answer">Contact us on WhatsApp immediately after placing your order. We can help modify or cancel orders before they're shipped.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">Do you offer beauty consultations?</h3>
+                    <p class="faq-answer">Yes! We offer personalized beauty consultations. Contact us via WhatsApp to book a session with our expert consultants.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="orders" class="section">
+            <h2 class="section-title">Your Orders</h2>
+            <div class="orders-container">
+                <div class="order-tracking-box">
+                    <h3>Track Your Order</h3>
+                    <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 20px;">
+                        <input type="text" id="orderIDSearch" placeholder="Enter Order ID (e.g., EVA-12345)" class="product-search" style="max-width: 300px; margin: 0;">
+                        <button id="trackOrderBtn" class="btn" style="padding: 0.8rem 1.5rem; margin: 0;">Track</button>
+                    </div>
+                </div>
+                <button class="btn" id="openOrderForm">Place New Order</button>
+                <div id="orders-list" class="orders-grid">
+                    <p class="no-orders">You have no orders yet. <a href="#products">Start shopping!</a></p>
+                </div>
+            </div>
+        </section>
+
+        <section id="newsletter" class="section bg-gradient">
+            <h2 class="section-title" style="color: #fff;">Join Our Beauty Community</h2>
+            <p style="color: #fff; max-width: 600px; margin: 0 auto 2rem;">Subscribe to get exclusive beauty tips, new product launches, and special discounts delivered straight to your inbox!</p>
+            <form id="newsletterForm" class="newsletter-form">
+                <input type="email" id="newsletterEmail" placeholder="Enter your email address" required>
+                <button type="submit" class="btn">Subscribe Now</button>
+            </form>
+            <p style="color: #fff; font-size: 0.9rem; margin-top: 1rem;">✓ No spam, just beauty inspiration and exclusive offers</p>
+        </section>
+
+    </main>
+
+    <div id="orderModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Place Your Order</h2>
+            <form id="orderForm">
+                <div class="form-group">
+                    <label for="customerName">Full Name *</label>
+                    <input type="text" id="customerName" name="customerName" required>
+                </div>
+                <div class="form-group">
+                    <label for="customerEmail">Email *</label>
+                    <input type="email" id="customerEmail" name="customerEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="customerPhone">Phone Number *</label>
+                    <input type="tel" id="customerPhone" name="customerPhone" required>
+                </div>
+                <div class="form-group">
+                    <label for="productSelect">Select Product *</label>
+                    <select id="productSelect" name="productSelect" required>
+                        <option value="">-- Choose a Product --</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="quantity">Quantity *</label>
+                    <input type="number" id="quantity" name="quantity" min="1" value="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="address">Delivery Address *</label>
+                    <textarea id="address" name="address" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="paymentMethod">Payment Method *</label>
+                    <select id="paymentMethod" name="paymentMethod" required>
+                        <option value="">-- Select Payment Method --</option>
+                        <option value="mobile-money">Mobile Money</option>
+                        <option value="whatsapp">WhatsApp Order</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="notes">Special Notes</label>
+                    <textarea id="notes" name="notes" rows="2" placeholder="Any special requests..."></textarea>
+                </div>
+                <button type="submit" class="btn">Complete Order</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <span class="close cart-close">&times;</span>
+            <h2>Your Shopping Cart</h2>
+            <div id="cart-items-container">
+                <p class="empty-cart-msg">Your cart is empty.</p>
+            </div>
+            <div class="cart-summary">
+                <div class="cart-total">Total: UGX <span id="cart-total-amount">0</span></div>
+                <button class="btn" id="checkoutBtn">Proceed to Order</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+
+
+    <button id="cartFloatBtn" class="cart-float-btn" title="View Cart">
+        🛒 <span id="cart-count">0</span>
+    </button>
+
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Eva's Beauty Hub</h3>
+                <p>Helping you shine since 2024.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#orders">Orders</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p><strong>Location:</strong> Nakawa, Kampala, Uganda</p>
+                <p>Email: <a href="mailto:atwiineevalyne@gmail.com">atwiineevalyne@gmail.com</a></p>
+                <p>Phone: <a href="https://wa.me/256752546261" target="_blank">+256 752546261</a></p>
+                <p><strong>Mobile Money:</strong> Pay to +256 752546261 (A. Evalyne)</p>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="https://facebook.com" target="_blank" class="social-icon" title="Facebook">f</a>
+                    <a href="https://instagram.com" target="_blank" class="social-icon" title="Instagram">📷</a>
+                    <a href="https://tiktok.com" target="_blank" class="social-icon" title="TikTok">🎵</a>
+                    <a href="https://wa.me/256752546261" target="_blank" class="social-icon" title="WhatsApp">💬</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Eva's Beauty Hub. All rights reserved. | Celebrating individuality & self-expression</p>
+        </div>
+    </footer>
+
+    <button id="backToTop" title="Go to top">↑</button>
+
+    <a href="https://wa.me/256752546261?text=hello%20welcome%20to%20Eva's%20beauty%20hub" class="whatsapp-float" target="_blank" title="Chat with us on WhatsApp">
+        <svg viewBox="0 0 448 512" width="30" height="30" fill="white">
+            <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-190.9 101.5-190.9 226.9 0 43.2 10.8 85.5 31.5 122.5L32 512l133.8-35.1c35.6 19.4 75.6 29.5 116.4 29.5 122.4 0 222-99.6 222-222 0-59.3-23.1-115.1-65.1-157.1zM223.9 474c-37.9 0-75.1-10.2-107.5-29.4l-7.7-4.6L29.9 462.7l23.5-85.4-5-7.9c-21.1-33.6-32.3-72.7-32.3-112.5 0-111.3 90.4-201.8 201.8-201.8 54 0 104.7 21 142.9 59.2s59.2 88.9 59.2 142.6c0 111.3-90.4 201.8-201.8 201.8zm117.7-156.6c-6.5-3.2-38.3-18.9-44.2-21.1-5.9-2.1-10.2-3.2-14.5 3.2-4.3 6.5-16.7 21.1-20.4 25.4-3.8 4.3-7.5 4.9-14 1.6-6.5-3.2-27.4-10.1-52.2-33.2-19.3-17.2-32.3-38.4-36.1-44.9-3.8-6.5-.4-10 2.8-13.2 2.9-2.9 6.5-7.5 9.7-11.3 3.2-3.8 4.3-6.5 6.5-10.8 2.1-4.3 1.1-8.1-.5-11.3-1.6-3.2-14.5-34.9-19.9-47.7-5.3-12.4-10.7-10.7-14.5-10.9-3.8-.2-8.1-.2-12.4-.2-4.3 0-11.3 1.6-17.2 7.5-5.9 5.9-22.6 22.1-22.6 53.8s23.1 62.4 26.3 66.7c3.2 4.3 45.4 69.4 110 97.2 15.4 6.6 27.3 10.6 36.7 13.6 15.5 4.9 29.6 4.2 40.7 2.1 12.4-2.3 38.3-15.6 43.7-30.7 5.4-15.1 5.4-28.1 3.8-30.7-1.6-2.6-5.9-4.3-12.4-7.5z"/>
+        </svg>
+    </a>
+
+    <script>
+        // Dynamic Product Data - Organized by Categories
+        const products = [
+            {
+                category: "Accessories",
+                name: "Earrings",
+                price: "UGX 5,000",
+                image: "r1.jpeg"
+            },
+            {
+                category: "Makeup",
+                name: "Lip Gloss",
+                price: "UGX 6,000",
+                image: "r2.jpeg"
+            },
+            {
+                category: "Makeup",
+                name: "Lip Gloss",
+                price: "UGX 10,000",
+                image: "r3.jpeg"
+            },
+            {
+                category: "Makeup",
+                name: "Lip Gloss",
+                price: "UGX 7,000",
+                image: "r4.jpeg"
+            },
+            {
+                category: "Skincare",
+                name: "Sherbet Body Scrub",
+                price: "UGX 45,000",
+                image: "ace clear spot treatment.jpeg"
+            },
+            {
+                category: "Makeup",
+                name: "Lip Gloss",
+                price: "UGX 7,000",
+                image: "r6.jpeg"
+            },
+            {
+                category: "Hair Care",
+                name: "Hair Clips",
+                price: "UGX 5,000",
+                image: "rr.jpeg"
+            },
+            {
+                category: "Makeup",
+                name: "Pink Lips Lip Gloss",
+                price: "UGX 15,000",
+                image: "e4.jpeg"
+            },
+            {
+                category: "Skincare",
+                name: "Skin Care Combo",
+                price: "UGX 100,000",
+                image: "44.jpeg"
+            },
+            {
+                category: "Hair Care",
+                name: "Puff Holder",
+                price: "UGX 2,000",
+                image: "re.jpeg"
+            },
+            {
+                category: "Hair Care",
+                name: "Ribbon Hair Bows",
+                price: "UGX 5,000",
+                image: "hair clips.jpeg"
+            },
+            {
+                category: "Skincare",
+                name: "Luxury Body Spray",
+                price: "UGX 20,000",
+                image: "body spray.jpeg"
+            },
+            {
+                category: "Skincare",
+                name: "Premium Cotton Pads",
+                price: "UGX 30,000",
+                image: "cotton pads.jpeg"
+            },
+            {
+                category: "Skincare",
+                name: "Exfoliating Glove Sponge",
+                price: "UGX 5,000",
+                image: "glove sponge.jpeg"
+            },
+            {
+                category: "Skincare",
+                name: "Vitamin C Brightening Cream",
+                price: "UGX 50,000",
+                image: "vc brightening cream.jpeg"
+            },
+            {
+                category: "Skincare",
+                name: "Pearl Cleansing Milk",
+                price: "UGX 20,000",
+                image: "pearl cleansing milk.jpeg"
+            },
+            {
+                category: "Skincare",
+                name: "Fruit Wipes",
+                price: "UGX 5,000",
+                image: "wipes.jpeg"
+            },
+            {
+                category: "Makeup",
+                name: "Matte Lip Gloss Set",
+                price: "UGX 20,000",
+                image: "velvet matte lip stick.jpeg"
+            },
+            {
+                category: "Skincare",
+                name: "Vitamin C Whitening Cream",
+                price: "UGX 30,000",
+                image: "vc whitening cream.jpeg"
+            },
+            {
+                category: "Nails",
+                name: "Luxury Floral Nail Art",
+                price: "UGX 40,000",
+                image: "nails3.jpeg"
+            },
+            {
+                category: "Accessories",
+                name: "Portable Mini Fans",
+                price: "UGX 15,000",
+                image: "hand funs.jpeg"
+            },
+            {
+                category: "Accessories",
+                name: "Pink Beaded Bracelets",
+                price: "UGX 5,000",
+                image: "bracelets.jpeg"
+            },
+            {
+                category: "Nails",
+                name: "Premium Press-on Nails",
+                price: "UGX 10,000",
+                image: "nails4.jpeg"
+            }
+        ];
+
+        const productContainer = document.getElementById('product-container');
+
+        // Function to render products with categories grouped
+        function renderProducts() {
+            productContainer.innerHTML = '';
+            
+            const categoryOrder = ["Skincare", "Makeup", "Hair Care", "Nails", "Accessories"];
+            
+            categoryOrder.forEach(category => {
+                const categoryProducts = products.filter(p => p.category === category);
+                
+                if (categoryProducts.length > 0) {
+                    // Add Category Header
+                    const categoryHeader = document.createElement('div');
+                    categoryHeader.className = 'category-section-title';
+                    categoryHeader.style.gridColumn = '1 / -1';
+                    categoryHeader.style.textAlign = 'left';
+                    categoryHeader.style.marginTop = '2rem';
+                    categoryHeader.style.marginBottom = '1rem';
+                    categoryHeader.style.borderBottom = '2px solid var(--primary-color)';
+                    categoryHeader.style.paddingBottom = '0.5rem';
+                    categoryHeader.innerHTML = `<h3 style="font-family: 'Playfair Display', serif; color: var(--accent-color);">${category}</h3>`;
+                    productContainer.appendChild(categoryHeader);
+
+                    categoryProducts.forEach(product => {
+                        const originalIndex = products.indexOf(product);
+                        const isFeatured = originalIndex % 5 === 0;
+                        const isNew = originalIndex % 3 === 0;
+                        
+                        const productCard = document.createElement('div');
+                        productCard.className = 'product-card';
+                        productCard.setAttribute('data-category', product.category.toLowerCase());
+                        productCard.innerHTML = `
+                            ${isFeatured ? '<div class="category-badge featured-badge" style="left: 10px; right: auto; background: var(--primary-color);">Featured</div>' : ''}
+                            ${isNew && !isFeatured ? '<div class="category-badge new-badge" style="left: 10px; right: auto; background: #2ecc71;">New</div>' : ''}
+                            <div class="category-badge product-cat-badge">${product.category}</div>
+                            <img src="${product.image}" alt="${product.name}" class="product-image" loading="lazy">
+                            <h3>${product.name}</h3>
+                            <p class="product-price">${product.price}</p>
+                            <div class="btn-group" style="display: flex; gap: 0.5rem; justify-content: center;">
+                                <button onclick="addToCart(${originalIndex})" class="btn-small">🛒 Add</button>
+                                <a href="https://wa.me/256752546261?text=Hi, I want to buy ${product.name} for ${product.price}. How do I pay via Mobile Money?" target="_blank" class="btn-small">Order Now</a>
+                            </div>
+                        `;
+                        productContainer.appendChild(productCard);
+
+                        // show details when card itself (not buttons/links) is clicked
+                        productCard.addEventListener('click', (e) => {
+                            // ignore clicks on buttons or links inside the card
+                            if (e.target.closest('button') || e.target.closest('a')) return;
+                            showProductDetails(product);
+                        });
+                    });
+                }
+            });
+        }
+
+        renderProducts();
+
+        // initialize filtering variables and UI
+        let selectedCategory = 'all';
+        const productSearch = document.getElementById('productSearch');
+        const categoryButtons = document.querySelectorAll('.category-filter-btn');
+
+        // add event listeners for category buttons
+        categoryButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                selectedCategory = btn.dataset.category;
+                categoryButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                filterProducts();
+            });
+        });
+
+        // search box listener
+        productSearch.addEventListener('input', filterProducts);
+
+        // observe after rendering
+        observeElements();
+
+        function filterProducts() {
+            const searchTerm = productSearch.value.toLowerCase();
+            const productCards = document.querySelectorAll('.product-card');
+            const categoryHeaders = document.querySelectorAll('.category-section-title');
+            
+            // Map selectedCategory to data-category format
+            const targetCategory = selectedCategory.replace('-', ' ');
+
+            productCards.forEach(card => {
+                const productName = card.querySelector('h3').innerText.toLowerCase();
+                const cardCategory = card.getAttribute('data-category');
+                const productPrice = card.querySelector('.product-price').innerText.toLowerCase();
+                
+                const categoryMatch = selectedCategory === 'all' || cardCategory === targetCategory;
+                const nameMatch = productName.includes(searchTerm) || cardCategory.includes(searchTerm) || productPrice.includes(searchTerm);
+                
+                if (categoryMatch && nameMatch) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // Hide/Show headers based on whether they have visible products
+            categoryHeaders.forEach(header => {
+                let current = header.nextElementSibling;
+                let hasVisible = false;
+                while (current && !current.classList.contains('category-section-title')) {
+                    if (current.classList.contains('product-card') && current.style.display !== 'none') {
+                        hasVisible = true;
+                        break;
+                    }
+                    current = current.nextElementSibling;
+                }
+                header.style.display = hasVisible ? 'block' : 'none';
+            });
+        }
+
+        // Intersection Observer for dynamic scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe product cards
+        function observeElements() {
+            const cards = document.querySelectorAll('.product-card, .category-section-title');
+            cards.forEach(card => {
+                observer.observe(card);
+            });
+        }
+
+        // Back to Top Logic
+        const backToTopBtn = document.createElement('button');
+        backToTopBtn.id = "backToTop";
+        backToTopBtn.innerHTML = "↑";
+        backToTopBtn.title = "Go to top";
+        document.body.appendChild(backToTopBtn);
+
+        window.onscroll = function() {
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                backToTopBtn.style.display = "block";
+            } else {
+                backToTopBtn.style.display = "none";
+            }
+        };
+
+        backToTopBtn.onclick = function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+
+        // Hamburger Menu
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            hamburger.classList.toggle('toggle');
+        });
+
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                hamburger.classList.remove('toggle');
+            });
+        });
+
+        
+        // helper to show simple product details (you can replace with modal)
+        function showProductDetails(prod) {
+            alert(`Product: ${prod.name}\nCategory: ${prod.category}\nPrice: ${prod.price}`);
+        }
+
+        // Cart Functionality
+        let cart = JSON.parse(localStorage.getItem('evasBeautyCart')) || [];
+        const cartModal = document.getElementById('cartModal');
+        const cartFloatBtn = document.getElementById('cartFloatBtn');
+        const cartCloseBtn = document.querySelector('.cart-close');
+        const cartItemsContainer = document.getElementById('cart-items-container');
+        const cartTotalAmount = document.getElementById('cart-total-amount');
+        const cartCount = document.getElementById('cart-count');
+
+        function updateCartUI() {
+            cartCount.innerText = cart.length;
+            localStorage.setItem('evasBeautyCart', JSON.stringify(cart));
+            
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p class="empty-cart-msg">Your cart is empty.</p>';
+                cartTotalAmount.innerText = '0';
+                return;
+            }
+
+            let total = 0;
+            cartItemsContainer.innerHTML = cart.map((item, index) => {
+                const price = parseInt(item.price.replace(/[^0-9]/g, ''));
+                total += price;
+                return `
+                    <div class="cart-item">
+                        <div class="cart-item-info">
+                            <h4>${item.name}</h4>
+                            <p>${item.price}</p>
+                        </div>
+                        <span class="remove-item" onclick="removeFromCart(${index})">❌ Remove</span>
+                    </div>
+                `;
+            }).join('');
+            cartTotalAmount.innerText = total.toLocaleString();
+        }
+
+        function addToCart(index) {
+            const product = products[index];
+            cart.push({...product, productIndex: index});
+            updateCartUI();
+            showToast(`✨ ${product.name} added to cart!`);
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        cartFloatBtn.addEventListener('click', () => {
+            cartModal.style.display = 'block';
+        });
+
+        cartCloseBtn.addEventListener('click', () => {
+            cartModal.style.display = 'none';
+        });
+
+        document.getElementById('checkoutBtn').addEventListener('click', () => {
+            if (cart.length === 0) {
+                showToast("Your cart is empty!");
+                return;
+            }
+            cartModal.style.display = 'none';
+            document.getElementById('orderModal').style.display = 'block';
+            
+            const cartSummary = cart.map(item => `${item.name} (${item.price})`).join(', ');
+            document.getElementById('notes').value = `Order from Cart: ${cartSummary}`;
+            productSelect.value = cart[0].productIndex;
+        });
+
+        // Order Management
+        const orderModal = document.getElementById('orderModal');
+        const openOrderFormBtn = document.getElementById('openOrderForm');
+        const closeModalBtn = document.querySelector('.close');
+        const orderForm = document.getElementById('orderForm');
+        const productSelect = document.getElementById('productSelect');
+        const ordersListContainer = document.getElementById('orders-list');
+
+        let allOrders = [];
+
+        function populateProductSelect() {
+            const options = products.map((product, index) => 
+                `<option value="${index}">${product.name} - ${product.price}</option>`
+            ).join('');
+            productSelect.innerHTML = '<option value="">-- Choose a Product --</option>' + options;
+        }
+
+        function generateOrderId() {
+            return 'ORD-' + Date.now() + Math.random().toString(36).substr(2, 9).toUpperCase();
+        }
+
+        function getOrderStatus(createdTime) {
+            const now = new Date().getTime();
+            const timeDiff = now - createdTime;
+            const hoursAgo = timeDiff / (1000 * 60 * 60);
+            
+            if (hoursAgo < 1) return 'Pending';
+            if (hoursAgo < 24) return 'Processing';
+            if (hoursAgo < 72) return 'Shipped';
+            return 'Delivered';
+        }
+
+        function loadOrders() {
+            const savedOrders = localStorage.getItem('evasBeautyOrders');
+            allOrders = savedOrders ? JSON.parse(savedOrders) : [];
+            displayOrders();
+        }
+
+        function displayOrders() {
+            if (allOrders.length === 0) {
+                ordersListContainer.innerHTML = '<p class="no-orders">You have no orders yet. <a href="#products">Start shopping!</a></p>';
+                return;
+            }
+
+            ordersListContainer.innerHTML = allOrders.map(order => `
+                <div class="order-card">
+                    <div class="order-header">
+                        <h3>${order.orderId}</h3>
+                        <span class="order-status status-${order.status.toLowerCase()}">${order.status}</span>
+                    </div>
+                    <div class="order-details">
+                        <p><strong>Product:</strong> ${products[order.productIndex].name}</p>
+                        <p><strong>Price:</strong> ${products[order.productIndex].price}</p>
+                        <p><strong>Quantity:</strong> ${order.quantity}</p>
+                        <p><strong>Total:</strong> UGX ${(parseInt(products[order.productIndex].price.replace(/[^0-9]/g, '')) * order.quantity).toLocaleString()}</p>
+                        <p><strong>Customer:</strong> ${order.customerName}</p>
+                        <p><strong>Delivery Address:</strong> ${order.address}</p>
+                        <p><strong>Payment Method:</strong> ${order.paymentMethod === 'mobile-money' ? 'Mobile Money' : 'WhatsApp Order'}</p>
+                        <p><strong>Ordered:</strong> ${new Date(order.createdTime).toLocaleString()}</p>
+                    </div>
+                    <div class="order-actions">
+                        <button class="btn-small" onclick="shareOrder('${order.orderId}', 'whatsapp')">Share to WhatsApp</button>
+                        <button class="btn-small btn-secondary" onclick="shareOrder('${order.orderId}', 'sms')">Send via SMS</button>
+                        <button class="btn-small btn-danger" onclick="deleteOrder('${order.orderId}')">Cancel Order</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function shareOrder(orderId, platform) {
+            const order = allOrders.find(o => o.orderId === orderId);
+            if (!order) return;
+
+            const product = products[order.productIndex];
+            const total = (parseInt(product.price.replace(/[^0-9]/g, '')) * order.quantity).toLocaleString();
+            
+            const text = `*EVA'S BEAUTY HUB - ORDER RECEIPT*\n\n` +
+                         `Order ID: ${order.orderId}\n` +
+                         `Product: ${product.name}\n` +
+                         `Quantity: ${order.quantity}\n` +
+                         `Total: UGX ${total}\n` +
+                         `Status: ${order.status}\n\n` +
+                         `Thank you for shopping with us!`;
+
+            if (platform === 'whatsapp') {
+                window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+            } else if (platform === 'sms') {
+                window.open(`sms:?body=${encodeURIComponent(text)}`, '_blank');
+            }
+        }
+
+        function saveOrder(orderData) {
+            const order = {
+                orderId: generateOrderId(),
+                ...orderData,
+                createdTime: Date.now(),
+                status: 'Pending'
+            };
+            allOrders.push(order);
+            localStorage.setItem('evasBeautyOrders', JSON.stringify(allOrders));
+            return order;
+        }
+
+        function deleteOrder(orderId) {
+            if (confirm('Are you sure you want to cancel this order?')) {
+                allOrders = allOrders.filter(order => order.orderId !== orderId);
+                localStorage.setItem('evasBeautyOrders', JSON.stringify(allOrders));
+                displayOrders();
+            }
+        }
+
+        openOrderFormBtn.addEventListener('click', () => {
+            orderModal.style.display = 'block';
+        });
+
+        closeModalBtn.addEventListener('click', () => {
+            orderModal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === orderModal) {
+                orderModal.style.display = 'none';
+            }
+        });
+
+        orderForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const productIndex = document.getElementById('productSelect').value;
+            const selectedProduct = products[productIndex];
+            
+            const orderData = {
+                customerName: document.getElementById('customerName').value,
+                customerEmail: document.getElementById('customerEmail').value,
+                customerPhone: document.getElementById('customerPhone').value,
+                productIndex: parseInt(productIndex),
+                productName: selectedProduct.name,
+                quantity: parseInt(document.getElementById('quantity').value),
+                address: document.getElementById('address').value,
+                paymentMethod: document.getElementById('paymentMethod').value,
+                notes: document.getElementById('notes').value
+            };
+
+            const newOrder = saveOrder(orderData);
+            
+            showToast(`Order placed! Order ID: ${newOrder.orderId}`, "🛍️");
+            
+            orderForm.reset();
+            orderModal.style.display = 'none';
+            loadOrders();
+
+            const totalAmount = (parseInt(selectedProduct.price.replace(/[^0-9]/g, '')) * orderData.quantity).toLocaleString();
+            const whatsappMessage = `*NEW ORDER - EVA'S BEAUTY HUB*\n\n` +
+                                    `*Order ID:* ${newOrder.orderId}\n` +
+                                    `*Product:* ${orderData.productName}\n` +
+                                    `*Quantity:* ${orderData.quantity}\n` +
+                                    `*Total:* UGX ${totalAmount}\n\n` +
+                                    `*Customer Details:*\n` +
+                                    `*Name:* ${orderData.customerName}\n` +
+                                    `*Phone:* ${orderData.customerPhone}\n` +
+                                    `*Address:* ${orderData.address}\n\n` +
+                                    `_Please confirm my order and send payment instructions. Thank you!_`;
+            
+            const whatsappUrl = `https://wa.me/256752546261?text=${encodeURIComponent(whatsappMessage)}`;
+            
+            setTimeout(() => {
+                window.open(whatsappUrl, '_blank');
+            }, 1000);
+        });
+
+        // Newsletter Signup
+        const newsletterForm = document.getElementById('newsletterForm');
+        if (newsletterForm) {
+            newsletterForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const email = document.getElementById('newsletterEmail').value;
+                
+                let subscribers = JSON.parse(localStorage.getItem('newsLetterSubscribers')) || [];
+                if (!subscribers.includes(email)) {
+                    subscribers.push(email);
+                    localStorage.setItem('newsLetterSubscribers', JSON.stringify(subscribers));
+                }
+                
+                alert('Thank you for subscribing! 💌 Check your email for exclusive beauty tips!');
+                newsletterForm.reset();
+            });
+        }
+
+        // FAQ Accordion
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                item.classList.toggle('active');
+            });
+        });
+
+        // Theme Toggle Functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        
+        if (currentTheme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            themeToggle.querySelector('.mode-icon').textContent = '☀️';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            let theme = document.documentElement.getAttribute('data-theme');
+            if (theme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+                themeToggle.querySelector('.mode-icon').textContent = '🌙';
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+                themeToggle.querySelector('.mode-icon').textContent = '☀️';
+            }
+        });
+
+        // Toast Notification System
+        function showToast(message, icon = '✅') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.innerHTML = `<span>${icon}</span> <span>${message}</span>`;
+            container.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateX(20px)';
+                toast.style.transition = 'all 0.3s ease';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // Live Activity Simulator
+        const locations = ['Nakawa', 'Kampala Central', 'Ntinda', 'Kiwatule', 'Bugolobi', 'Kololo', 'Kansanga', 'Muyenga', 'Naalya'];
+        const buyerNames = ['Namono', 'Achieng', 'Nakalema', 'Mbabazi', 'Atwiine', 'Kiconco', 'Tumusiime', 'Aine', 'Kyomugisha'];
+        
+        function simulateActivity() {
+            const container = document.getElementById('activity-simulator');
+            const randomLocation = locations[Math.floor(Math.random() * locations.length)];
+            const randomProduct = products[Math.floor(Math.random() * products.length)];
+            const randomName = buyerNames[Math.floor(Math.random() * buyerNames.length)];
+            
+            const activity = document.createElement('div');
+            activity.className = 'activity-card';
+            activity.innerHTML = `
+                <span class="activity-icon">🛍️</span>
+                <span><strong>${randomName}</strong> from ${randomLocation} just ordered <strong>${randomProduct.name}</strong></span>
+            `;
+            
+            container.appendChild(activity);
+            
+            setTimeout(() => {
+                activity.remove();
+            }, 5000);
+        }
+
+        // Start activity simulation after 5 seconds
+        setTimeout(() => {
+            simulateActivity();
+            setInterval(simulateActivity, 15000); // Repeat every 15 seconds
+        }, 5000);
+
+        // Order Tracking Functionality
+        const trackOrderBtn = document.getElementById('trackOrderBtn');
+        const orderIDSearch = document.getElementById('orderIDSearch');
+
+        if (trackOrderBtn) {
+            trackOrderBtn.addEventListener('click', () => {
+                const orderId = orderIDSearch.value.trim().toUpperCase();
+                if (!orderId) {
+                    showToast("Please enter an Order ID", "⚠️");
+                    return;
+                }
+
+                const orders = JSON.parse(localStorage.getItem('evasBeautyOrders')) || [];
+                const order = orders.find(o => o.orderId === orderId);
+
+                if (order) {
+                    const currentStatus = getOrderStatus(order.createdTime);
+                    showToast(`Order Found! Status: ${currentStatus}`, "📦");
+                    
+                    // Scroll to the order in the list if it exists
+                    const orderCards = document.querySelectorAll('.order-card');
+                    orderCards.forEach(card => {
+                        const cardHeader = card.querySelector('h3');
+                        if (cardHeader && cardHeader.innerText === orderId) {
+                            card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            card.classList.add('highlight-order');
+                            setTimeout(() => card.classList.remove('highlight-order'), 3000);
+                        }
+                    });
+                } else {
+                    showToast("Order ID not found. Please check and try again.", "❌");
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            populateProductSelect();
+            loadOrders();
+            observeElements();
+            
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+                document.body.style.transition = 'opacity 0.5s ease-in';
+            }, 100);
+        });
+    </script>
+</body>
+</html>
