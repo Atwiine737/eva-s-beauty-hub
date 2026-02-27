@@ -254,9 +254,15 @@
                     <label for="paymentMethod">Payment Method *</label>
                     <select id="paymentMethod" name="paymentMethod" required>
                         <option value="">-- Select Payment Method --</option>
+                        <option value="mpesa">M-Pesa (Daraja API)</option>
                         <option value="mobile-money">Mobile Money</option>
                         <option value="whatsapp">WhatsApp Order</option>
                     </select>
+                </div>
+                <div id="mpesaPaymentInfo" style="display: none; background: #e8f5e9; padding: 1rem; border-radius: 8px; margin-top: 1rem; border-left: 4px solid #2ecc71; display: none;">
+                    <h4 style="margin-top: 0; color: #27ae60;">M-Pesa Payment Instructions</h4>
+                    <p><strong>Phone Number:</strong> <span id="mpesaPhoneDisplay">+256 752 546 261</span></p>
+                    <p style="font-size: 0.9rem; color: #555;">You will receive an M-Pesa STK prompt on your phone to complete the payment. Your order will be confirmed immediately upon successful payment.</p>
                 </div>
                 <div class="form-group">
                     <label for="notes">Special Notes</label>
@@ -855,11 +861,25 @@
             }
         });
 
+        // Payment Method visibility handler
+        const paymentMethodSelect = document.getElementById('paymentMethod');
+        const mpesaPaymentInfo = document.getElementById('mpesaPaymentInfo');
+
+        paymentMethodSelect.addEventListener('change', (e) => {
+            if (e.target.value === 'mpesa') {
+                mpesaPaymentInfo.style.display = 'block';
+            } else {
+                mpesaPaymentInfo.style.display = 'none';
+            }
+        });
+
+        // Order form submission with M-Pesa support
         orderForm.addEventListener('submit', (e) => {
             e.preventDefault();
             
             const productIndex = document.getElementById('productSelect').value;
             const selectedProduct = products[productIndex];
+            const paymentMethod = document.getElementById('paymentMethod').value;
             
             const orderData = {
                 customerName: document.getElementById('customerName').value,
@@ -869,36 +889,114 @@
                 productName: selectedProduct.name,
                 quantity: parseInt(document.getElementById('quantity').value),
                 address: document.getElementById('address').value,
-                paymentMethod: document.getElementById('paymentMethod').value,
+                paymentMethod: paymentMethod,
                 notes: document.getElementById('notes').value
             };
 
-            const newOrder = saveOrder(orderData);
-            
-            showToast(`Order placed! Order ID: ${newOrder.orderId}`, "🛍️");
-            
-            orderForm.reset();
-            orderModal.style.display = 'none';
-            loadOrders();
+            const totalAmount = parseInt(selectedProduct.price.replace(/[^0-9]/g, '')) * orderData.quantity;
 
-            const totalAmount = (parseInt(selectedProduct.price.replace(/[^0-9]/g, '')) * orderData.quantity).toLocaleString();
-            const whatsappMessage = `*NEW ORDER - EVA'S BEAUTY HUB*\n\n` +
-                                    `*Order ID:* ${newOrder.orderId}\n` +
-                                    `*Product:* ${orderData.productName}\n` +
-                                    `*Quantity:* ${orderData.quantity}\n` +
-                                    `*Total:* UGX ${totalAmount}\n\n` +
-                                    `*Customer Details:*\n` +
-                                    `*Name:* ${orderData.customerName}\n` +
-                                    `*Phone:* ${orderData.customerPhone}\n` +
-                                    `*Address:* ${orderData.address}\n\n` +
-                                    `_Please confirm my order and send payment instructions. Thank you!_`;
-            
-            const whatsappUrl = `https://wa.me/256752546261?text=${encodeURIComponent(whatsappMessage)}`;
-            
-            setTimeout(() => {
-                window.open(whatsappUrl, '_blank');
-            }, 1000);
+            // Handle M-Pesa payment
+            if (paymentMethod === 'mpesa') {
+                processMpesaPayment(orderData, totalAmount, selectedProduct);
+            } else {
+                // Handle other payment methods
+                const newOrder = saveOrder(orderData);
+                
+                showToast(`Order placed! Order ID: ${newOrder.orderId}`, "🛍️");
+                
+                orderForm.reset();
+                orderModal.style.display = 'none';
+                loadOrders();
+
+                if (paymentMethod === 'whatsapp') {
+                    const whatsappMessage = `*NEW ORDER - EVA'S BEAUTY HUB*\n\n` +
+                                            `*Order ID:* ${newOrder.orderId}\n` +
+                                            `*Product:* ${orderData.productName}\n` +
+                                            `*Quantity:* ${orderData.quantity}\n` +
+                                            `*Total:* UGX ${totalAmount.toLocaleString()}\n\n` +
+                                            `*Customer Details:*\n` +
+                                            `*Name:* ${orderData.customerName}\n` +
+                                            `*Phone:* ${orderData.customerPhone}\n` +
+                                            `*Address:* ${orderData.address}\n\n` +
+                                            `_Please confirm my order and send payment instructions. Thank you!_`;
+                    
+                    const whatsappUrl = `https://wa.me/256752546261?text=${encodeURIComponent(whatsappMessage)}`;
+                    
+                    setTimeout(() => {
+                        window.open(whatsappUrl, '_blank');
+                    }, 1000);
+                }
+            }
         });
+
+        // M-Pesa Payment Handler
+        async function processMpesaPayment(orderData, totalAmount, product) {
+            try {
+                showToast("Processing M-Pesa payment...", "⏳");
+
+                // First, validate the phone number
+                const validateResponse = await fetch('/evas-beauty-hub/mpesa-payment.php?action=validate', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        phoneNumber: orderData.customerPhone
+                    })
+                });
+
+                const validationResult = await validateResponse.json();
+
+                if (!validationResult.success) {
+                    showToast("Invalid phone number. Please use a valid Ugandan number (e.g., 0700000000 or +256700000000)", "❌");
+                    return;
+                }
+
+                // Initiate STK Push
+                const initiateResponse = await fetch('/evas-beauty-hub/mpesa-payment.php?action=initiate', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        amount: totalAmount,
+                        phoneNumber: orderData.customerPhone,
+                        orderId: 'EVA-' + Date.now()
+                    })
+                });
+
+                const stkResult = await initiateResponse.json();
+
+                if (!stkResult.success) {
+                    showToast("Failed to initiate M-Pesa payment: " + stkResult.message, "❌");
+                    return;
+                }
+
+                // Save the order
+                const newOrder = saveOrder(orderData);
+
+                showToast("STK push sent! Enter your M-Pesa PIN on your phone.", "📱");
+                
+                orderForm.reset();
+                orderModal.style.display = 'none';
+                loadOrders();
+
+                // Show payment confirmation message
+                const confirmationMessage = `✅ *Order Placed Successfully!*\n\n` +
+                                           `*Order ID:* ${newOrder.orderId}\n` +
+                                           `*Product:* ${orderData.productName}\n` +
+                                           `*Amount:* UGX ${totalAmount.toLocaleString()}\n\n` +
+                                           `📱 Check your phone for the M-Pesa prompt.\n` +
+                                           `Enter your PIN to complete the payment.\n\n` +
+                                           `If you don't receive the prompt within 10 seconds, contact us on WhatsApp.`;
+                
+                alert(confirmationMessage);
+
+            } catch (error) {
+                console.error("M-Pesa Error:", error);
+                showToast("Error processing M-Pesa payment. Please try again.", "❌");
+            }
+        }
 
         // Newsletter Signup
         const newsletterForm = document.getElementById('newsletterForm');

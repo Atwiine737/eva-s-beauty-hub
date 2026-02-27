@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M-Pesa Integration Tester - Eva's Beauty Hub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 0.95rem;
+        }
+
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            border-left: 4px solid;
+        }
+
+        .alert-info {
+            background: #e3f2fd;
+            border-color: #2196f3;
+            color: #1976d2;
+        }
+
+        .alert-warning {
+            background: #fff3e0;
+            border-color: #ff9800;
+            color: #e65100;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .button-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #333;
+        }
+
+        .btn-secondary:hover {
+            background: #e0e0e0;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        .response-section {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #eee;
+        }
+
+        .response-section h3 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .response-box {
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            max-height: 300px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .status-success {
+            background: #4caf50;
+            color: white;
+        }
+
+        .status-error {
+            background: #f44336;
+            color: white;
+        }
+
+        .status-pending {
+            background: #ff9800;
+            color: white;
+        }
+
+        .test-scenarios {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            border-left: 4px solid #667eea;
+        }
+
+        .test-scenarios h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .test-scenarios ul {
+            margin-left: 20px;
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+
+        .test-scenarios code {
+            background: white;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            margin-right: 8px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🛍️ M-Pesa Integration Tester</h1>
+        <p class="subtitle">Test M-Pesa STK Push, Validation & Payment Queries</p>
+
+        <div class="alert alert-warning">
+            ⚠️ <strong>Important:</strong> Before testing, make sure you have filled in your credentials in <code>mpesa-config.php</code>
+        </div>
+
+        <div class="alert alert-info">
+            ℹ️ <strong>Sandbox Testing:</strong> Use phone number <code>254708374149</code> for testing. Any amount works: 1-1,000,000 UGX
+        </div>
+
+        <form id="testForm">
+            <div class="test-scenarios">
+                <h4>📋 Test Scenarios</h4>
+                <ul>
+                    <li><strong>Test Phone:</strong> <code>0708374149</code> (add any country code)</li>
+                    <li><strong>Test Amount:</strong> Any amount between 1-1,000,000 UGX</li>
+                    <li><strong>Test PIN:</strong> <code>123456</code></li>
+                    <li><strong>Successful Payment:</strong> Use any valid amount</li>
+                    <li><strong>Insufficient Funds:</strong> Amount might exceed balance</li>
+                    <li><strong>Timeout:</strong> Don't enter PIN within 10 seconds</li>
+                </ul>
+            </div>
+
+            <div class="form-group">
+                <label for="testAction">Test Action *</label>
+                <select id="testAction" name="testAction" required onchange="updateFormFields()">
+                    <option value="">-- Select Action --</option>
+                    <option value="initiate">STK Push (Initiate Payment)</option>
+                    <option value="validate">Validate Phone Number</option>
+                    <option value="query">Query Payment Status</option>
+                </select>
+            </div>
+
+            <div id="phoneField" class="form-group" style="display: none;">
+                <label for="phoneNumber">Phone Number *</label>
+                <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="e.g., 0700000000 or +256700000000">
+                <small style="color: #888; margin-top: 5px; display: block;">Ugandan phone number (with or without country code)</small>
+            </div>
+
+            <div id="amountField" class="form-group" style="display: none;">
+                <label for="amount">Amount (UGX) *</label>
+                <input type="number" id="amount" name="amount" placeholder="e.g., 50000" min="1" step="100">
+                <small style="color: #888; margin-top: 5px; display: block;">Amount in Ugandan Shillings</small>
+            </div>
+
+            <div id="checkoutField" class="form-group" style="display: none;">
+                <label for="checkoutRequestID">Checkout Request ID *</label>
+                <input type="text" id="checkoutRequestID" name="checkoutRequestID" placeholder="From STK Push response">
+                <small style="color: #888; margin-top: 5px; display: block;">Use the CheckoutRequestID from a previous STK Push</small>
+            </div>
+
+            <div class="button-group">
+                <button type="submit" class="btn-primary" id="submitBtn">Test API</button>
+                <button type="button" class="btn-secondary" onclick="clearResponse()">Clear Results</button>
+            </div>
+        </form>
+
+        <div id="responseSection" class="response-section" style="display: none;">
+            <h3>📊 API Response</h3>
+            <div id="responseBox" class="response-box">Ready for testing...</div>
+            <div id="statusBadge"></div>
+        </div>
+
+        <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; font-size: 0.85rem; color: #999;">
+            <p>💡 <strong>Tips:</strong></p>
+            <ul style="margin-left: 20px; line-height: 1.8;">
+                <li>Test phone validation first to ensure your number format is correct</li>
+                <li>Check browser console for any errors during testing</li>
+                <li>Make sure your M-Pesa config credentials are correct</li>
+                <li>For live testing, use actual Safaricom production credentials</li>
+                <li>Payment callbacks are simulated in sandbox for testing</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        const testForm = document.getElementById('testForm');
+        const testAction = document.getElementById('testAction');
+        const phoneField = document.getElementById('phoneField');
+        const amountField = document.getElementById('amountField');
+        const checkoutField = document.getElementById('checkoutField');
+        const responseSection = document.getElementById('responseSection');
+        const responseBox = document.getElementById('responseBox');
+        const statusBadge = document.getElementById('statusBadge');
+        const submitBtn = document.getElementById('submitBtn');
+
+        function updateFormFields() {
+            const action = testAction.value;
+            phoneField.style.display = 'none';
+            amountField.style.display = 'none';
+            checkoutField.style.display = 'none';
+
+            switch(action) {
+                case 'initiate':
+                    phoneField.style.display = 'block';
+                    amountField.style.display = 'block';
+                    document.getElementById('phoneNumber').required = true;
+                    document.getElementById('amount').required = true;
+                    break;
+                case 'validate':
+                    phoneField.style.display = 'block';
+                    document.getElementById('phoneNumber').required = true;
+                    break;
+                case 'query':
+                    checkoutField.style.display = 'block';
+                    document.getElementById('checkoutRequestID').required = true;
+                    break;
+            }
+        }
+
+        testForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const action = testAction.value;
+            if (!action) {
+                alert('Please select an action');
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="spinner"></span>Testing...';
+            responseSection.style.display = 'block';
+            responseBox.textContent = 'Sending request...';
+
+            try {
+                const payload = { action };
+
+                if (action === 'initiate' || action === 'validate') {
+                    payload.phoneNumber = document.getElementById('phoneNumber').value;
+                }
+                if (action === 'initiate') {
+                    payload.amount = parseInt(document.getElementById('amount').value);
+                }
+                if (action === 'query') {
+                    payload.checkoutRequestID = document.getElementById('checkoutRequestID').value;
+                }
+
+                const response = await fetch(`/evas-beauty-hub/mpesa-payment.php?action=${action}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload.phoneNumber ? 
+                        {phoneNumber: payload.phoneNumber, ...(payload.amount && {amount: payload.amount}), ...(payload.checkoutRequestID && {checkoutRequestID: payload.checkoutRequestID})} : 
+                        {checkoutRequestID: payload.checkoutRequestID})
+                });
+
+                const data = await response.json();
+                responseBox.textContent = JSON.stringify(data, null, 2);
+
+                if (data.success) {
+                    statusBadge.innerHTML = '<span class="status-badge status-success">✓ Success</span>';
+                } else {
+                    statusBadge.innerHTML = '<span class="status-badge status-error">✗ Error</span>';
+                }
+            } catch (error) {
+                responseBox.textContent = 'Error: ' + error.message + '\n\nMake sure:\n1. Your API endpoint is accessible\n2. M-Pesa credentials are configured\n3. CORS is properly configured';
+                statusBadge.innerHTML = '<span class="status-badge status-error">✗ Error</span>';
+                console.error(error);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Test API';
+            }
+        });
+
+        function clearResponse() {
+            responseSection.style.display = 'none';
+            responseBox.textContent = '';
+            statusBadge.innerHTML = '';
+        }
+
+        // Initialize
+        updateFormFields();
+    </script>
+</body>
+</html>
