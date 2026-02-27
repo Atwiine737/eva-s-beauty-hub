@@ -5,6 +5,71 @@
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
+    ],
+    "headers": [
+      {
+        "source": "**/*.@(js|css|gif|jpg|jpeg|png|svg|webp|woff|woff2|ttf|eot)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "max-age=31536000"
+          }
+        ]
+      },
+      {
+        "source": "mpesa-payment.php",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-cache, no-store, must-revalidate"
+          }
+        ]
+      }
     ]
+  },
+  "version": "2.0",
+  "project": {
+    "name": "Eva's Beauty Hub",
+    "description": "Premium beauty products and services with M-Pesa STK Push payment integration",
+    "features": [
+      "E-commerce Platform",
+      "M-Pesa Payment Integration (Daraja API)",
+      "Product Catalog with Categories",
+      "Order Management System",
+      "Real-time Notifications",
+      "Dark/Light Theme Support",
+      "Firebase Hosting"
+    ],
+    "payment_methods": [
+      "M-Pesa STK Push (NEW - Feb 2026)",
+      "Mobile Money",
+      "WhatsApp Orders"
+    ],
+    "technologies": [
+      "HTML5",
+      "CSS3",
+      "JavaScript (Vanilla)",
+      "PHP 7.0+",
+      "Safaricom Daraja API",
+      "Firebase Hosting",
+      "Git/GitHub"
+    ],
+    "last_updated": "2026-02-27",
+    "mpesa_integration": {
+      "status": "Active",
+      "api": "Safaricom Daraja API v1",
+      "methods": ["STK Push", "Payment Query", "Phone Validation"],
+      "files": [
+        "mpesa-payment.php",
+        "mpesa-callback.php",
+        "mpesa-config.php",
+        "mpesa-tester.html"
+      ],
+      "documentation": [
+        "MPESA_SETUP.md",
+        "QUICK_REFERENCE.md",
+        "IMPLEMENTATION_SUMMARY.md"
+      ]
+    }
   }
 }
