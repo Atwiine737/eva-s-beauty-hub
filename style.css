@@ -1257,10 +1257,27 @@ footer {
         padding: 0;
     }
 
-    .faq-question {
-        padding: 1rem;
-        font-size: 1rem;
-    }
+.faq-question {
+    cursor: pointer;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.faq-question::after {
+    content: '+';
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    transition: transform 0.3s ease;
+}
 
     .newsletter-form {
         flex-direction: column;
