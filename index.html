@@ -276,9 +276,19 @@
                     <label for="paymentMethod">Payment Method *</label>
                     <select id="paymentMethod" name="paymentMethod" required>
                         <option value="">-- Select Payment Method --</option>
-                        <option value="mobile-money">Mobile Money (Send to 00752546261)</option>
+                        <option value="intasend">M-Pesa (Instant - STK Push)</option>
+                        <option value="mobile-money">Mobile Money (Send to 0752546261)</option>
                         <option value="whatsapp">WhatsApp Order</option>
                     </select>
+                </div>
+                <div id="intasendInfo" style="display: none; background: #e8f5e9; padding: 1rem; border-radius: 8px; margin-top: 1rem; border-left: 4px solid #2ecc71;">
+                    <h4 style="margin-top: 0; color: #27ae60;">M-Pesa Payment (Instant)</h4>
+                    <p style="font-size: 0.9rem; color: #555;">Click "Complete Order" and you'll receive an M-Pesa prompt on your phone. Enter your PIN to pay instantly.</p>
+                </div>
+                <div id="mobileMoneyInfo" style="display: none; background: #e8f5e9; padding: 1rem; border-radius: 8px; margin-top: 1rem; border-left: 4px solid #2ecc71;">
+                    <h4 style="margin-top: 0; color: #27ae60;">Mobile Money Payment Instructions</h4>
+                    <p><strong>Send to:</strong> <span id="mpesaPhoneDisplay">+256 752 546 261</span></p>
+                    <p style="font-size: 0.9rem; color: #555;">1. Open your Mobile Money app<br>2. Send the total amount to <strong>0752546261</strong><br>3. Enter your PIN to confirm<br>4. Your order will be processed after payment confirmation</p>
                 </div>
                 <div id="mobileMoneyInfo" style="display: none; background: #e8f5e9; padding: 1rem; border-radius: 8px; margin-top: 1rem; border-left: 4px solid #2ecc71;">
                     <h4 style="margin-top: 0; color: #27ae60;">Mobile Money Payment Instructions</h4>
@@ -964,15 +974,58 @@
 
         // Payment Method visibility handler
         const paymentMethodSelect = document.getElementById('paymentMethod');
+        const intasendInfo = document.getElementById('intasendInfo');
         const mobileMoneyInfo = document.getElementById('mobileMoneyInfo');
 
         paymentMethodSelect.addEventListener('change', (e) => {
-            if (e.target.value === 'mobile-money') {
+            intasendInfo.style.display = 'none';
+            mobileMoneyInfo.style.display = 'none';
+            
+            if (e.target.value === 'intasend') {
+                intasendInfo.style.display = 'block';
+            } else if (e.target.value === 'mobile-money') {
                 mobileMoneyInfo.style.display = 'block';
-            } else {
-                mobileMoneyInfo.style.display = 'none';
             }
         });
+
+        // IntaSend Payment Function
+        async function processIntaSendPayment(orderData, amount) {
+            try {
+                const response = await fetch('api/intasend-payment.php?action=initiate', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        amount: amount,
+                        phone: orderData.customerPhone,
+                        email: orderData.customerEmail,
+                        name: orderData.customerName,
+                        orderId: orderData.orderId || 'EVA-' + Date.now()
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showToast('M-Pesa prompt sent! Check your phone and enter PIN.', '📱');
+                    
+                    // Save order after payment initiated
+                    await saveOrder(orderData);
+                    
+                    // Clear cart
+                    cart = [];
+                    updateCartUI();
+                    
+                    orderForm.reset();
+                    orderModal.style.display = 'none';
+                    loadOrders();
+                } else {
+                    showToast('Payment failed: ' + result.message, '❌');
+                }
+            } catch (error) {
+                console.error('IntaSend Error:', error);
+                showToast('Payment error. Try again or use Mobile Money.', '❌');
+            }
+        }
 
         // Order form submission
         orderForm.addEventListener('submit', (e) => {
@@ -1010,27 +1063,41 @@
                 notes: document.getElementById('notes').value
             };
 
-            // Handle payment methods (Mobile Money or WhatsApp)
-            (async () => {
-                const newOrder = await saveOrder(orderData);
-                
-                if (paymentMethod === 'mobile-money') {
-                    showToast(`Order placed! Order ID: ${newOrder.orderId}. Please send UGX ${totalAmount.toLocaleString()} to 00752546261`, "🛍️");
-                } else {
+            // Handle IntaSend M-Pesa payment
+            if (paymentMethod === 'intasend') {
+                processIntaSendPayment(orderData, totalAmount);
+            } 
+            // Handle Mobile Money
+            else if (paymentMethod === 'mobile-money') {
+                (async () => {
+                    const newOrder = await saveOrder(orderData);
+                    showToast(`Order placed! Order ID: ${newOrder.orderId}. Please send UGX ${totalAmount.toLocaleString()} to 0752546261`, "🛍️");
+                    
+                    if (isCartCheckout) {
+                        cart = [];
+                        updateCartUI();
+                    }
+
+                    orderForm.reset();
+                    orderModal.style.display = 'none';
+                    loadOrders();
+                })();
+            }
+            // Handle WhatsApp
+            else if (paymentMethod === 'whatsapp') {
+                (async () => {
+                    const newOrder = await saveOrder(orderData);
                     showToast(`Order placed! Order ID: ${newOrder.orderId}`, "🛍️");
-                }
-                
-                // Clear cart if it was a cart checkout
-                if (isCartCheckout) {
-                    cart = [];
-                    updateCartUI();
-                }
+                    
+                    if (isCartCheckout) {
+                        cart = [];
+                        updateCartUI();
+                    }
 
-                orderForm.reset();
-                orderModal.style.display = 'none';
-                loadOrders();
+                    orderForm.reset();
+                    orderModal.style.display = 'none';
+                    loadOrders();
 
-                if (paymentMethod === 'whatsapp') {
                     const whatsappMessage = `*NEW ORDER - EVA'S BEAUTY HUB*\n\n` +
                                             `*Order ID:* ${newOrder.orderId}\n` +
                                             `*Items:* ${orderData.productName}\n` +
@@ -1046,28 +1113,54 @@
                     setTimeout(() => {
                         window.open(whatsappUrl, '_blank');
                     }, 1000);
-                }
-            })();
+                })();
             }
         });
 
         // IntaSend Payment Handler
-        function processIntaSendPayment(orderData, totalAmount) {
+        async function processIntaSendPayment(orderData, totalAmount) {
             try {
-                showToast("Opening IntaSend payment...", "⏳");
+                showToast("Sending M-Pesa request...", "⏳");
                 
-                // Check if IntaSend is loaded
-                if (typeof window.IntaSend === 'undefined') {
-                    showToast("IntaSend SDK not loaded. Please check your connection.", "❌");
-                    return;
-                }
-
-                const intasend = new window.IntaSend({
-                    public_key: "ISPubKey_test_ce977d20-4375-4375-8771-3642337d975a", // TEST KEY - Replace with live key for production
-                    live: false
+                const response = await fetch('api/intasend-payment.php?action=initiate', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        amount: totalAmount,
+                        phone: orderData.customerPhone,
+                        email: orderData.customerEmail,
+                        name: orderData.customerName,
+                        orderId: 'EVA-' + Date.now()
+                    })
                 });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showToast('M-Pesa prompt sent! Check your phone and enter PIN.', '📱');
+                    
+                    // Save order
+                    await saveOrder(orderData);
+                    
+                    // Clear cart
+                    if (isCartCheckout) {
+                        cart = [];
+                        updateCartUI();
+                    }
+                    
+                    orderForm.reset();
+                    orderModal.style.display = 'none';
+                    loadOrders();
+                } else {
+                    showToast('Payment failed: ' + result.message, '❌');
+                }
+            } catch (error) {
+                console.error('IntaSend Error:', error);
+                showToast('Payment error. Try Mobile Money instead.', '❌');
+            }
+        }
 
-                intasend.on("COMPLETE", (response) => {
+        // Legacy IntaSend function (backup)
                     orderData.paymentDetails = response;
                     orderData.status = 'Paid';
                     const newOrder = saveOrder(orderData);
