@@ -7,6 +7,8 @@
     <title>Eva's Beauty Hub | Premium Beauty Products & Services</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- IntaSend SDK -->
+    <script src="https://unpkg.com/intasend-inlinejs-sdk@3.0.4/build/intasend-inline.js"></script>
 </head>
 <body>
 
@@ -169,11 +171,19 @@
                 </div>
                 <div class="faq-item">
                     <h3 class="faq-question">What payment methods do you accept?</h3>
-                    <p class="faq-answer">We accept Mobile Money payments to +256 752546261 (A. Evalyne). You can also place orders via WhatsApp for more flexible payment options.</p>
+                    <p class="faq-answer">We accept M-Pesa (Direct STK Push), Mobile Money transfers to +256 0752546261 (A. Evalyne), and payments via WhatsApp for more flexible options. Choose your preferred method at checkout!</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">How do I pay with M-Pesa?</h3>
+                    <p class="faq-answer">Select "M-Pesa" at checkout, enter your phone number, and you'll receive a prompt on your phone to enter your PIN. Once confirmed, your order is automatically updated!</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">What if I don't receive the M-Pesa prompt?</h3>
+                    <p class="faq-answer">Ensure your phone is on, has a stable signal, and isn't in "Do Not Disturb" mode. If it still doesn't appear, try again or contact us on WhatsApp for assistance.</p>
                 </div>
                 <div class="faq-item">
                     <h3 class="faq-question">How long does delivery take?</h3>
-                    <p class="faq-answer">We offer fast delivery within Kampala. Most orders are delivered within 24-48 hours of payment confirmation.</p>
+                    <p class="faq-answer">We offer fast delivery! Orders within Kampala are typically delivered within 24-48 hours. For locations outside Kampala, delivery may take 2-3 business days.</p>
                 </div>
                 <div class="faq-item">
                     <h3 class="faq-question">Are your products authentic?</h3>
@@ -181,7 +191,19 @@
                 </div>
                 <div class="faq-item">
                     <h3 class="faq-question">Can I cancel or modify my order?</h3>
-                    <p class="faq-answer">Contact us on WhatsApp immediately after placing your order. We can help modify or cancel orders before they're shipped.</p>
+                    <p class="faq-answer">Contact us on WhatsApp immediately after placing your order. We can help modify or cancel orders before they're processed for shipping.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">What is your return policy?</h3>
+                    <p class="faq-answer">Due to hygiene reasons, we only accept returns for items that are damaged or incorrect. Please notify us within 24 hours of delivery if there's any issue with your order.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">What if I have a skin reaction to a product?</h3>
+                    <p class="faq-answer">We recommend doing a patch test before full use. If you experience irritation, discontinue use immediately and consult a professional. You can also reach out for product-specific advice.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">Do you offer wholesale options?</h3>
+                    <p class="faq-answer">Yes! We provide competitive wholesale pricing for bulk orders. Contact us on WhatsApp with your requirements for a custom quote.</p>
                 </div>
                 <div class="faq-item">
                     <h3 class="faq-question">Do you offer beauty consultations?</h3>
@@ -254,15 +276,14 @@
                     <label for="paymentMethod">Payment Method *</label>
                     <select id="paymentMethod" name="paymentMethod" required>
                         <option value="">-- Select Payment Method --</option>
-                        <option value="mpesa">M-Pesa (Daraja API)</option>
-                        <option value="mobile-money">Mobile Money</option>
+                        <option value="mobile-money">Mobile Money (Send to 00752546261)</option>
                         <option value="whatsapp">WhatsApp Order</option>
                     </select>
                 </div>
-                <div id="mpesaPaymentInfo" style="display: none; background: #e8f5e9; padding: 1rem; border-radius: 8px; margin-top: 1rem; border-left: 4px solid #2ecc71; display: none;">
-                    <h4 style="margin-top: 0; color: #27ae60;">M-Pesa Payment Instructions</h4>
-                    <p><strong>Phone Number:</strong> <span id="mpesaPhoneDisplay">+256 752 546 261</span></p>
-                    <p style="font-size: 0.9rem; color: #555;">You will receive an M-Pesa STK prompt on your phone to complete the payment. Your order will be confirmed immediately upon successful payment.</p>
+                <div id="mobileMoneyInfo" style="display: none; background: #e8f5e9; padding: 1rem; border-radius: 8px; margin-top: 1rem; border-left: 4px solid #2ecc71;">
+                    <h4 style="margin-top: 0; color: #27ae60;">Mobile Money Payment Instructions</h4>
+                    <p><strong>Send to:</strong> <span id="mpesaPhoneDisplay">+256 752 546 261</span></p>
+                    <p style="font-size: 0.9rem; color: #555;">1. Open your Mobile Money app<br>2. Send the total amount to <strong>00752546261</strong><br>3. Enter your PIN to confirm<br>4. Your order will be processed after payment confirmation</p>
                 </div>
                 <div class="form-group">
                     <label for="notes">Special Notes</label>
@@ -316,8 +337,8 @@
                 <h3>Contact Us</h3>
                 <p><strong>Location:</strong> Nakawa, Kampala, Uganda</p>
                 <p>Email: <a href="mailto:atwiineevalyne@gmail.com">atwiineevalyne@gmail.com</a></p>
-                <p>Phone: <a href="https://wa.me/256752546261" target="_blank">+256 752546261</a></p>
-                <p><strong>Mobile Money:</strong> Pay to +256 752546261 (A. Evalyne)</p>
+                <p>Phone: <a href="https://wa.me/2560752546261" target="_blank">+256 0752546261</a></p>
+                <p><strong>Mobile Money:</strong> Pay to +256 0752546261 (A. Evalyne)</p>
             </div>
             <div class="footer-section">
                 <h3>Follow Us</h3>
@@ -325,7 +346,7 @@
                     <a href="https://facebook.com" target="_blank" class="social-icon" title="Facebook">f</a>
                     <a href="https://instagram.com" target="_blank" class="social-icon" title="Instagram">📷</a>
                     <a href="https://tiktok.com" target="_blank" class="social-icon" title="TikTok">🎵</a>
-                    <a href="https://wa.me/256752546261" target="_blank" class="social-icon" title="WhatsApp">💬</a>
+                    <a href="https://wa.me/2560752546261" target="_blank" class="social-icon" title="WhatsApp">💬</a>
                 </div>
             </div>
         </div>
@@ -336,7 +357,7 @@
 
     <button id="backToTop" title="Go to top">↑</button>
 
-    <a href="https://wa.me/256752546261?text=hello%20welcome%20to%20Eva's%20beauty%20hub" class="whatsapp-float" target="_blank" title="Chat with us on WhatsApp">
+    <a href="https://wa.me/2560752546261?text=hello%20welcome%20to%20Eva's%20beauty%20hub" class="whatsapp-float" target="_blank" title="Chat with us on WhatsApp">
         <svg viewBox="0 0 448 512" width="30" height="30" fill="white">
             <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-190.9 101.5-190.9 226.9 0 43.2 10.8 85.5 31.5 122.5L32 512l133.8-35.1c35.6 19.4 75.6 29.5 116.4 29.5 122.4 0 222-99.6 222-222 0-59.3-23.1-115.1-65.1-157.1zM223.9 474c-37.9 0-75.1-10.2-107.5-29.4l-7.7-4.6L29.9 462.7l23.5-85.4-5-7.9c-21.1-33.6-32.3-72.7-32.3-112.5 0-111.3 90.4-201.8 201.8-201.8 54 0 104.7 21 142.9 59.2s59.2 88.9 59.2 142.6c0 111.3-90.4 201.8-201.8 201.8zm117.7-156.6c-6.5-3.2-38.3-18.9-44.2-21.1-5.9-2.1-10.2-3.2-14.5 3.2-4.3 6.5-16.7 21.1-20.4 25.4-3.8 4.3-7.5 4.9-14 1.6-6.5-3.2-27.4-10.1-52.2-33.2-19.3-17.2-32.3-38.4-36.1-44.9-3.8-6.5-.4-10 2.8-13.2 2.9-2.9 6.5-7.5 9.7-11.3 3.2-3.8 4.3-6.5 6.5-10.8 2.1-4.3 1.1-8.1-.5-11.3-1.6-3.2-14.5-34.9-19.9-47.7-5.3-12.4-10.7-10.7-14.5-10.9-3.8-.2-8.1-.2-12.4-.2-4.3 0-11.3 1.6-17.2 7.5-5.9 5.9-22.6 22.1-22.6 53.8s23.1 62.4 26.3 66.7c3.2 4.3 45.4 69.4 110 97.2 15.4 6.6 27.3 10.6 36.7 13.6 15.5 4.9 29.6 4.2 40.7 2.1 12.4-2.3 38.3-15.6 43.7-30.7 5.4-15.1 5.4-28.1 3.8-30.7-1.6-2.6-5.9-4.3-12.4-7.5z"/>
         </svg>
@@ -526,7 +547,7 @@
                             <p class="product-price">${product.price}</p>
                             <div class="btn-group" style="display: flex; gap: 0.5rem; justify-content: center;">
                                 <button onclick="addToCart(${originalIndex})" class="btn-small">🛒 Add</button>
-                                <a href="https://wa.me/256752546261?text=Hi, I want to buy ${product.name} for ${product.price}. How do I pay via Mobile Money?" target="_blank" class="btn-small">Order Now</a>
+                                <a href="https://wa.me/2560752546261?text=Hi, I want to buy ${product.name} for ${product.price}. How do I pay via Mobile Money?" target="_blank" class="btn-small">Order Now</a>
                             </div>
                         `;
                         productContainer.appendChild(productCard);
@@ -723,17 +744,29 @@
             cartModal.style.display = 'none';
         });
 
+        let isCartCheckout = false;
+
         document.getElementById('checkoutBtn').addEventListener('click', () => {
             if (cart.length === 0) {
                 showToast("Your cart is empty!");
                 return;
             }
+            isCartCheckout = true;
             cartModal.style.display = 'none';
-            document.getElementById('orderModal').style.display = 'block';
+            orderModal.style.display = 'block';
             
+            const total = cart.reduce((sum, item) => sum + parseInt(item.price.replace(/[^0-9]/g, '')), 0);
             const cartSummary = cart.map(item => `${item.name} (${item.price})`).join(', ');
             document.getElementById('notes').value = `Order from Cart: ${cartSummary}`;
-            productSelect.value = cart[0].productIndex;
+            
+            // Temporary add "Cart Items" to select
+            const cartOption = document.createElement('option');
+            cartOption.value = "cart";
+            cartOption.text = `Shopping Cart (${cart.length} items) - UGX ${total.toLocaleString()}`;
+            productSelect.insertBefore(cartOption, productSelect.firstChild);
+            productSelect.value = "cart";
+            document.getElementById('quantity').value = 1;
+            document.getElementById('quantity').disabled = true;
         });
 
         // Order Management
@@ -751,6 +784,7 @@
                 `<option value="${index}">${product.name} - ${product.price}</option>`
             ).join('');
             productSelect.innerHTML = '<option value="">-- Choose a Product --</option>' + options;
+            document.getElementById('quantity').disabled = false;
         }
 
         function generateOrderId() {
@@ -768,9 +802,30 @@
             return 'Delivered';
         }
 
-        function loadOrders() {
-            const savedOrders = localStorage.getItem('evasBeautyOrders');
-            allOrders = savedOrders ? JSON.parse(savedOrders) : [];
+        async function loadOrders() {
+            try {
+                // Try to load orders from backend for the current user's phone if it's stored
+                const savedPhone = localStorage.getItem('customerPhone');
+                let url = 'api/get-orders.php';
+                if (savedPhone) {
+                    url += `?customer_phone=${encodeURIComponent(savedPhone)}`;
+                }
+                
+                const response = await fetch(url);
+                const result = await response.json();
+                
+                if (result.success && result.orders.length > 0) {
+                    allOrders = result.orders;
+                } else {
+                    // Fallback to localStorage
+                    const savedOrders = localStorage.getItem('evasBeautyOrders');
+                    allOrders = savedOrders ? JSON.parse(savedOrders) : [];
+                }
+            } catch (error) {
+                console.error("Error loading orders:", error);
+                const savedOrders = localStorage.getItem('evasBeautyOrders');
+                allOrders = savedOrders ? JSON.parse(savedOrders) : [];
+            }
             displayOrders();
         }
 
@@ -780,20 +835,34 @@
                 return;
             }
 
-            ordersListContainer.innerHTML = allOrders.map(order => `
+            ordersListContainer.innerHTML = allOrders.map(order => {
+                let itemsList = "";
+                let totalAmount = 0;
+
+                if (order.items && order.items.length > 0) {
+                    itemsList = order.items.map(item => `${item.name}`).join(', ');
+                    totalAmount = order.totalAmount;
+                } else if (order.productIndex !== undefined && products[order.productIndex]) {
+                    const prod = products[order.productIndex];
+                    itemsList = `${prod.name} (${order.quantity})`;
+                    totalAmount = parseInt(prod.price.replace(/[^0-9]/g, '')) * order.quantity;
+                } else {
+                    itemsList = order.productName || "Unknown Product";
+                    totalAmount = order.totalAmount || 0;
+                }
+
+                return `
                 <div class="order-card">
                     <div class="order-header">
                         <h3>${order.orderId}</h3>
                         <span class="order-status status-${order.status.toLowerCase()}">${order.status}</span>
                     </div>
                     <div class="order-details">
-                        <p><strong>Product:</strong> ${products[order.productIndex].name}</p>
-                        <p><strong>Price:</strong> ${products[order.productIndex].price}</p>
-                        <p><strong>Quantity:</strong> ${order.quantity}</p>
-                        <p><strong>Total:</strong> UGX ${(parseInt(products[order.productIndex].price.replace(/[^0-9]/g, '')) * order.quantity).toLocaleString()}</p>
+                        <p><strong>Product(s):</strong> ${itemsList}</p>
+                        <p><strong>Total:</strong> UGX ${totalAmount.toLocaleString()}</p>
                         <p><strong>Customer:</strong> ${order.customerName}</p>
                         <p><strong>Delivery Address:</strong> ${order.address}</p>
-                        <p><strong>Payment Method:</strong> ${order.paymentMethod === 'mobile-money' ? 'Mobile Money' : 'WhatsApp Order'}</p>
+                        <p><strong>Payment Method:</strong> ${order.paymentMethod === 'mobile-money' ? 'Mobile Money (00752546261)' : 'WhatsApp Order'}</p>
                         <p><strong>Ordered:</strong> ${new Date(order.createdTime).toLocaleString()}</p>
                     </div>
                     <div class="order-actions">
@@ -802,21 +871,30 @@
                         <button class="btn-small btn-danger" onclick="deleteOrder('${order.orderId}')">Cancel Order</button>
                     </div>
                 </div>
-            `).join('');
+            `;}).join('');
         }
 
         function shareOrder(orderId, platform) {
             const order = allOrders.find(o => o.orderId === orderId);
             if (!order) return;
 
-            const product = products[order.productIndex];
-            const total = (parseInt(product.price.replace(/[^0-9]/g, '')) * order.quantity).toLocaleString();
+            let itemsList = "";
+            let totalAmount = 0;
+
+            if (order.items && order.items.length > 0) {
+                itemsList = order.items.map(item => `${item.name} (${item.price})`).join('\n- ');
+                itemsList = "\n- " + itemsList;
+                totalAmount = order.totalAmount;
+            } else {
+                const product = products[order.productIndex];
+                itemsList = `${product.name} (${order.quantity})`;
+                totalAmount = parseInt(product.price.replace(/[^0-9]/g, '')) * order.quantity;
+            }
             
             const text = `*EVA'S BEAUTY HUB - ORDER RECEIPT*\n\n` +
                          `Order ID: ${order.orderId}\n` +
-                         `Product: ${product.name}\n` +
-                         `Quantity: ${order.quantity}\n` +
-                         `Total: UGX ${total}\n` +
+                         `Items: ${itemsList}\n` +
+                         `Total: UGX ${totalAmount.toLocaleString()}\n` +
                          `Status: ${order.status}\n\n` +
                          `Thank you for shopping with us!`;
 
@@ -827,13 +905,34 @@
             }
         }
 
-        function saveOrder(orderData) {
+        async function saveOrder(orderData) {
+            const orderId = generateOrderId();
             const order = {
-                orderId: generateOrderId(),
+                orderId: orderId,
                 ...orderData,
                 createdTime: Date.now(),
-                status: 'Pending'
+                status: orderData.status || 'Pending'
             };
+            
+            // Save customer phone for future lookups
+            localStorage.setItem('customerPhone', orderData.customerPhone);
+            
+            try {
+                const response = await fetch('api/create-order.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(order)
+                });
+                
+                const result = await response.json();
+                if (!result.success) {
+                    console.error("Backend save failed:", result.message);
+                }
+            } catch (error) {
+                console.error("Error saving to backend:", error);
+            }
+
+            // Still save to localStorage as a redundant backup
             allOrders.push(order);
             localStorage.setItem('evasBeautyOrders', JSON.stringify(allOrders));
             return order;
@@ -848,6 +947,8 @@
         }
 
         openOrderFormBtn.addEventListener('click', () => {
+            isCartCheckout = false;
+            populateProductSelect();
             orderModal.style.display = 'block';
         });
 
@@ -863,47 +964,68 @@
 
         // Payment Method visibility handler
         const paymentMethodSelect = document.getElementById('paymentMethod');
-        const mpesaPaymentInfo = document.getElementById('mpesaPaymentInfo');
+        const mobileMoneyInfo = document.getElementById('mobileMoneyInfo');
 
         paymentMethodSelect.addEventListener('change', (e) => {
-            if (e.target.value === 'mpesa') {
-                mpesaPaymentInfo.style.display = 'block';
+            if (e.target.value === 'mobile-money') {
+                mobileMoneyInfo.style.display = 'block';
             } else {
-                mpesaPaymentInfo.style.display = 'none';
+                mobileMoneyInfo.style.display = 'none';
             }
         });
 
-        // Order form submission with M-Pesa support
+        // Order form submission
         orderForm.addEventListener('submit', (e) => {
             e.preventDefault();
             
             const productIndex = document.getElementById('productSelect').value;
-            const selectedProduct = products[productIndex];
             const paymentMethod = document.getElementById('paymentMethod').value;
+            const quantity = parseInt(document.getElementById('quantity').value);
+            
+            let selectedProduct = null;
+            let totalAmount = 0;
+            let items = [];
+
+            if (isCartCheckout && productIndex === 'cart') {
+                items = [...cart];
+                totalAmount = cart.reduce((sum, item) => sum + parseInt(item.price.replace(/[^0-9]/g, '')), 0);
+                selectedProduct = { name: "Cart Items", price: `UGX ${totalAmount.toLocaleString()}` };
+            } else {
+                selectedProduct = products[productIndex];
+                totalAmount = parseInt(selectedProduct.price.replace(/[^0-9]/g, '')) * quantity;
+                items = [{...selectedProduct, quantity: quantity}];
+            }
             
             const orderData = {
                 customerName: document.getElementById('customerName').value,
                 customerEmail: document.getElementById('customerEmail').value,
                 customerPhone: document.getElementById('customerPhone').value,
-                productIndex: parseInt(productIndex),
+                productIndex: productIndex === 'cart' ? undefined : parseInt(productIndex),
                 productName: selectedProduct.name,
-                quantity: parseInt(document.getElementById('quantity').value),
+                quantity: quantity,
+                items: items,
+                totalAmount: totalAmount,
                 address: document.getElementById('address').value,
                 paymentMethod: paymentMethod,
                 notes: document.getElementById('notes').value
             };
 
-            const totalAmount = parseInt(selectedProduct.price.replace(/[^0-9]/g, '')) * orderData.quantity;
+            // Handle payment methods (Mobile Money or WhatsApp)
+            (async () => {
+                const newOrder = await saveOrder(orderData);
+                
+                if (paymentMethod === 'mobile-money') {
+                    showToast(`Order placed! Order ID: ${newOrder.orderId}. Please send UGX ${totalAmount.toLocaleString()} to 00752546261`, "🛍️");
+                } else {
+                    showToast(`Order placed! Order ID: ${newOrder.orderId}`, "🛍️");
+                }
+                
+                // Clear cart if it was a cart checkout
+                if (isCartCheckout) {
+                    cart = [];
+                    updateCartUI();
+                }
 
-            // Handle M-Pesa payment
-            if (paymentMethod === 'mpesa') {
-                processMpesaPayment(orderData, totalAmount, selectedProduct);
-            } else {
-                // Handle other payment methods
-                const newOrder = saveOrder(orderData);
-                
-                showToast(`Order placed! Order ID: ${newOrder.orderId}`, "🛍️");
-                
                 orderForm.reset();
                 orderModal.style.display = 'none';
                 loadOrders();
@@ -911,8 +1033,7 @@
                 if (paymentMethod === 'whatsapp') {
                     const whatsappMessage = `*NEW ORDER - EVA'S BEAUTY HUB*\n\n` +
                                             `*Order ID:* ${newOrder.orderId}\n` +
-                                            `*Product:* ${orderData.productName}\n` +
-                                            `*Quantity:* ${orderData.quantity}\n` +
+                                            `*Items:* ${orderData.productName}\n` +
                                             `*Total:* UGX ${totalAmount.toLocaleString()}\n\n` +
                                             `*Customer Details:*\n` +
                                             `*Name:* ${orderData.customerName}\n` +
@@ -920,16 +1041,71 @@
                                             `*Address:* ${orderData.address}\n\n` +
                                             `_Please confirm my order and send payment instructions. Thank you!_`;
                     
-                    const whatsappUrl = `https://wa.me/256752546261?text=${encodeURIComponent(whatsappMessage)}`;
+                    const whatsappUrl = `https://wa.me/2560752546261?text=${encodeURIComponent(whatsappMessage)}`;
                     
                     setTimeout(() => {
                         window.open(whatsappUrl, '_blank');
                     }, 1000);
                 }
+            })();
             }
         });
 
-        // M-Pesa Payment Handler
+        // IntaSend Payment Handler
+        function processIntaSendPayment(orderData, totalAmount) {
+            try {
+                showToast("Opening IntaSend payment...", "⏳");
+                
+                // Check if IntaSend is loaded
+                if (typeof window.IntaSend === 'undefined') {
+                    showToast("IntaSend SDK not loaded. Please check your connection.", "❌");
+                    return;
+                }
+
+                const intasend = new window.IntaSend({
+                    public_key: "ISPubKey_test_ce977d20-4375-4375-8771-3642337d975a", // TEST KEY - Replace with live key for production
+                    live: false
+                });
+
+                intasend.on("COMPLETE", (response) => {
+                    orderData.paymentDetails = response;
+                    orderData.status = 'Paid';
+                    const newOrder = saveOrder(orderData);
+                    
+                    showToast(`Payment successful! Order ID: ${newOrder.orderId}`, "🛍️");
+                    
+                    if (isCartCheckout) {
+                        cart = [];
+                        updateCartUI();
+                    }
+                    
+                    orderForm.reset();
+                    orderModal.style.display = 'none';
+                    loadOrders();
+                    
+                    alert(`✅ Payment Successful!\nOrder ID: ${newOrder.orderId}\nTransaction ID: ${response.transaction_id}`);
+                });
+
+                intasend.on("FAILED", (response) => {
+                    showToast("Payment failed. Please try again.", "❌");
+                });
+
+                intasend.run({
+                    amount: totalAmount,
+                    currency: "UGX",
+                    email: orderData.customerEmail,
+                    first_name: orderData.customerName.split(' ')[0],
+                    last_name: orderData.customerName.split(' ').slice(1).join(' ') || "Customer",
+                    phone_number: orderData.customerPhone,
+                });
+
+            } catch (error) {
+                console.error("IntaSend Error:", error);
+                showToast("Error initializing payment. Please try again.", "❌");
+            }
+        }
+
+        // M-Pesa Payment Handler (Daraja)
         async function processMpesaPayment(orderData, totalAmount, product) {
             try {
                 showToast("Processing M-Pesa payment...", "⏳");
