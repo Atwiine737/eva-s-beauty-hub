@@ -333,7 +333,8 @@
                 <p class="empty-cart-msg">Your cart is empty.</p>
             </div>
             <div class="cart-summary">
-                <button class="btn" id="whatsappOrderBtn" style="background:#25D366;width:100%;font-size:18px;" onclick="orderAllViaWhatsApp()">ORDER NOW VIA WHATSAPP</button>
+                <button class="btn" style="background:#25D366;width:100%;font-size:18px;" onclick="orderAllViaWhatsApp()">ORDER NOW</button>
+                <button class="btn" style="background:#e74c3c;width:100%;margin-top:10px;" onclick="cart=[];saveCart();updateCartDisplay();">CLEAR CART</button>
             </div>
         </div>
     </div>
@@ -404,7 +405,9 @@
             cart.push({name: name, price: price});
             saveCart();
             updateCartDisplay();
-            alert(name + ' added to cart!');
+            
+            // Immediately open WhatsApp after adding
+            orderAllViaWhatsApp();
         }
         
         function updateCartDisplay() {
@@ -417,7 +420,7 @@
             if (!container) return;
             
             if (cart.length === 0) {
-                container.innerHTML = '<p class="empty-cart-msg">Your cart is empty. Add items and click Order Now!</p>';
+                container.innerHTML = '<p class="empty-cart-msg">Your cart is empty.</p>';
                 if(totalEl) totalEl.innerText = '0';
                 return;
             }
@@ -431,6 +434,7 @@
             container.innerHTML = `<div style="text-align:center;padding:20px;">
                 <h3>${cart.length} item(s) in cart</h3>
                 <h2 style="color:#e91e63;">Total: UGX ${total.toLocaleString()}</h2>
+                <p>WhatsApp order opened automatically!</p>
             </div>`;
             if(totalEl) totalEl.innerText = total.toLocaleString();
         }
