@@ -3,1535 +3,889 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Eva's Beauty Hub - Curating premium beauty products and services to celebrate individuality and self-expression.">
-    <title>Eva's Beauty Hub | Premium Beauty Products & Services</title>
+    <meta name="description" content="Eva's Beauty Hub - Premium beauty products in Uganda. Shop Skincare, Makeup, Hair Care, Nals & Accessories">
+    <title>Eva's Beauty Hub | Online Beauty Store Uganda</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <!-- IntaSend SDK -->
-    <script src="https://unpkg.com/intasend-inlinejs-sdk@3.0.4/build/intasend-inline.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💄</text></svg>">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-    <div id="toast-container" class="toast-container"></div>
-    <div id="activity-simulator" class="activity-simulator"></div>
-    
-    <header>
-        <nav class="navbar">
-            <div class="logo">Eva's Beauty Hub</div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#products">Products</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#orders">Orders</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li class="theme-switch-container">
-                    <button id="theme-toggle" class="theme-toggle-btn" title="Toggle Dark/Light Mode">
-                        <span class="mode-icon">🌙</span>
-                    </button>
-                </li>
-            </ul>
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <a href="#home" class="logo">💄 Eva's Beauty Hub</a>
+            
+            <nav class="nav-menu">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#products" class="nav-link">Products</a>
+                <a href="#services" class="nav-link">Services</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#orders" class="nav-link">Orders</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </nav>
+
+            <div class="header-actions">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Search products..." onkeyup="searchProducts()">
+                </div>
+                <a href="https://wa.me/256752546261?text=Hello" class="whatsapp-btn" title="Chat on WhatsApp">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <button class="theme-btn" onclick="toggleTheme()">🌙</button>
+                <button class="cart-btn" onclick="openCart()">
+                    🛒 <span id="cart-count">0</span>
+                </button>
+                <button class="menu-toggle" onclick="toggleMenu()">☰</button>
             </div>
-        </nav>
+        </div>
     </header>
 
-    <main>
-        <section id="home" class="hero">
-            <div class="hero-content">
-                <h1>Celebrate Your Individuality</h1>
-                <p>Eva's Beauty Hub curates premium beauty products and services to help women feel confident and beautiful, celebrating individuality and self-expression.</p>
-                <a href="#products" class="btn">Explore Our Collection</a>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <span class="hero-badge">Hello 👋 Welcome to Eva's Beauty Hub</span>
+            <h1>Discover Your <span class="highlight">Natural Beauty</span></h1>
+            <p>Shop premium beauty products, skincare, makeup, hair care, and accessories. Professional makeup services available.</p>
+            <div class="hero-btns">
+                <a href="#products" class="btn btn-primary">🛍️ Shop Now</a>
+                <a href="#services" class="btn btn-outline">💅 Our Services</a>
             </div>
-        </section>
+            <div class="hero-stats">
+                <div class="stat"><strong>23</strong><span>Products</span></div>
+                <div class="stat"><strong>4</strong><span>Services</span></div>
+                <div class="stat"><strong>500+</strong><span>Customers</span></div>
+            </div>
+        </div>
+    </section>
 
-        <section id="about" class="section bg-light">
-            <h2 class="section-title">About Eva's Beauty Hub</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>Welcome to <strong>Eva's Beauty Hub</strong> – your sanctuary for premium beauty products and personalized services. Founded with a passion for helping women celebrate their unique beauty, we believe that true beauty comes from confidence and self-expression.</p>
-                    <p>Our carefully curated collection features only the finest beauty products, sourced globally to ensure quality and authenticity. From skincare essentials to makeup masterpieces, we're committed to helping you look and feel your absolute best.</p>
-                    <div class="about-features">
-                        <div class="feature-item">
-                            <span class="feature-icon">✨</span>
-                            <h4>Premium Quality</h4>
-                            <p>Only the finest beauty products</p>
-                        </div>
-                        <div class="feature-item">
-                            <span class="feature-icon">💕</span>
-                            <h4>Expert Care</h4>
-                            <p>Professional consultations included</p>
-                        </div>
-                        <div class="feature-item">
-                            <span class="feature-icon">🚚</span>
-                            <h4>Fast Delivery</h4>
-                            <p>Quick delivery across Kampala</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <!-- Promo Banner -->
+    <div class="promo-bar">
+        🎉 Free delivery on orders UGX 100,000+ | Use code <strong>BEAUTY10</strong> for 10% off!
+    </div>
 
-        <section id="products" class="section">
-            <h2 class="section-title">Our Premium Products</h2>
-            <div class="search-filter-container">
-                <input type="text" id="productSearch" class="product-search" placeholder="🔍 Search products...">
+    <!-- Circular Showcase Section -->
+    <section class="circular-showcase">
+        <div class="section-header">
+            <h2>✨ Trending Products</h2>
+            <p>Experience our premium collection in dynamic 3D motion</p>
+        </div>
+        <div class="carousel-stage">
+            <div id="circular-carousel" class="carousel-container">
+                <!-- Products will be injected by JavaScript -->
             </div>
-            <div class="category-filter-container">
-                <button class="category-filter-btn active" data-category="all">All Products</button>
-                <button class="category-filter-btn" data-category="skincare">Skincare</button>
-                <button class="category-filter-btn" data-category="makeup">Makeup</button>
-                <button class="category-filter-btn" data-category="hair-care">Hair Care</button>
-                <button class="category-filter-btn" data-category="nails">Nails</button>
-                <button class="category-filter-btn" data-category="accessories">Accessories</button>
+            <div class="carousel-controls">
+                <button class="control-btn" onclick="rotateCarouselManual('prev')">←</button>
+                <button class="control-btn" onclick="rotateCarouselManual('next')">→</button>
             </div>
-            <div id="product-container" class="product-grid">
-                <!-- Static Products -->
-                <div class="product-card"><div class="category-badge">Skincare</div><img src="ace clear spot treatment.jpeg" alt="Sherbet Body Scrub" class="product-image"><h3>Sherbet Body Scrub</h3><p class="product-price">UGX 45,000</p><button onclick="addToCartFromButton('Sherbet Body Scrub', 'UGX 45,000')" class="btn-small">🛒 Add to Cart</button></div>
-                <div class="product-card"><div class="category-badge">Skincare</div><img src="body spray.jpeg" alt="Luxury Body Spray" class="product-image"><h3>Luxury Body Spray</h3><p class="product-price">UGX 15,000</p><button onclick="addToCartFromButton('Luxury Body Spray', 'UGX 15,000')" class="btn-small">🛒 Add to Cart</button></div>
-                <div class="product-card"><div class="category-badge">Skincare</div><img src="cotton pads.jpeg" alt="Premium Cotton Pads" class="product-image"><h3>Premium Cotton Pads</h3><p class="product-price">UGX 8,000</p><button onclick="addToCartFromButton('Premium Cotton Pads', 'UGX 8,000')" class="btn-small">🛒 Add to Cart</button></div>
-                <div class="product-card"><div class="category-badge">Skincare</div><img src="glove sponge.jpeg" alt="Exfoliating Glove" class="product-image"><h3>Exfoliating Glove</h3><p class="product-price">UGX 5,000</p><button onclick="addToCartFromButton('Exfoliating Glove', 'UGX 5,000')" class="btn-small">🛒 Add to Cart</button></div>
-                <div class="product-card"><div class="category-badge">Skincare</div><img src="vc brightening cream.jpeg" alt="Vitamin C Cream" class="product-image"><h3>Vitamin C Brightening Cream</h3><p class="product-price">UGX 35,000</p><button onclick="addToCartFromButton('Vitamin C Brightening Cream', 'UGX 35,000')" class="btn-small">🛒 Add to Cart</button></div>
-                <div class="product-card"><div class="category-badge">Skincare</div><img src="pearl cleansing milk.jpeg" alt="Pearl Cleansing Milk" class="product-image"><h3>Pearl Cleansing Milk</h3><p class="product-price">UGX 20,000</p><button onclick="addToCartFromButton('Pearl Cleansing Milk', 'UGX 20,000')" class="btn-small">🛒 Add to Cart</button></div>
-                <div class="product-card"><div class="category-badge">Skincare</div><img src="wipes.jpeg" alt="Fruit Wipes" class="product-image"><h3>Fruit Wipes</h3><p class="product-price">UGX 5,000</p><button onclick="addToCartFromButton('Fruit Wipes', 'UGX 5,000')" class="btn-small">🛒 Add to Cart</button></div>
-                <div class="product-card"><div class="category-badge">Skincare</div><img src="vc whitening cream.jpeg" alt="Vitamin C Whitening" class="product-image"><h3>Vitamin C Whitening Cream</h3><p class="product-price">UGX 30,000</p><button onclick="addToCartFromButton('Vitamin C Whitening Cream', 'UGX 30,000')" class="btn-small">🛒 Add to Cart</button></div>
-                <div class="product-card"><div class="category-badge">Makeup</div><img src="r2.jpeg" alt="Lip Gloss" class="product-image"><h3>Lip Gloss</h3><p class="product-price">UGX 6,000</p><button onclick="addToCartFromButton('Lip Gloss', 'UGX 6,000')" class="btn-small">🛒 Add to Cart</button></div>
-                <div class="product-card"><div class="category-badge">Makeup</div><img src="r3.jpeg" alt="Lip Gloss" class="product-image"><h3>Lip Gloss</h3><p class="product-price">UGX 10,000</p><button onclick="addToCartFromButton('Lip Gloss', 'UGX 10,000')" class="btn-small">🛒 Add to Cart</button></div>
-                <div class="product-card"><div class="category-badge">Makeup</div><img src="r4.jpeg" alt="Lip Gloss" class="product-image"><h3>Lip Gloss</h3><p class="product-price">UGX 7,000</p><button onclick="addToCartFromButton('Lip Gloss', 'UGX 7,000')" class="btn-small">🛒 Add to Cart</button></div>
-                <div class="product-card"><div class="category-badge">Makeup</div><img src="e4.jpeg" alt="Pink Lips" class="product-image"><h3>Pink Lips Lip Gloss</h3><p class="product-price">UGX 15,000</p><button onclick="addToCartFromButton('Pink Lips Lip Gloss', 'UGX 15,000')" class="btn-small">🛒 Add to Cart</button></div>
-                <div class="product-card"><div class="category-badge">Makeup</div><img src="velvet matte lip stick.jpeg" alt="Matte Lip Gloss Set" class="product-image"><h3>Matte Lip Gloss Set</h3><p class="product-price">UGX 20,000</p><button onclick="addToCartFromButton('Matte Lip Gloss Set', 'UGX 20,000')" class="btn-small">🛒 Add to Cart</button></div>
-                <div class="product-card"><div class="category-badge">Hair Care</div><img src="hair clips.jpeg" alt="Hair Clips" class="product-image"><h3>Hair Clips</h3><p class="product-price">UGX 5,000</p><button onclick="addToCartFromButton('Hair Clips', 'UGX 5,000')" class="btn-small">🛒 Add to Cart</button></div>
-                <div class="product-card"><div class="category-badge">Hair Care</div><img src="rr.jpeg" alt="Puff Holder" class="product-image"><h3>Puff Holder</h3><p class="product-price">UGX 5,000</p><button onclick="addToCartFromButton('Puff Holder', 'UGX 5,000')" class="btn-small">🛒 Add to Cart</button></div>
-                <div class="product-card"><div class="category-badge">Hair Care</div><img src="hand funs.jpeg" alt="Ribbon Hair Bows" class="product-image"><h3>Ribbon Hair Bows</h3><p class="product-price">UGX 5,000</p><button onclick="addToCartFromButton('Ribbon Hair Bows', 'UGX 5,000')" class="btn-small">🛒 Add to Cart</button></div>
-                <div class="product-card"><div class="category-badge">Nails</div><img src="nails3.jpeg" alt="Luxury Floral Nail Art" class="product-image"><h3>Luxury Floral Nail Art</h3><p class="product-price">UGX 40,000</p><button onclick="addToCartFromButton('Luxury Floral Nail Art', 'UGX 40,000')" class="btn-small">🛒 Add to Cart</button></div>
-                <div class="product-card"><div class="category-badge">Nails</div><img src="nails4.jpeg" alt="Premium Press-on Nails" class="product-image"><h3>Premium Press-on Nails</h3><p class="product-price">UGX 10,000</p><button onclick="addToCartFromButton('Premium Press-on Nails', 'UGX 10,000')" class="btn-small">🛒 Add to Cart</button></div>
-                <div class="product-card"><div class="category-badge">Accessories</div><img src="er.jpeg" alt="Earrings" class="product-image"><h3>Earrings</h3><p class="product-price">UGX 5,000</p><button onclick="addToCartFromButton('Earrings', 'UGX 5,000')" class="btn-small">🛒 Add to Cart</button></div>
-                <div class="product-card"><div class="category-badge">Accessories</div><img src="bracelets.jpeg" alt="Pink Beaded Bracelets" class="product-image"><h3>Pink Beaded Bracelets</h3><p class="product-price">UGX 5,000</p><button onclick="addToCartFromButton('Pink Beaded Bracelets', 'UGX 5,000')" class="btn-small">🛒 Add to Cart</button></div>
-            </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="services" class="section bg-light">
-            <div class="location-badge">
-                <p>📍 <strong>Visit Us:</strong> Nakawa, Kampala, Uganda</p>
+    <!-- Products Section -->
+    <section id="products" class="section">
+        <div class="section-header">
+            <h2>Our Products</h2>
+            <p>Browse our collection of premium beauty products</p>
+        </div>
+
+        <!-- Category Filters -->
+        <div class="filter-btns">
+            <button class="filter-btn active" onclick="filterCategory('all')">All</button>
+            <button class="filter-btn" onclick="filterCategory('Skincare')">Skincare</button>
+            <button class="filter-btn" onclick="filterCategory('Makeup')">Makeup</button>
+            <button class="filter-btn" onclick="filterCategory('Hair Care')">Hair Care</button>
+            <button class="filter-btn" onclick="filterCategory('Nails')">Nails</button>
+            <button class="filter-btn" onclick="filterCategory('Accessories')">Accessories</button>
+        </div>
+
+        <!-- Skincare -->
+        <div class="category-group" id="Skincare">
+            <h3 class="category-title">🧴 Skincare</h3>
+            <div class="products-grid">
+                <div class="product-card"><div class="badge">Hot</div><img src="ace clear spot treatment.jpeg" alt="Sherbet Body Scrub"><h4>Sherbet Body Scrub</h4><p class="price">UGX 45,000</p><button onclick="addToCart(0)">Add to Cart</button></div>
+                <div class="product-card"><img src="body spray.jpeg" alt="Luxury Body Spray"><h4>Luxury Body Spray</h4><p class="price">UGX 15,000</p><button onclick="addToCart(1)">Add to Cart</button></div>
+                <div class="product-card"><img src="cotton pads.jpeg" alt="Premium Cotton Pads"><h4>Premium Cotton Pads</h4><p class="price">UGX 8,000</p><button onclick="addToCart(2)">Add to Cart</button></div>
+                <div class="product-card"><img src="glove sponge.jpeg" alt="Exfoliating Glove"><h4>Exfoliating Glove Sponge</h4><p class="price">UGX 5,000</p><button onclick="addToCart(3)">Add to Cart</button></div>
+                <div class="product-card"><img src="vc brightening cream.jpeg" alt="Vitamin C Cream"><h4>Vitamin C Brightening Cream</h4><p class="price">UGX 35,000</p><button onclick="addToCart(4)">Add to Cart</button></div>
+                <div class="product-card"><img src="pearl cleansing milk.jpeg" alt="Pearl Cleansing Milk"><h4>Pearl Cleansing Milk</h4><p class="price">UGX 20,000</p><button onclick="addToCart(5)">Add to Cart</button></div>
+                <div class="product-card"><img src="wipes.jpeg" alt="Fruit Wipes"><h4>Fruit Wipes</h4><p class="price">UGX 5,000</p><button onclick="addToCart(6)">Add to Cart</button></div>
+                <div class="product-card"><img src="vc whitening cream.jpeg" alt="Vitamin C Whitening"><h4>Vitamin C Whitening Cream</h4><p class="price">UGX 30,000</p><button onclick="addToCart(7)">Add to Cart</button></div>
+                <div class="product-card"><div class="badge">Sale</div><img src="44.jpeg" alt="Skin Care Combo"><h4>Skin Care Combo</h4><p class="price">UGX 100,000</p><button onclick="addToCart(8)">Add to Cart</button></div>
             </div>
-            <div class="services-content">
-                <p>At Eva's Beauty Hub, we go beyond products. We offer personalized beauty services designed to enhance your natural beauty and boost your confidence. Our expert team is dedicated to providing you with the best experience.</p>
-                <div class="services-list">
-                    <div class="service-description">
-                        <h3>Professional Makeup</h3>
-                        <p>Whether it's for a wedding, a party, or a photoshoot, our professional makeup artists will help you achieve the perfect look that reflects your individuality.</p>
-                    </div>
-                    <div class="service-description">
-                        <h3>Make up Consultation</h3>
-                        <p>Personalized sessions to help you find the best makeup techniques and products that complement your features and skin tone.</p>
-                    </div>
-                </div>
+        </div>
+
+        <!-- Makeup -->
+        <div class="category-group" id="Makeup">
+            <h3 class="category-title">💄 Makeup</h3>
+            <div class="products-grid">
+                <div class="product-card"><img src="r2.jpeg" alt="Lip Gloss"><h4>Lip Gloss</h4><p class="price">UGX 6,000</p><button onclick="addToCart(9)">Add to Cart</button></div>
+                <div class="product-card"><img src="r3.jpeg" alt="Lip Gloss Premium"><h4>Lip Gloss Premium</h4><p class="price">UGX 10,000</p><button onclick="addToCart(10)">Add to Cart</button></div>
+                <div class="product-card"><img src="r4.jpeg" alt="Lip Gloss"><h4>Lip Gloss</h4><p class="price">UGX 7,000</p><button onclick="addToCart(11)">Add to Cart</button></div>
+                <div class="product-card"><img src="r6.jpeg" alt="Lip Gloss"><h4>Lip Gloss</h4><p class="price">UGX 7,000</p><button onclick="addToCart(12)">Add to Cart</button></div>
+                <div class="product-card"><img src="e4.jpeg" alt="Pink Lips"><h4>Pink Lips Lip Gloss</h4><p class="price">UGX 15,000</p><button onclick="addToCart(13)">Add to Cart</button></div>
+                <div class="product-card"><img src="velvet matte lip stick.jpeg" alt="Matte Lip Gloss"><h4>Matte Lip Gloss Set</h4><p class="price">UGX 20,000</p><button onclick="addToCart(14)">Add to Cart</button></div>
             </div>
-        </section>
+        </div>
 
-        <section id="testimonials" class="section">
-            <h2 class="section-title">What Our Customers Say</h2>
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="stars">⭐⭐⭐⭐⭐</div>
-                    <p>"Eva's Beauty Hub is my go-to for all my beauty needs. The quality is exceptional and the customer service is amazing!"</p>
-                    <h4>Sarah M.</h4>
-                    <p class="testimonial-role">Verified Buyer</p>
-                </div>
-                <div class="testimonial-card">
-                    <div class="stars">⭐⭐⭐⭐⭐</div>
-                    <p>"I love the personalized consultations. The team really helped me find products that work perfectly for my skin!"</p>
-                    <h4>Jessica K.</h4>
-                    <p class="testimonial-role">Verified Buyer</p>
-                </div>
-                <div class="testimonial-card">
-                    <div class="stars">⭐⭐⭐⭐⭐</div>
-                    <p>"Fast delivery, beautiful packaging, and premium products. Highly recommended to every woman who loves beauty!"</p>
-                    <h4>Angela T.</h4>
-                    <p class="testimonial-role">Verified Buyer</p>
-                </div>
+        <!-- Hair Care -->
+        <div class="category-group" id="Hair Care">
+            <h3 class="category-title">💇 Hair Care</h3>
+            <div class="products-grid">
+                <div class="product-card"><img src="rr.jpeg" alt="Hair Clips"><h4>Hair Clips</h4><p class="price">UGX 5,000</p><button onclick="addToCart(15)">Add to Cart</button></div>
+                <div class="product-card"><img src="re.jpeg" alt="Puff Holder"><h4>Puff Holder</h4><p class="price">UGX 2,000</p><button onclick="addToCart(16)">Add to Cart</button></div>
+                <div class="product-card"><img src="hair clips.jpeg" alt="Ribbon Hair Bows"><h4>Ribbon Hair Bows</h4><p class="price">UGX 5,000</p><button onclick="addToCart(17)">Add to Cart</button></div>
+                <div class="product-card"><img src="hand funs.jpeg" alt="Mini Fan"><h4>Portable Mini Fan</h4><p class="price">UGX 15,000</p><button onclick="addToCart(18)">Add to Cart</button></div>
             </div>
-        </section>
+        </div>
 
-        <section id="trust" class="section bg-light">
-            <h2 class="section-title">Why Choose Us</h2>
-            <div class="trust-badges">
-                <div class="trust-badge">
-                    <div class="badge-icon">🛡️</div>
-                    <h3>100% Authentic</h3>
-                    <p>Genuine products sourced from verified suppliers</p>
-                </div>
-                <div class="trust-badge">
-                    <div class="badge-icon">💯</div>
-                    <h3>Quality Guaranteed</h3>
-                    <p>All products meet international beauty standards</p>
-                </div>
-                <div class="trust-badge">
-                    <div class="badge-icon">🔒</div>
-                    <h3>Secure Payment</h3>
-                    <p>Safe and secure mobile money transactions</p>
-                </div>
-                <div class="trust-badge">
-                    <div class="badge-icon">⏱️</div>
-                    <h3>Fast Service</h3>
-                    <p>Quick response and delivery within Kampala</p>
-                </div>
+        <!-- Nails -->
+        <div class="category-group" id="Nails">
+            <h3 class="category-title">💅 Nails</h3>
+            <div class="products-grid">
+                <div class="product-card"><img src="nails3.jpeg" alt="Luxury Floral Nail Art"><h4>Luxury Floral Nail Art</h4><p class="price">UGX 40,000</p><button onclick="addToCart(19)">Add to Cart</button></div>
+                <div class="product-card"><img src="nails4.jpeg" alt="Premium Press-on Nails"><h4>Premium Press-on Nails</h4><p class="price">UGX 10,000</p><button onclick="addToCart(20)">Add to Cart</button></div>
+                <div class="product-card"><img src="nails.jpeg" alt="Nail Art Set"><h4>Nail Art Set</h4><p class="price">UGX 25,000</p><button onclick="addToCart(21)">Add to Cart</button></div>
             </div>
-        </section>
+        </div>
 
-        <section id="faq" class="section">
-            <h2 class="section-title">Frequently Asked Questions</h2>
-            <div class="faq-container">
-                <div class="faq-item">
-                    <h3 class="faq-question">How do I place an order?</h3>
-                    <p class="faq-answer">Click the "Place New Order" button, fill in your details, select your product, and submit. You'll receive an order confirmation on WhatsApp.</p>
-                </div>
-                <div class="faq-item">
-                    <h3 class="faq-question">What payment methods do you accept?</h3>
-                    <p class="faq-answer">We accept M-Pesa (Direct STK Push), Mobile Money transfers to +256 0752546261 (A. Evalyne), and payments via WhatsApp for more flexible options. Choose your preferred method at checkout!</p>
-                </div>
-                <div class="faq-item">
-                    <h3 class="faq-question">How do I pay with M-Pesa?</h3>
-                    <p class="faq-answer">Select "M-Pesa" at checkout, enter your phone number, and you'll receive a prompt on your phone to enter your PIN. Once confirmed, your order is automatically updated!</p>
-                </div>
-                <div class="faq-item">
-                    <h3 class="faq-question">What if I don't receive the M-Pesa prompt?</h3>
-                    <p class="faq-answer">Ensure your phone is on, has a stable signal, and isn't in "Do Not Disturb" mode. If it still doesn't appear, try again or contact us on WhatsApp for assistance.</p>
-                </div>
-                <div class="faq-item">
-                    <h3 class="faq-question">How long does delivery take?</h3>
-                    <p class="faq-answer">We offer fast delivery! Orders within Kampala are typically delivered within 24-48 hours. For locations outside Kampala, delivery may take 2-3 business days.</p>
-                </div>
-                <div class="faq-item">
-                    <h3 class="faq-question">Are your products authentic?</h3>
-                    <p class="faq-answer">Yes! All our products are 100% authentic, sourced directly from verified suppliers and meet international quality standards.</p>
-                </div>
-                <div class="faq-item">
-                    <h3 class="faq-question">Can I cancel or modify my order?</h3>
-                    <p class="faq-answer">Contact us on WhatsApp immediately after placing your order. We can help modify or cancel orders before they're processed for shipping.</p>
-                </div>
-                <div class="faq-item">
-                    <h3 class="faq-question">What is your return policy?</h3>
-                    <p class="faq-answer">Due to hygiene reasons, we only accept returns for items that are damaged or incorrect. Please notify us within 24 hours of delivery if there's any issue with your order.</p>
-                </div>
-                <div class="faq-item">
-                    <h3 class="faq-question">What if I have a skin reaction to a product?</h3>
-                    <p class="faq-answer">We recommend doing a patch test before full use. If you experience irritation, discontinue use immediately and consult a professional. You can also reach out for product-specific advice.</p>
-                </div>
-                <div class="faq-item">
-                    <h3 class="faq-question">Do you offer wholesale options?</h3>
-                    <p class="faq-answer">Yes! We provide competitive wholesale pricing for bulk orders. Contact us on WhatsApp with your requirements for a custom quote.</p>
-                </div>
-                <div class="faq-item">
-                    <h3 class="faq-question">Do you offer beauty consultations?</h3>
-                    <p class="faq-answer">Yes! We offer personalized beauty consultations. Contact us via WhatsApp to book a session with our expert consultants.</p>
-                </div>
+        <!-- Accessories -->
+        <div class="category-group" id="Accessories">
+            <h3 class="category-title">💍 Accessories</h3>
+            <div class="products-grid">
+                <div class="product-card"><img src="r1.jpeg" alt="Earrings"><h4>Earrings</h4><p class="price">UGX 5,000</p><button onclick="addToCart(22)">Add to Cart</button></div>
+                <div class="product-card"><img src="bracelets.jpeg" alt="Pink Beaded Bracelets"><h4>Pink Beaded Bracelets</h4><p class="price">UGX 5,000</p><button onclick="addToCart(23)">Add to Cart</button></div>
+                <div class="product-card"><img src="er.jpeg" alt="Beauty Set"><h4>Beauty Set</h4><p class="price">UGX 50,000</p><button onclick="addToCart(24)">Add to Cart</button></div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="orders" class="section">
-            <h2 class="section-title">Your Orders</h2>
-            <div class="orders-container">
-                <div class="order-tracking-box">
-                    <h3>Track Your Order</h3>
-                    <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 20px;">
-                        <input type="text" id="orderIDSearch" placeholder="Enter Order ID (e.g., EVA-12345)" class="product-search" style="max-width: 300px; margin: 0;">
-                        <button id="trackOrderBtn" class="btn" style="padding: 0.8rem 1.5rem; margin: 0;">Track</button>
-                    </div>
-                </div>
-                <button class="btn" id="openOrderForm">Place New Order</button>
-                <div id="orders-list" class="orders-grid">
-                    <p class="no-orders">You have no orders yet. <a href="#products">Start shopping!</a></p>
-                </div>
+    <!-- Services Section -->
+    <section id="services" class="section bg-light">
+        <div class="section-header">
+            <h2>Our Services</h2>
+            <p>Professional beauty services for you</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">💄</div>
+                <h3>Professional Makeup</h3>
+                <p>Expert makeup application for weddings, parties, photoshoots, and special occasions</p>
+                <span class="service-price">From UGX 50,000</span>
             </div>
-        </section>
+            <div class="service-card">
+                <div class="service-icon">🧴</div>
+                <h3>Facials & Skincare</h3>
+                <p>Professional facial treatments for all skin types. Rejuvenate your skin with our premium treatments.</p>
+                <span class="service-price">From UGX 50,000</span>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">💅</div>
+                <h3>Manicure & Pedicure</h3>
+                <p>Complete nail care and beautiful nail art services. Get perfect nails for any occasion.</p>
+                <span class="service-price">From UGX 30,000</span>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">💇</div>
+                <h3>Makeup Consultation</h3>
+                <p>Personalized advice on makeup techniques and product selection for your skin type</p>
+                <span class="service-price">From UGX 25,000</span>
+            </div>
+        </div>
+    </section>
 
-        <section id="newsletter" class="section bg-gradient">
-            <h2 class="section-title" style="color: #fff;">Join Our Beauty Community</h2>
-            <p style="color: #fff; max-width: 600px; margin: 0 auto 2rem;">Subscribe to get exclusive beauty tips, new product launches, and special discounts delivered straight to your inbox!</p>
-            <form id="newsletterForm" class="newsletter-form">
-                <input type="email" id="newsletterEmail" placeholder="Enter your email address" required>
-                <button type="submit" class="btn">Subscribe Now</button>
-            </form>
-            <p style="color: #fff; font-size: 0.9rem; margin-top: 1rem;">✓ No spam, just beauty inspiration and exclusive offers</p>
-        </section>
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="section-header">
+            <h2>About Eva's Beauty Hub</h2>
+            <p>Your trusted beauty partner in Uganda</p>
+        </div>
+        <div class="about-content">
+            <p>Welcome to <strong>Eva's Beauty Hub</strong> - your sanctuary for premium beauty products and personalized services. Located in Nakawa, Kampala, we believe that true beauty comes from confidence and self-expression.</p>
+            <p>Our curated collection features quality skincare, makeup, hair care, and accessories to help you look and feel your best. Whether you visit us in-store or shop online, we're dedicated to providing you with the best beauty experience in Uganda.</p>
+            <div class="features">
+                <div class="feature"><span>✨</span><div><h4>Premium Quality</h4><p>Only the finest beauty products</p></div></div>
+                <div class="feature"><span>💕</span><div><h4>Expert Care</h4><p>Professional consultations</p></div></div>
+                <div class="feature"><span>🚚</span><div><h4>Fast Delivery</h4><p>Across Kampala & Uganda</p></div></div>
+                <div class="feature"><span>💬</span><div><h4>24/7 Support</h4><p>We're always here to help</p></div></div>
+            </div>
+        </div>
+    </section>
 
-    </main>
+    <!-- Testimonials -->
+    <section class="section bg-light">
+        <div class="section-header">
+            <h2>What Customers Say</h2>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p>"Best beauty shop in Kampala! Quality products and amazing service. The staff helped me choose the right skincare for my skin type."</p>
+                <span>- Sarah M., Kampala</span>
+            </div>
+            <div class="testimonial">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p>"They did my wedding makeup and I looked stunning! Highly recommend Eva's Beauty Hub for any occasion."</p>
+                <span>- Grace K., Entebbe</span>
+            </div>
+            <div class="testimonial">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p>"Fast delivery and genuine products. My go-to beauty store in Uganda! The online ordering via WhatsApp is so convenient."</p>
+                <span>- Faith N., Jinja</span>
+            </div>
+        </div>
+    </section>
 
-    <div id="orderModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Place Your Order</h2>
-            <form id="orderForm">
-                <div class="form-group">
-                    <label for="customerName">Full Name *</label>
-                    <input type="text" id="customerName" name="customerName" required>
-                </div>
-                <div class="form-group">
-                    <label for="customerEmail">Email *</label>
-                    <input type="email" id="customerEmail" name="customerEmail" required>
-                </div>
-                <div class="form-group">
-                    <label for="customerPhone">Phone Number *</label>
-                    <input type="tel" id="customerPhone" name="customerPhone" required>
-                </div>
-                <div class="form-group">
-                    <label for="productSelect">Select Product *</label>
-                    <select id="productSelect" name="productSelect" required>
-                        <option value="">-- Choose a Product --</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="quantity">Quantity *</label>
-                    <input type="number" id="quantity" name="quantity" min="1" value="1" required>
-                </div>
-                <div class="form-group">
-                    <label for="address">Delivery Address *</label>
-                    <textarea id="address" name="address" rows="3" required></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="paymentMethod">Payment Method *</label>
-                    <select id="paymentMethod" name="paymentMethod" required>
-                        <option value="">-- Select Payment Method --</option>
-                        <option value="intasend">M-Pesa (Instant - STK Push)</option>
-                        <option value="mobile-money">Mobile Money (Send to 0752546261)</option>
-                        <option value="whatsapp">WhatsApp Order</option>
-                    </select>
-                </div>
-                <div id="intasendInfo" style="display: none; background: #e8f5e9; padding: 1rem; border-radius: 8px; margin-top: 1rem; border-left: 4px solid #2ecc71;">
-                    <h4 style="margin-top: 0; color: #27ae60;">M-Pesa Payment (Instant)</h4>
-                    <p style="font-size: 0.9rem; color: #555;">Click "Complete Order" and you'll receive an M-Pesa prompt on your phone. Enter your PIN to pay instantly.</p>
-                </div>
-                <div id="mobileMoneyInfo" style="display: none; background: #e8f5e9; padding: 1rem; border-radius: 8px; margin-top: 1rem; border-left: 4px solid #2ecc71;">
-                    <h4 style="margin-top: 0; color: #27ae60;">Mobile Money Payment Instructions</h4>
-                    <p><strong>Send to:</strong> <span id="mpesaPhoneDisplay">+256 752 546 261</span></p>
-                    <p style="font-size: 0.9rem; color: #555;">1. Open your Mobile Money app<br>2. Send the total amount to <strong>0752546261</strong><br>3. Enter your PIN to confirm<br>4. Your order will be processed after payment confirmation</p>
-                </div>
-                <div id="mobileMoneyInfo" style="display: none; background: #e8f5e9; padding: 1rem; border-radius: 8px; margin-top: 1rem; border-left: 4px solid #2ecc71;">
-                    <h4 style="margin-top: 0; color: #27ae60;">Mobile Money Payment Instructions</h4>
-                    <p><strong>Send to:</strong> <span id="mpesaPhoneDisplay">+256 752 546 261</span></p>
-                    <p style="font-size: 0.9rem; color: #555;">1. Open your Mobile Money app<br>2. Send the total amount to <strong>00752546261</strong><br>3. Enter your PIN to confirm<br>4. Your order will be processed after payment confirmation</p>
-                </div>
-                <div class="form-group">
-                    <label for="notes">Special Notes</label>
-                    <textarea id="notes" name="notes" rows="2" placeholder="Any special requests..."></textarea>
-                </div>
-                <button type="submit" class="btn">Complete Order</button>
+    <!-- FAQ Section -->
+    <section class="section">
+        <div class="section-header">
+            <h2>❓ Frequently Asked Questions</h2>
+        </div>
+        <div class="faq-grid">
+            <div class="faq-item">
+                <h4>How do I place an order?</h4>
+                <p>Browse our products, add items to your cart, and click "Place New Order". Fill in your details and select your preferred payment method. You can also order directly via WhatsApp!</p>
+            </div>
+            <div class="faq-item">
+                <h4>What payment methods do you accept?</h4>
+                <p>We accept M-Pesa via IntaSend, M-Pesa via Daraja API, direct Mobile Money transfer to +256 0752546261, or WhatsApp ordering.</p>
+            </div>
+            <div class="faq-item">
+                <h4>What are the delivery charges?</h4>
+                <p>Free delivery on orders over UGX 100,000! Standard delivery within Kampala is UGX 10,000. Delivery to other regions in Uganda varies.</p>
+            </div>
+            <div class="faq-item">
+                <h4>How do I pay with M-Pesa?</h4>
+                <p>Select M-Pesa payment at checkout. For IntaSend, you'll receive an STK push on your phone. For Daraja, you'll get a prompt. For direct transfer, send to +256 0752546261.</p>
+            </div>
+            <div class="faq-item">
+                <h4>How do I track my order?</h4>
+                <p>Use your Order ID on the Orders page to track your order status. Orders show as Pending (new), Processing (1-24hrs), Shipped (24-72hrs), or Delivered (72hrs+).</p>
+            </div>
+            <div class="faq-item">
+                <h4>What is your return policy?</h4>
+                <p>We offer a 7-day return policy for unused items in original packaging. Contact us for returns. We want you to be completely satisfied!</p>
+            </div>
+            <div class="faq-item">
+                <h4>Do you offer wholesale prices?</h4>
+                <p>Yes! Contact us on WhatsApp for bulk orders and wholesale pricing. We cater to resellers and salonners across Uganda.</p>
+            </div>
+            <div class="faq-item">
+                <h4>How do I book a makeup service?</h4>
+                <p>Contact us via WhatsApp or call +256 0752546261 to book your makeup appointment. We service weddings, parties, photoshoots, and special events.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section bg-light">
+        <div class="section-header">
+            <h2>Contact Us</h2>
+            <p>Get in touch with us</p>
+        </div>
+        <div class="contact-grid">
+            <div class="contact-card">
+                <span>📍</span>
+                <h4>Location</h4>
+                <p>Nakawa, Kampala, Uganda</p>
+            </div>
+            <div class="contact-card">
+                <span>📱</span>
+                <h4>Phone/WhatsApp</h4>
+                <p>+256 0752546261</p>
+            </div>
+            <div class="contact-card">
+                <span>📧</span>
+                <h4>Email</h4>
+                <p>atwiineevalyne@gmail.com</p>
+            </div>
+            <div class="contact-card">
+                <span>💳</span>
+                <h4>Mobile Money</h4>
+                <p>+256 0752546261</p>
+            </div>
+        </div>
+
+        <!-- Newsletter -->
+        <div class="newsletter">
+            <h3>📧 Subscribe to Our Newsletter</h3>
+            <p>Get updates on new products, promotions, and beauty tips!</p>
+            <form onsubmit="subscribeNewsletter(event)">
+                <input type="email" id="newsletterEmail" placeholder="Enter your email" required>
+                <button type="submit">Subscribe</button>
             </form>
         </div>
-    </div>
+    </section>
+
+    <!-- Orders Section -->
+    <section id="orders" class="section">
+        <div class="section-header">
+            <h2>📦 Order Tracking & History</h2>
+        </div>
+        
+        <!-- Track Order -->
+        <div class="track-order">
+            <h3>Track Your Order</h3>
+            <p>Enter your Order ID to check the status</p>
+            <div class="track-form">
+                <input type="text" id="trackInput" placeholder="Enter Order ID (e.g., ORD-XXXXX)">
+                <button onclick="trackOrder()">Track</button>
+            </div>
+            <div id="trackResult"></div>
+        </div>
+
+        <!-- Order History -->
+        <div class="order-history">
+            <h3>Your Order History</h3>
+            <div id="orderHistory"></div>
+        </div>
+
+        <!-- Place New Order Button -->
+        <div class="place-order-section">
+            <button class="btn btn-primary" onclick="openOrderModal()">📝 Place New Order</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>💄 Eva's Beauty Hub</h3>
+                <p>Your trusted beauty partner in Uganda. Celebrating individuality and self-expression with premium products and professional services.</p>
+                <div class="social-links">
+                    <a href="#">📘</a>
+                    <a href="#">📸</a>
+                    <a href="https://wa.me/256752546261?text=Hello">💬</a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <a href="#home">Home</a>
+                <a href="#products">Products</a>
+                <a href="#services">Services</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="footer-links">
+                <h4>Categories</h4>
+                <a href="#products">Skincare</a>
+                <a href="#products">Makeup</a>
+                <a href="#products">Hair Care</a>
+                <a href="#products">Nails</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Eva's Beauty Hub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp -->
+    <a href="https://wa.me/256752546261?text=Hello" class="float-whatsapp" target="_blank">💬</a>
 
     <!-- Cart Modal -->
     <div id="cartModal" class="modal">
         <div class="modal-content">
-            <span class="close cart-close">&times;</span>
-            <h2>Your Shopping Cart</h2>
-            <div id="cart-items-container">
-                <p class="empty-cart-msg">Your cart is empty.</p>
+            <span class="close" onclick="closeCart()">&times;</span>
+            <h2>🛒 Your Cart</h2>
+            <div id="cart-items">
+                <p class="empty-cart">Your cart is empty</p>
             </div>
-            <div class="cart-summary">
-                <button class="btn" style="background:#25D366;width:100%;font-size:18px;" onclick="orderAllViaWhatsApp()">ORDER NOW</button>
-                <button class="btn" style="background:#e74c3c;width:100%;margin-top:10px;" onclick="cart=[];saveCart();updateCartDisplay();">CLEAR CART</button>
+            <div class="cart-total">
+                <strong>Total: UGX <span id="cart-total">0</span></strong>
+            </div>
+            <div class="cart-actions">
+                <button class="btn-order" onclick="openOrderModal()">📝 Place Order</button>
+                <button class="btn-clear" onclick="clearCart()">Clear Cart</button>
             </div>
         </div>
     </div>
 
-    <!-- Toast Notification -->
-
-
-    <button id="cartFloatBtn" class="cart-float-btn" title="View Cart">
-        🛒 <span id="cart-count">0</span>
-    </button>
-
-    <footer id="contact">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>Eva's Beauty Hub</h3>
-                <p>Helping you shine since 2024.</p>
-            </div>
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About Us</a></li>
-                    <li><a href="#products">Products</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#faq">FAQ</a></li>
-                    <li><a href="#orders">Orders</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Contact Us</h3>
-                <p><strong>Location:</strong> Nakawa, Kampala, Uganda</p>
-                <p>Email: <a href="mailto:atwiineevalyne@gmail.com">atwiineevalyne@gmail.com</a></p>
-                <p>Phone: <a href="https://wa.me/2560752546261" target="_blank">+256 0752546261</a></p>
-                <p><strong>Mobile Money:</strong> Pay to +256 0752546261 (A. Evalyne)</p>
-            </div>
-            <div class="footer-section">
-                <h3>Follow Us</h3>
-                <div class="social-links">
-                    <a href="https://facebook.com" target="_blank" class="social-icon" title="Facebook">f</a>
-                    <a href="https://instagram.com" target="_blank" class="social-icon" title="Instagram">📷</a>
-                    <a href="https://tiktok.com" target="_blank" class="social-icon" title="TikTok">🎵</a>
-                    <a href="https://wa.me/2560752546261" target="_blank" class="social-icon" title="WhatsApp">💬</a>
+    <!-- Order Form Modal -->
+    <div id="orderModal" class="modal">
+        <div class="modal-content order-modal">
+            <span class="close" onclick="closeOrderModal()">&times;</span>
+            <h2>📝 Place Your Order</h2>
+            <form id="orderForm" onsubmit="submitOrder(event)">
+                <div class="form-group">
+                    <label>Full Name *</label>
+                    <input type="text" id="orderName" required placeholder="Your full name">
                 </div>
-            </div>
+                <div class="form-group">
+                    <label>Email *</label>
+                    <input type="email" id="orderEmail" required placeholder="your@email.com">
+                </div>
+                <div class="form-group">
+                    <label>Phone Number *</label>
+                    <input type="tel" id="orderPhone" required placeholder="+256 7XX XXX XXX">
+                </div>
+                <div class="form-group">
+                    <label>Select Product *</label>
+                    <select id="orderProduct" required>
+                        <option value="">-- Select Product --</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Quantity *</label>
+                    <input type="number" id="orderQty" required min="1" value="1" placeholder="1">
+                </div>
+                <div class="form-group">
+                    <label>Delivery Address *</label>
+                    <textarea id="orderAddress" required placeholder="Full delivery address"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Payment Method *</label>
+                    <select id="orderPayment" required>
+                        <option value="">-- Select Payment --</option>
+                        <option value="intasend">M-Pesa via IntaSend (STK Push)</option>
+                        <option value="daraja">M-Pesa via Daraja API</option>
+                        <option value="direct">Direct Mobile Money Transfer</option>
+                        <option value="whatsapp">WhatsApp Ordering</option>
+                    </select>
+                </div>
+                <div class="payment-instructions" id="paymentInstructions">
+                    <p id="instructionText"></p>
+                </div>
+                <div class="form-group">
+                    <label>Special Notes</label>
+                    <textarea id="orderNotes" placeholder="Any special instructions..."></textarea>
+                </div>
+                <button type="submit" class="btn-submit">✅ Submit Order</button>
+            </form>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2024 Eva's Beauty Hub. All rights reserved. | Celebrating individuality & self-expression</p>
-        </div>
-    </footer>
+    </div>
 
-    <button id="backToTop" title="Go to top">↑</button>
-
-    <a href="https://wa.me/2560752546261?text=hello%20welcome%20to%20Eva's%20beauty%20hub" class="whatsapp-float" target="_blank" title="Chat with us on WhatsApp">
-        <svg viewBox="0 0 448 512" width="30" height="30" fill="white">
-            <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-190.9 101.5-190.9 226.9 0 43.2 10.8 85.5 31.5 122.5L32 512l133.8-35.1c35.6 19.4 75.6 29.5 116.4 29.5 122.4 0 222-99.6 222-222 0-59.3-23.1-115.1-65.1-157.1zM223.9 474c-37.9 0-75.1-10.2-107.5-29.4l-7.7-4.6L29.9 462.7l23.5-85.4-5-7.9c-21.1-33.6-32.3-72.7-32.3-112.5 0-111.3 90.4-201.8 201.8-201.8 54 0 104.7 21 142.9 59.2s59.2 88.9 59.2 142.6c0 111.3-90.4 201.8-201.8 201.8zm117.7-156.6c-6.5-3.2-38.3-18.9-44.2-21.1-5.9-2.1-10.2-3.2-14.5 3.2-4.3 6.5-16.7 21.1-20.4 25.4-3.8 4.3-7.5 4.9-14 1.6-6.5-3.2-27.4-10.1-52.2-33.2-19.3-17.2-32.3-38.4-36.1-44.9-3.8-6.5-.4-10 2.8-13.2 2.9-2.9 6.5-7.5 9.7-11.3 3.2-3.8 4.3-6.5 6.5-10.8 2.1-4.3 1.1-8.1-.5-11.3-1.6-3.2-14.5-34.9-19.9-47.7-5.3-12.4-10.7-10.7-14.5-10.9-3.8-.2-8.1-.2-12.4-.2-4.3 0-11.3 1.6-17.2 7.5-5.9 5.9-22.6 22.1-22.6 53.8s23.1 62.4 26.3 66.7c3.2 4.3 45.4 69.4 110 97.2 15.4 6.6 27.3 10.6 36.7 13.6 15.5 4.9 29.6 4.2 40.7 2.1 12.4-2.3 38.3-15.6 43.7-30.7 5.4-15.1 5.4-28.1 3.8-30.7-1.6-2.6-5.9-4.3-12.4-7.5z"/>
-        </svg>
-    </a>
+    <!-- Toast Container -->
+    <div id="toast-container"></div>
 
     <script>
-        // Cart using localStorage
-        let cart = JSON.parse(localStorage.getItem('evaCart')) || [];
-        
-        function saveCart() {
-            localStorage.setItem('evaCart', JSON.stringify(cart));
-        }
-        
-        function addToCartFromButton(name, price) {
-            cart.push({name: name, price: price});
-            saveCart();
-            updateCartDisplay();
-            
-            // Immediately open WhatsApp after adding
-            orderAllViaWhatsApp();
-        }
-        
-        function updateCartDisplay() {
-            const container = document.getElementById('cart-items-container');
-            const totalEl = document.getElementById('cart-total-amount');
-            const countEl = document.getElementById('cart-count');
-            
-            if(countEl) countEl.innerText = cart.length;
-            
-            if (!container) return;
-            
-            if (cart.length === 0) {
-                container.innerHTML = '<p class="empty-cart-msg">Your cart is empty.</p>';
-                if(totalEl) totalEl.innerText = '0';
-                return;
-            }
-            
-            let total = 0;
-            cart.forEach((item) => {
-                const price = parseInt(item.price.replace(/[^0-9]/g, ''));
-                total += price;
-            });
-            
-            container.innerHTML = `<div style="text-align:center;padding:20px;">
-                <h3>${cart.length} item(s) in cart</h3>
-                <h2 style="color:#e91e63;">Total: UGX ${total.toLocaleString()}</h2>
-                <p>WhatsApp order opened automatically!</p>
-            </div>`;
-            if(totalEl) totalEl.innerText = total.toLocaleString();
-        }
-        
-        function removeFromCart(index) {
-            cart.splice(index, 1);
-            saveCart();
-            updateCartDisplay();
-        }
-        
-        function orderAllViaWhatsApp() {
-            if (cart.length === 0) {
-                alert('Your cart is empty!');
-                return;
-            }
-            
-            let message = "*ORDER FROM EVA'S BEAUTY HUB*\n\n";
-            let total = 0;
-            
-            cart.forEach((item, index) => {
-                const price = parseInt(item.price.replace(/[^0-9]/g, ''));
-                total += price;
-                message += `${index + 1}. ${item.name} - ${item.price}\n`;
-            });
-            
-            message += `\n*TOTAL: UGX ${total.toLocaleString()}*\n\n`;
-            message += "Please confirm my order and send payment details. Thank you!";
-            
-            window.open('https://wa.me/256752546261?text=' + encodeURIComponent(message), '_blank');
-        }
-        
-        // Initialize cart display on page load
-        window.onload = function() {
-            updateCartDisplay();
-        };
-    </script>
-            {
-                category: "Accessories",
-                name: "Earrings",
-                price: "UGX 5,000",
-                image: "r1.jpeg"
-            },
-            {
-                category: "Makeup",
-                name: "Lip Gloss",
-                price: "UGX 6,000",
-                image: "r2.jpeg"
-            },
-            {
-                category: "Makeup",
-                name: "Lip Gloss",
-                price: "UGX 10,000",
-                image: "r3.jpeg"
-            },
-            {
-                category: "Makeup",
-                name: "Lip Gloss",
-                price: "UGX 7,000",
-                image: "r4.jpeg"
-            },
-            {
-                category: "Skincare",
-                name: "Sherbet Body Scrub",
-                price: "UGX 45,000",
-                image: "ace clear spot treatment.jpeg"
-            },
-            {
-                category: "Makeup",
-                name: "Lip Gloss",
-                price: "UGX 7,000",
-                image: "r6.jpeg"
-            },
-            {
-                category: "Hair Care",
-                name: "Hair Clips",
-                price: "UGX 5,000",
-                image: "rr.jpeg"
-            },
-            {
-                category: "Makeup",
-                name: "Pink Lips Lip Gloss",
-                price: "UGX 15,000",
-                image: "e4.jpeg"
-            },
-            {
-                category: "Skincare",
-                name: "Skin Care Combo",
-                price: "UGX 100,000",
-                image: "44.jpeg"
-            },
-            {
-                category: "Hair Care",
-                name: "Puff Holder",
-                price: "UGX 2,000",
-                image: "re.jpeg"
-            },
-            {
-                category: "Hair Care",
-                name: "Ribbon Hair Bows",
-                price: "UGX 5,000",
-                image: "hair clips.jpeg"
-            },
-            {
-                category: "Skincare",
-                name: "Luxury Body Spray",
-                price: "UGX 20,000",
-                image: "body spray.jpeg"
-            },
-            {
-                category: "Skincare",
-                name: "Premium Cotton Pads",
-                price: "UGX 30,000",
-                image: "cotton pads.jpeg"
-            },
-            {
-                category: "Skincare",
-                name: "Exfoliating Glove Sponge",
-                price: "UGX 5,000",
-                image: "glove sponge.jpeg"
-            },
-            {
-                category: "Skincare",
-                name: "Vitamin C Brightening Cream",
-                price: "UGX 50,000",
-                image: "vc brightening cream.jpeg"
-            },
-            {
-                category: "Skincare",
-                name: "Pearl Cleansing Milk",
-                price: "UGX 20,000",
-                image: "pearl cleansing milk.jpeg"
-            },
-            {
-                category: "Skincare",
-                name: "Fruit Wipes",
-                price: "UGX 5,000",
-                image: "wipes.jpeg"
-            },
-            {
-                category: "Makeup",
-                name: "Matte Lip Gloss Set",
-                price: "UGX 20,000",
-                image: "velvet matte lip stick.jpeg"
-            },
-            {
-                category: "Skincare",
-                name: "Vitamin C Whitening Cream",
-                price: "UGX 30,000",
-                image: "vc whitening cream.jpeg"
-            },
-            {
-                category: "Nails",
-                name: "Luxury Floral Nail Art",
-                price: "UGX 40,000",
-                image: "nails3.jpeg"
-            },
-            {
-                category: "Accessories",
-                name: "Portable Mini Fans",
-                price: "UGX 15,000",
-                image: "hand funs.jpeg"
-            },
-            {
-                category: "Accessories",
-                name: "Pink Beaded Bracelets",
-                price: "UGX 5,000",
-                image: "bracelets.jpeg"
-            },
-            {
-                category: "Nails",
-                name: "Premium Press-on Nails",
-                price: "UGX 10,000",
-                image: "nails4.jpeg"
-            }
+        // Products Data
+        const products = [
+            {name: "Sherbet Body Scrub", price: 45000, category: "Skincare"},
+            {name: "Luxury Body Spray", price: 15000, category: "Skincare"},
+            {name: "Premium Cotton Pads", price: 8000, category: "Skincare"},
+            {name: "Exfoliating Glove Sponge", price: 5000, category: "Skincare"},
+            {name: "Vitamin C Brightening Cream", price: 35000, category: "Skincare"},
+            {name: "Pearl Cleansing Milk", price: 20000, category: "Skincare"},
+            {name: "Fruit Wipes", price: 5000, category: "Skincare"},
+            {name: "Vitamin C Whitening Cream", price: 30000, category: "Skincare"},
+            {name: "Skin Care Combo", price: 100000, category: "Skincare"},
+            {name: "Lip Gloss", price: 6000, category: "Makeup"},
+            {name: "Lip Gloss Premium", price: 10000, category: "Makeup"},
+            {name: "Lip Gloss", price: 7000, category: "Makeup"},
+            {name: "Lip Gloss", price: 7000, category: "Makeup"},
+            {name: "Pink Lips Lip Gloss", price: 15000, category: "Makeup"},
+            {name: "Matte Lip Gloss Set", price: 20000, category: "Makeup"},
+            {name: "Hair Clips", price: 5000, category: "Hair Care"},
+            {name: "Puff Holder", price: 2000, category: "Hair Care"},
+            {name: "Ribbon Hair Bows", price: 5000, category: "Hair Care"},
+            {name: "Portable Mini Fan", price: 15000, category: "Hair Care"},
+            {name: "Luxury Floral Nail Art", price: 40000, category: "Nails"},
+            {name: "Premium Press-on Nails", price: 10000, category: "Nails"},
+            {name: "Nail Art Set", price: 25000, category: "Nails"},
+            {name: "Earrings", price: 5000, category: "Accessories"},
+            {name: "Pink Beaded Bracelets", price: 5000, category: "Accessories"},
+            {name: "Beauty Set", price: 50000, category: "Accessories"}
         ];
 
-        const productContainer = document.getElementById('product-container');
-
-        // Function to render products with categories grouped
-        function renderProducts() {
-            productContainer.innerHTML = '';
-            
-            const categoryOrder = ["Skincare", "Makeup", "Hair Care", "Nails", "Accessories"];
-            
-            categoryOrder.forEach(category => {
-                const categoryProducts = products.filter(p => p.category === category);
-                
-                if (categoryProducts.length > 0) {
-                    // Add Category Header
-                    const categoryHeader = document.createElement('div');
-                    categoryHeader.className = 'category-section-title';
-                    categoryHeader.style.gridColumn = '1 / -1';
-                    categoryHeader.style.textAlign = 'left';
-                    categoryHeader.style.marginTop = '2rem';
-                    categoryHeader.style.marginBottom = '1rem';
-                    categoryHeader.style.borderBottom = '2px solid var(--primary-color)';
-                    categoryHeader.style.paddingBottom = '0.5rem';
-                    categoryHeader.innerHTML = `<h3 style="font-family: 'Playfair Display', serif; color: var(--accent-color);">${category}</h3>`;
-                    productContainer.appendChild(categoryHeader);
-
-                    categoryProducts.forEach(product => {
-                        const originalIndex = products.indexOf(product);
-                        const isFeatured = originalIndex % 5 === 0;
-                        const isNew = originalIndex % 3 === 0;
-                        
-                        const productCard = document.createElement('div');
-                        productCard.className = 'product-card';
-                        productCard.setAttribute('data-category', product.category.toLowerCase());
-                        productCard.innerHTML = `
-                            ${isFeatured ? '<div class="category-badge featured-badge" style="left: 10px; right: auto; background: var(--primary-color);">Featured</div>' : ''}
-                            ${isNew && !isFeatured ? '<div class="category-badge new-badge" style="left: 10px; right: auto; background: #2ecc71;">New</div>' : ''}
-                            <div class="category-badge product-cat-badge">${product.category}</div>
-                            <img src="${encodeURI(product.image)}" alt="${product.name}" class="product-image" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23f0f0f0%22 width=%22100%22 height=%22100%22/><text x=%2250%%22 y=%2250%%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22>No Image</text></svg>'">
-                            <h3>${product.name}</h3>
-                            <p class="product-price">${product.price}</p>
-                            <div class="btn-group" style="display: flex; gap: 0.5rem; justify-content: center;">
-                                <button onclick="addToCart(${originalIndex})" class="btn-small">🛒 Add</button>
-                                <a href="https://wa.me/2560752546261?text=Hi, I want to buy ${product.name} for ${product.price}. How do I pay via Mobile Money?" target="_blank" class="btn-small">Order Now</a>
-                            </div>
-                        `;
-                        productContainer.appendChild(productCard);
-
-                        // show details when card itself (not buttons/links) is clicked
-                        productCard.addEventListener('click', (e) => {
-                            // ignore clicks on buttons or links inside the card
-                            if (e.target.closest('button') || e.target.closest('a')) return;
-                            showProductDetails(product);
-                        });
-                    });
-                }
+        // Initialize product dropdown
+        function initProductDropdown() {
+            const select = document.getElementById('orderProduct');
+            products.forEach((p, i) => {
+                const opt = document.createElement('option');
+                opt.value = i;
+                opt.textContent = `${p.name} - UGX ${p.price.toLocaleString()}`;
+                select.appendChild(opt);
             });
         }
 
-        renderProducts();
+        // Cart
+        let cart = JSON.parse(localStorage.getItem('evaCart')) || [];
+        document.getElementById('cart-count').innerText = cart.length;
 
-        // initialize filtering variables and UI
-        let selectedCategory = 'all';
-        const productSearch = document.getElementById('productSearch');
-        const categoryButtons = document.querySelectorAll('.category-filter-btn');
-
-        // add event listeners for category buttons
-        categoryButtons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                selectedCategory = btn.dataset.category;
-                categoryButtons.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                filterProducts();
-            });
-        });
-
-        // search box listener
-        productSearch.addEventListener('input', filterProducts);
-
-        // observe after rendering
-        observeElements();
-
-        function filterProducts() {
-            const searchTerm = productSearch.value.toLowerCase();
-            const productCards = document.querySelectorAll('.product-card');
-            const categoryHeaders = document.querySelectorAll('.category-section-title');
-            
-            // Map selectedCategory to data-category format
-            const targetCategory = selectedCategory.replace('-', ' ');
-
-            productCards.forEach(card => {
-                const productName = card.querySelector('h3').innerText.toLowerCase();
-                const cardCategory = card.getAttribute('data-category');
-                const productPrice = card.querySelector('.product-price').innerText.toLowerCase();
-                
-                const categoryMatch = selectedCategory === 'all' || cardCategory === targetCategory;
-                const nameMatch = productName.includes(searchTerm) || cardCategory.includes(searchTerm) || productPrice.includes(searchTerm);
-                
-                if (categoryMatch && nameMatch) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-
-            // Hide/Show headers based on whether they have visible products
-            categoryHeaders.forEach(header => {
-                let current = header.nextElementSibling;
-                let hasVisible = false;
-                while (current && !current.classList.contains('category-section-title')) {
-                    if (current.classList.contains('product-card') && current.style.display !== 'none') {
-                        hasVisible = true;
-                        break;
-                    }
-                    current = current.nextElementSibling;
-                }
-                header.style.display = hasVisible ? 'block' : 'none';
-            });
-        }
-
-        // Intersection Observer for dynamic scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        // Observe product cards
-        function observeElements() {
-            const cards = document.querySelectorAll('.product-card, .category-section-title');
-            cards.forEach(card => {
-                observer.observe(card);
-            });
-        }
-
-        // Back to Top Logic
-        const backToTopBtn = document.createElement('button');
-        backToTopBtn.id = "backToTop";
-        backToTopBtn.innerHTML = "↑";
-        backToTopBtn.title = "Go to top";
-        document.body.appendChild(backToTopBtn);
-
-        window.onscroll = function() {
-            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
-                backToTopBtn.style.display = "block";
-            } else {
-                backToTopBtn.style.display = "none";
-            }
-        };
-
-        backToTopBtn.onclick = function() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        };
-
-        // Hamburger Menu
-        const hamburger = document.querySelector('.hamburger');
-        const navLinks = document.querySelector('.nav-links');
-
-        hamburger.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            hamburger.classList.toggle('toggle');
-        });
-
-        navLinks.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-                hamburger.classList.remove('toggle');
-            });
-        });
-
-        
-        // helper to show simple product details (you can replace with modal)
-        function showProductDetails(prod) {
-            alert(`Product: ${prod.name}\nCategory: ${prod.category}\nPrice: ${prod.price}`);
-        }
-
-        // Cart Functionality
-        let cart = JSON.parse(localStorage.getItem('evasBeautyCart')) || [];
-        const cartModal = document.getElementById('cartModal');
-        const cartFloatBtn = document.getElementById('cartFloatBtn');
-        const cartCloseBtn = document.querySelector('.cart-close');
-        const cartItemsContainer = document.getElementById('cart-items-container');
-        const cartTotalAmount = document.getElementById('cart-total-amount');
-        const cartCount = document.getElementById('cart-count');
-
-        function updateCartUI() {
-            cartCount.innerText = cart.length;
-            localStorage.setItem('evasBeautyCart', JSON.stringify(cart));
-            
-            if (cart.length === 0) {
-                cartItemsContainer.innerHTML = '<p class="empty-cart-msg">Your cart is empty.</p>';
-                cartTotalAmount.innerText = '0';
-                return;
-            }
-
-            let total = 0;
-            cartItemsContainer.innerHTML = cart.map((item, index) => {
-                const price = parseInt(item.price.replace(/[^0-9]/g, ''));
-                total += price;
-                return `
-                    <div class="cart-item">
-                        <div class="cart-item-info">
-                            <h4>${item.name}</h4>
-                            <p>${item.price}</p>
-                        </div>
-                        <span class="remove-item" onclick="removeFromCart(${index})">❌ Remove</span>
-                    </div>
-                `;
-            }).join('');
-            cartTotalAmount.innerText = total.toLocaleString();
-        }
-
+        // Add to Cart
         function addToCart(index) {
-            const product = products[index];
-            cart.push({...product, productIndex: index});
-            updateCartUI();
-            showToast(`✨ ${product.name} added to cart!`);
+            cart.push(products[index]);
+            localStorage.setItem('evaCart', JSON.stringify(cart));
+            document.getElementById('cart-count').innerText = cart.length;
+            showToast(products[index].name + ' added to cart!');
         }
 
-        function removeFromCart(index) {
-            cart.splice(index, 1);
-            updateCartUI();
+        // Open Cart
+        function openCart() {
+            updateCartDisplay();
+            document.getElementById('cartModal').style.display = 'block';
         }
 
-        cartFloatBtn.addEventListener('click', () => {
-            cartModal.style.display = 'block';
-        });
+        // Close Cart
+        function closeCart() {
+            document.getElementById('cartModal').style.display = 'none';
+        }
 
-        cartCloseBtn.addEventListener('click', () => {
-            cartModal.style.display = 'none';
-        });
-
-        let isCartCheckout = false;
-
-        document.getElementById('checkoutBtn').addEventListener('click', () => {
+        // Update Cart Display
+        function updateCartDisplay() {
+            const container = document.getElementById('cart-items');
             if (cart.length === 0) {
-                showToast("Your cart is empty!");
+                container.innerHTML = '<p class="empty-cart">Your cart is empty 🛒</p>';
+                document.getElementById('cart-total').innerText = '0';
                 return;
             }
-            isCartCheckout = true;
-            cartModal.style.display = 'none';
-            orderModal.style.display = 'block';
-            
-            const total = cart.reduce((sum, item) => sum + parseInt(item.price.replace(/[^0-9]/g, '')), 0);
-            const cartSummary = cart.map(item => `${item.name} (${item.price})`).join(', ');
-            document.getElementById('notes').value = `Order from Cart: ${cartSummary}`;
-            
-            // Temporary add "Cart Items" to select
-            const cartOption = document.createElement('option');
-            cartOption.value = "cart";
-            cartOption.text = `Shopping Cart (${cart.length} items) - UGX ${total.toLocaleString()}`;
-            productSelect.insertBefore(cartOption, productSelect.firstChild);
-            productSelect.value = "cart";
-            document.getElementById('quantity').value = 1;
-            document.getElementById('quantity').disabled = true;
-        });
-
-        // WhatsApp Order Button - Order all items at once
-        document.getElementById('whatsappOrderBtn').addEventListener('click', () => {
-            if (cart.length === 0) {
-                showToast("Your cart is empty!");
-                return;
-            }
-            
-            let message = "*ORDER FROM EVA'S BEAUTY HUB*\n\n";
             let total = 0;
-            
-            cart.forEach((item, index) => {
-                const price = parseInt(item.price.replace(/[^0-9]/g, ''));
-                total += price;
-                message += `${index + 1}. ${item.name} - ${item.price}\n`;
+            let html = '';
+            cart.forEach((item, i) => {
+                total += item.price;
+                html += '<div class="cart-item"><span>' + item.name + '</span><span>UGX ' + item.price.toLocaleString() + '</span><button onclick="removeItem(' + i + ')">✕</button></div>';
             });
-            
-            message += `\n*TOTAL: UGX ${total.toLocaleString()}*\n\n`;
-            message += "Please confirm my order and send payment details. Thank you!";
-            
-            const whatsappUrl = `https://wa.me/256752546261?text=${encodeURIComponent(message)}`;
-            window.open(whatsappUrl, '_blank');
-            
+            container.innerHTML = html;
+            document.getElementById('cart-total').innerText = total.toLocaleString();
+        }
+
+        // Remove Item
+        function removeItem(index) {
+            cart.splice(index, 1);
+            localStorage.setItem('evaCart', JSON.stringify(cart));
+            document.getElementById('cart-count').innerText = cart.length;
+            updateCartDisplay();
+        }
+
+        // Clear Cart
+        function clearCart() {
             cart = [];
-            updateCartUI();
-            cartModal.style.display = 'none';
-            showToast("Order sent via WhatsApp!");
-        });
-
-        // Order Management
-        const orderModal = document.getElementById('orderModal');
-        const openOrderFormBtn = document.getElementById('openOrderForm');
-        const closeModalBtn = document.querySelector('.close');
-        const orderForm = document.getElementById('orderForm');
-        const productSelect = document.getElementById('productSelect');
-        const ordersListContainer = document.getElementById('orders-list');
-
-        let allOrders = [];
-
-        function populateProductSelect() {
-            const options = products.map((product, index) => 
-                `<option value="${index}">${product.name} - ${product.price}</option>`
-            ).join('');
-            productSelect.innerHTML = '<option value="">-- Choose a Product --</option>' + options;
-            document.getElementById('quantity').disabled = false;
+            localStorage.setItem('evaCart', JSON.stringify(cart));
+            document.getElementById('cart-count').innerText = '0';
+            updateCartDisplay();
+            showToast('Cart cleared!');
         }
 
-        function generateOrderId() {
-            return 'ORD-' + Date.now() + Math.random().toString(36).substr(2, 9).toUpperCase();
-        }
-
-        function getOrderStatus(createdTime) {
-            const now = new Date().getTime();
-            const timeDiff = now - createdTime;
-            const hoursAgo = timeDiff / (1000 * 60 * 60);
-            
-            if (hoursAgo < 1) return 'Pending';
-            if (hoursAgo < 24) return 'Processing';
-            if (hoursAgo < 72) return 'Shipped';
-            return 'Delivered';
-        }
-
-        async function loadOrders() {
-            try {
-                // Try to load orders from backend for the current user's phone if it's stored
-                const savedPhone = localStorage.getItem('customerPhone');
-                let url = 'api/get-orders.php';
-                if (savedPhone) {
-                    url += `?customer_phone=${encodeURIComponent(savedPhone)}`;
-                }
-                
-                const response = await fetch(url);
-                const result = await response.json();
-                
-                if (result.success && result.orders.length > 0) {
-                    allOrders = result.orders;
-                } else {
-                    // Fallback to localStorage
-                    const savedOrders = localStorage.getItem('evasBeautyOrders');
-                    allOrders = savedOrders ? JSON.parse(savedOrders) : [];
-                }
-            } catch (error) {
-                console.error("Error loading orders:", error);
-                const savedOrders = localStorage.getItem('evasBeautyOrders');
-                allOrders = savedOrders ? JSON.parse(savedOrders) : [];
-            }
-            displayOrders();
-        }
-
-        function displayOrders() {
-            if (allOrders.length === 0) {
-                ordersListContainer.innerHTML = '<p class="no-orders">You have no orders yet. <a href="#products">Start shopping!</a></p>';
-                return;
-            }
-
-            ordersListContainer.innerHTML = allOrders.map(order => {
-                let itemsList = "";
-                let totalAmount = 0;
-
-                if (order.items && order.items.length > 0) {
-                    itemsList = order.items.map(item => `${item.name}`).join(', ');
-                    totalAmount = order.totalAmount;
-                } else if (order.productIndex !== undefined && products[order.productIndex]) {
-                    const prod = products[order.productIndex];
-                    itemsList = `${prod.name} (${order.quantity})`;
-                    totalAmount = parseInt(prod.price.replace(/[^0-9]/g, '')) * order.quantity;
-                } else {
-                    itemsList = order.productName || "Unknown Product";
-                    totalAmount = order.totalAmount || 0;
-                }
-
-                return `
-                <div class="order-card">
-                    <div class="order-header">
-                        <h3>${order.orderId}</h3>
-                        <span class="order-status status-${order.status.toLowerCase()}">${order.status}</span>
-                    </div>
-                    <div class="order-details">
-                        <p><strong>Product(s):</strong> ${itemsList}</p>
-                        <p><strong>Total:</strong> UGX ${totalAmount.toLocaleString()}</p>
-                        <p><strong>Customer:</strong> ${order.customerName}</p>
-                        <p><strong>Delivery Address:</strong> ${order.address}</p>
-                        <p><strong>Payment Method:</strong> ${order.paymentMethod === 'mobile-money' ? 'Mobile Money (00752546261)' : 'WhatsApp Order'}</p>
-                        <p><strong>Ordered:</strong> ${new Date(order.createdTime).toLocaleString()}</p>
-                    </div>
-                    <div class="order-actions">
-                        <button class="btn-small" onclick="shareOrder('${order.orderId}', 'whatsapp')">Share to WhatsApp</button>
-                        <button class="btn-small btn-secondary" onclick="shareOrder('${order.orderId}', 'sms')">Send via SMS</button>
-                        <button class="btn-small btn-danger" onclick="deleteOrder('${order.orderId}')">Cancel Order</button>
-                    </div>
-                </div>
-            `;}).join('');
-        }
-
-        function shareOrder(orderId, platform) {
-            const order = allOrders.find(o => o.orderId === orderId);
-            if (!order) return;
-
-            let itemsList = "";
-            let totalAmount = 0;
-
-            if (order.items && order.items.length > 0) {
-                itemsList = order.items.map(item => `${item.name} (${item.price})`).join('\n- ');
-                itemsList = "\n- " + itemsList;
-                totalAmount = order.totalAmount;
-            } else {
-                const product = products[order.productIndex];
-                itemsList = `${product.name} (${order.quantity})`;
-                totalAmount = parseInt(product.price.replace(/[^0-9]/g, '')) * order.quantity;
-            }
-            
-            const text = `*EVA'S BEAUTY HUB - ORDER RECEIPT*\n\n` +
-                         `Order ID: ${order.orderId}\n` +
-                         `Items: ${itemsList}\n` +
-                         `Total: UGX ${totalAmount.toLocaleString()}\n` +
-                         `Status: ${order.status}\n\n` +
-                         `Thank you for shopping with us!`;
-
-            if (platform === 'whatsapp') {
-                window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
-            } else if (platform === 'sms') {
-                window.open(`sms:?body=${encodeURIComponent(text)}`, '_blank');
-            }
-        }
-
-        async function saveOrder(orderData) {
-            const orderId = generateOrderId();
-            const order = {
-                orderId: orderId,
-                ...orderData,
-                createdTime: Date.now(),
-                status: orderData.status || 'Pending'
-            };
-            
-            // Save customer phone for future lookups
-            localStorage.setItem('customerPhone', orderData.customerPhone);
-            
-            try {
-                const response = await fetch('api/create-order.php', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(order)
+        // Order Modal
+        function openOrderModal() {
+            closeCart();
+            document.getElementById('orderModal').style.display = 'block';
+            // If cart has items, add them to dropdown
+            if (cart.length > 0) {
+                const select = document.getElementById('orderProduct');
+                select.innerHTML = '<option value="">-- Select Product --</option>';
+                cart.forEach((item, i) => {
+                    const idx = products.findIndex(p => p.name === item.name);
+                    const opt = document.createElement('option');
+                    opt.value = idx;
+                    opt.textContent = `${item.name} - UGX ${item.price.toLocaleString()}`;
+                    opt.selected = true;
+                    select.appendChild(opt);
                 });
-                
-                const result = await response.json();
-                if (!result.success) {
-                    console.error("Backend save failed:", result.message);
-                }
-            } catch (error) {
-                console.error("Error saving to backend:", error);
-            }
-
-            // Still save to localStorage as a redundant backup
-            allOrders.push(order);
-            localStorage.setItem('evasBeautyOrders', JSON.stringify(allOrders));
-            return order;
-        }
-
-        function deleteOrder(orderId) {
-            if (confirm('Are you sure you want to cancel this order?')) {
-                allOrders = allOrders.filter(order => order.orderId !== orderId);
-                localStorage.setItem('evasBeautyOrders', JSON.stringify(allOrders));
-                displayOrders();
+                document.getElementById('orderQty').value = cart.length;
             }
         }
 
-        openOrderFormBtn.addEventListener('click', () => {
-            isCartCheckout = false;
-            populateProductSelect();
-            orderModal.style.display = 'block';
-        });
+        function closeOrderModal() {
+            document.getElementById('orderModal').style.display = 'none';
+            document.getElementById('orderForm').reset();
+        }
 
-        closeModalBtn.addEventListener('click', () => {
-            orderModal.style.display = 'none';
-        });
-
-        window.addEventListener('click', (e) => {
-            if (e.target === orderModal) {
-                orderModal.style.display = 'none';
-            }
-        });
-
-        // Payment Method visibility handler
-        const paymentMethodSelect = document.getElementById('paymentMethod');
-        const intasendInfo = document.getElementById('intasendInfo');
-        const mobileMoneyInfo = document.getElementById('mobileMoneyInfo');
-
-        paymentMethodSelect.addEventListener('change', (e) => {
-            intasendInfo.style.display = 'none';
-            mobileMoneyInfo.style.display = 'none';
+        // Payment method instructions
+        document.getElementById('orderPayment').addEventListener('change', function() {
+            const instructions = document.getElementById('paymentInstructions');
+            const text = document.getElementById('instructionText');
+            const method = this.value;
             
-            if (e.target.value === 'intasend') {
-                intasendInfo.style.display = 'block';
-            } else if (e.target.value === 'mobile-money') {
-                mobileMoneyInfo.style.display = 'block';
+            if (method === 'intasend') {
+                text.textContent = "You will receive an STK push on your phone. Enter your M-Pesa PIN to complete payment.";
+            } else if (method === 'daraja') {
+                text.textContent = "You will receive a prompt on your phone. Enter your M-Pesa PIN to complete payment.";
+            } else if (method === 'direct') {
+                text.textContent = "Send UGX to +256 0752546261 via M-Pesa. Use your phone number as the reference.";
+            } else if (method === 'whatsapp') {
+                text.textContent = "You will be redirected to WhatsApp to complete your order with our team.";
             }
         });
 
-        // IntaSend Payment Function
-        async function processIntaSendPayment(orderData, amount) {
-            try {
-                const response = await fetch('api/intasend-payment.php?action=initiate', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        amount: amount,
-                        phone: orderData.customerPhone,
-                        email: orderData.customerEmail,
-                        name: orderData.customerName,
-                        orderId: orderData.orderId || 'EVA-' + Date.now()
-                    })
-                });
-                
-                const result = await response.json();
-                
-                if (result.success) {
-                    showToast('M-Pesa prompt sent! Check your phone and enter PIN.', '📱');
-                    
-                    // Save order after payment initiated
-                    await saveOrder(orderData);
-                    
-                    // Clear cart
-                    cart = [];
-                    updateCartUI();
-                    
-                    orderForm.reset();
-                    orderModal.style.display = 'none';
-                    loadOrders();
-                } else {
-                    showToast('Payment failed: ' + result.message, '❌');
-                }
-            } catch (error) {
-                console.error('IntaSend Error:', error);
-                showToast('Payment error. Try again or use Mobile Money.', '❌');
-            }
-        }
-
-        // Order form submission
-        orderForm.addEventListener('submit', (e) => {
+        // Submit Order
+        function submitOrder(e) {
             e.preventDefault();
             
-            const productIndex = document.getElementById('productSelect').value;
-            const paymentMethod = document.getElementById('paymentMethod').value;
-            const quantity = parseInt(document.getElementById('quantity').value);
+            const orderId = 'ORD-' + Date.now().toString(36).toUpperCase();
+            const name = document.getElementById('orderName').value;
+            const email = document.getElementById('orderEmail').value;
+            const phone = document.getElementById('orderPhone').value;
+            const productIdx = document.getElementById('orderProduct').value;
+            const qty = parseInt(document.getElementById('orderQty').value);
+            const address = document.getElementById('orderAddress').value;
+            const payment = document.getElementById('orderPayment').value;
+            const notes = document.getElementById('orderNotes').value;
             
-            let selectedProduct = null;
-            let totalAmount = 0;
-            let items = [];
-
-            if (isCartCheckout && productIndex === 'cart') {
-                items = [...cart];
-                totalAmount = cart.reduce((sum, item) => sum + parseInt(item.price.replace(/[^0-9]/g, '')), 0);
-                selectedProduct = { name: "Cart Items", price: `UGX ${totalAmount.toLocaleString()}` };
-            } else {
-                selectedProduct = products[productIndex];
-                totalAmount = parseInt(selectedProduct.price.replace(/[^0-9]/g, '')) * quantity;
-                items = [{...selectedProduct, quantity: quantity}];
+            if (!productIdx) {
+                showToast('Please select a product!');
+                return;
             }
             
-            const orderData = {
-                customerName: document.getElementById('customerName').value,
-                customerEmail: document.getElementById('customerEmail').value,
-                customerPhone: document.getElementById('customerPhone').value,
-                productIndex: productIndex === 'cart' ? undefined : parseInt(productIndex),
-                productName: selectedProduct.name,
-                quantity: quantity,
-                items: items,
-                totalAmount: totalAmount,
-                address: document.getElementById('address').value,
-                paymentMethod: paymentMethod,
-                notes: document.getElementById('notes').value
+            const product = products[productIdx];
+            const total = product.price * qty;
+            
+            // Create order object
+            const order = {
+                orderId: orderId,
+                name: name,
+                email: email,
+                phone: phone,
+                product: product.name,
+                quantity: qty,
+                price: product.price,
+                total: total,
+                address: address,
+                payment: payment,
+                notes: notes,
+                status: 'Pending',
+                date: new Date().toISOString(),
+                displayDate: new Date().toLocaleDateString()
             };
-
-            // Handle IntaSend M-Pesa payment
-            if (paymentMethod === 'intasend') {
-                processIntaSendPayment(orderData, totalAmount);
-            } 
-            // Handle Mobile Money
-            else if (paymentMethod === 'mobile-money') {
-                (async () => {
-                    const newOrder = await saveOrder(orderData);
-                    showToast(`Order placed! Order ID: ${newOrder.orderId}. Please send UGX ${totalAmount.toLocaleString()} to 0752546261`, "🛍️");
-                    
-                    if (isCartCheckout) {
-                        cart = [];
-                        updateCartUI();
-                    }
-
-                    orderForm.reset();
-                    orderModal.style.display = 'none';
-                    loadOrders();
-                })();
+            
+            // Save to orders
+            let orders = JSON.parse(localStorage.getItem('evaOrders')) || [];
+            orders.push(order);
+            localStorage.setItem('evaOrders', JSON.stringify(orders));
+            
+            // Clear cart
+            cart = [];
+            localStorage.setItem('evaCart', JSON.stringify(cart));
+            document.getElementById('cart-count').innerText = '0';
+            
+            closeOrderModal();
+            
+            // Show success
+            alert(`✅ Order Placed Successfully!\n\nOrder ID: ${orderId}\nProduct: ${product.name}\nQuantity: ${qty}\nTotal: UGX ${total.toLocaleString()}\n\nSave your Order ID to track your order!\n\nYou will be contacted for payment confirmation.`);
+            
+            // WhatsApp redirect for certain payments
+            if (payment === 'whatsapp') {
+                let msg = `Hello Eva's Beauty Hub,\n\nI want to order:\n${qty}x ${product.name}\nTotal: UGX ${total.toLocaleString()}\n\nDelivery Address: ${address}`;
+                window.open('https://wa.me/256752546261?text=' + encodeURIComponent(msg), '_blank');
             }
-            // Handle WhatsApp
-            else if (paymentMethod === 'whatsapp') {
-                (async () => {
-                    const newOrder = await saveOrder(orderData);
-                    showToast(`Order placed! Order ID: ${newOrder.orderId}`, "🛍️");
-                    
-                    if (isCartCheckout) {
-                        cart = [];
-                        updateCartUI();
-                    }
-
-                    orderForm.reset();
-                    orderModal.style.display = 'none';
-                    loadOrders();
-
-                    const whatsappMessage = `*NEW ORDER - EVA'S BEAUTY HUB*\n\n` +
-                                            `*Order ID:* ${newOrder.orderId}\n` +
-                                            `*Items:* ${orderData.productName}\n` +
-                                            `*Total:* UGX ${totalAmount.toLocaleString()}\n\n` +
-                                            `*Customer Details:*\n` +
-                                            `*Name:* ${orderData.customerName}\n` +
-                                            `*Phone:* ${orderData.customerPhone}\n` +
-                                            `*Address:* ${orderData.address}\n\n` +
-                                            `_Please confirm my order and send payment instructions. Thank you!_`;
-                    
-                    const whatsappUrl = `https://wa.me/2560752546261?text=${encodeURIComponent(whatsappMessage)}`;
-                    
-                    setTimeout(() => {
-                        window.open(whatsappUrl, '_blank');
-                    }, 1000);
-                })();
-            }
-        });
-
-        // IntaSend Payment Handler
-        async function processIntaSendPayment(orderData, totalAmount) {
-            try {
-                showToast("Sending M-Pesa request...", "⏳");
-                
-                const response = await fetch('api/intasend-payment.php?action=initiate', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        amount: totalAmount,
-                        phone: orderData.customerPhone,
-                        email: orderData.customerEmail,
-                        name: orderData.customerName,
-                        orderId: 'EVA-' + Date.now()
-                    })
-                });
-                
-                const result = await response.json();
-                
-                if (result.success) {
-                    showToast('M-Pesa prompt sent! Check your phone and enter PIN.', '📱');
-                    
-                    // Save order
-                    await saveOrder(orderData);
-                    
-                    // Clear cart
-                    if (isCartCheckout) {
-                        cart = [];
-                        updateCartUI();
-                    }
-                    
-                    orderForm.reset();
-                    orderModal.style.display = 'none';
-                    loadOrders();
-                } else {
-                    showToast('Payment failed: ' + result.message, '❌');
-                }
-            } catch (error) {
-                console.error('IntaSend Error:', error);
-                showToast('Payment error. Try Mobile Money instead.', '❌');
-            }
+            
+            // Refresh order history
+            loadOrderHistory();
+            
+            showToast('Order placed successfully!');
         }
 
-        // Legacy IntaSend function (backup)
-                    orderData.paymentDetails = response;
-                    orderData.status = 'Paid';
-                    const newOrder = saveOrder(orderData);
-                    
-                    showToast(`Payment successful! Order ID: ${newOrder.orderId}`, "🛍️");
-                    
-                    if (isCartCheckout) {
-                        cart = [];
-                        updateCartUI();
-                    }
-                    
-                    orderForm.reset();
-                    orderModal.style.display = 'none';
-                    loadOrders();
-                    
-                    alert(`✅ Payment Successful!\nOrder ID: ${newOrder.orderId}\nTransaction ID: ${response.transaction_id}`);
-                });
-
-                intasend.on("FAILED", (response) => {
-                    showToast("Payment failed. Please try again.", "❌");
-                });
-
-                intasend.run({
-                    amount: totalAmount,
-                    currency: "UGX",
-                    email: orderData.customerEmail,
-                    first_name: orderData.customerName.split(' ')[0],
-                    last_name: orderData.customerName.split(' ').slice(1).join(' ') || "Customer",
-                    phone_number: orderData.customerPhone,
-                });
-
-            } catch (error) {
-                console.error("IntaSend Error:", error);
-                showToast("Error initializing payment. Please try again.", "❌");
+        // Track Order
+        function trackOrder() {
+            const orderId = document.getElementById('trackInput').value.trim();
+            const result = document.getElementById('trackResult');
+            
+            if (!orderId) {
+                result.innerHTML = '<p class="error">Please enter an Order ID</p>';
+                return;
             }
-        }
-
-        // M-Pesa Payment Handler (Daraja)
-        async function processMpesaPayment(orderData, totalAmount, product) {
-            try {
-                showToast("Processing M-Pesa payment...", "⏳");
-
-                // First, validate the phone number
-                const validateResponse = await fetch('/evas-beauty-hub/mpesa-payment.php?action=validate', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        phoneNumber: orderData.customerPhone
-                    })
-                });
-
-                const validationResult = await validateResponse.json();
-
-                if (!validationResult.success) {
-                    showToast("Invalid phone number. Please use a valid Ugandan number (e.g., 0700000000 or +256700000000)", "❌");
-                    return;
-                }
-
-                // Initiate STK Push
-                const initiateResponse = await fetch('/evas-beauty-hub/mpesa-payment.php?action=initiate', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        amount: totalAmount,
-                        phoneNumber: orderData.customerPhone,
-                        orderId: 'EVA-' + Date.now()
-                    })
-                });
-
-                const stkResult = await initiateResponse.json();
-
-                if (!stkResult.success) {
-                    showToast("Failed to initiate M-Pesa payment: " + stkResult.message, "❌");
-                    return;
-                }
-
-                // Save the order
-                const newOrder = saveOrder(orderData);
-
-                showToast("STK push sent! Enter your M-Pesa PIN on your phone.", "📱");
+            
+            let orders = JSON.parse(localStorage.getItem('evaOrders')) || [];
+            let order = orders.find(o => o.orderId === orderId);
+            
+            if (order) {
+                // Calculate status based on time
+                const orderTime = new Date(order.date).getTime();
+                const now = new Date().getTime();
+                const hoursPassed = (now - orderTime) / (1000 * 60 * 60);
                 
-                orderForm.reset();
-                orderModal.style.display = 'none';
-                loadOrders();
-
-                // Show payment confirmation message
-                const confirmationMessage = `✅ *Order Placed Successfully!*\n\n` +
-                                           `*Order ID:* ${newOrder.orderId}\n` +
-                                           `*Product:* ${orderData.productName}\n` +
-                                           `*Amount:* UGX ${totalAmount.toLocaleString()}\n\n` +
-                                           `📱 Check your phone for the M-Pesa prompt.\n` +
-                                           `Enter your PIN to complete the payment.\n\n` +
-                                           `If you don't receive the prompt within 10 seconds, contact us on WhatsApp.`;
+                if (hoursPassed < 1) order.status = 'Pending';
+                else if (hoursPassed < 24) order.status = 'Processing';
+                else if (hoursPassed < 72) order.status = 'Shipped';
+                else order.status = 'Delivered';
                 
-                alert(confirmationMessage);
-
-            } catch (error) {
-                console.error("M-Pesa Error:", error);
-                showToast("Error processing M-Pesa payment. Please try again.", "❌");
-            }
-        }
-
-        // Newsletter Signup
-        const newsletterForm = document.getElementById('newsletterForm');
-        if (newsletterForm) {
-            newsletterForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const email = document.getElementById('newsletterEmail').value;
-                
-                let subscribers = JSON.parse(localStorage.getItem('newsLetterSubscribers')) || [];
-                if (!subscribers.includes(email)) {
-                    subscribers.push(email);
-                    localStorage.setItem('newsLetterSubscribers', JSON.stringify(subscribers));
-                }
-                
-                alert('Thank you for subscribing! 💌 Check your email for exclusive beauty tips!');
-                newsletterForm.reset();
-            });
-        }
-
-        // FAQ Accordion
-        const faqItems = document.querySelectorAll('.faq-item');
-        faqItems.forEach(item => {
-            const question = item.querySelector('.faq-question');
-            question.addEventListener('click', () => {
-                item.classList.toggle('active');
-            });
-        });
-
-        // Theme Toggle Functionality
-        const themeToggle = document.getElementById('theme-toggle');
-        const currentTheme = localStorage.getItem('theme') || 'light';
-        
-        if (currentTheme === 'dark') {
-            document.documentElement.setAttribute('data-theme', 'dark');
-            themeToggle.querySelector('.mode-icon').textContent = '☀️';
-        }
-
-        themeToggle.addEventListener('click', () => {
-            let theme = document.documentElement.getAttribute('data-theme');
-            if (theme === 'dark') {
-                document.documentElement.setAttribute('data-theme', 'light');
-                localStorage.setItem('theme', 'light');
-                themeToggle.querySelector('.mode-icon').textContent = '🌙';
+                result.innerHTML = `
+                    <div class="order-found">
+                        <p class="success">✅ Order Found!</p>
+                        <p><strong>Order ID:</strong> ${order.orderId}</p>
+                        <p><strong>Product:</strong> ${order.product} x${order.quantity}</p>
+                        <p><strong>Total:</strong> UGX ${order.total.toLocaleString()}</p>
+                        <p><strong>Status:</strong> <span class="status-${order.status.toLowerCase()}">${order.status}</span></p>
+                        <p><strong>Date:</strong> ${order.displayDate}</p>
+                        <p><strong>Delivery:</strong> ${order.address}</p>
+                    </div>
+                `;
             } else {
-                document.documentElement.setAttribute('data-theme', 'dark');
-                localStorage.setItem('theme', 'dark');
-                themeToggle.querySelector('.mode-icon').textContent = '☀️';
+                result.innerHTML = '<p class="error">❌ Order not found. Please check your Order ID.</p>';
             }
-        });
+        }
 
-        // Toast Notification System
-        function showToast(message, icon = '✅') {
+        // Load Order History
+        function loadOrderHistory() {
+            const container = document.getElementById('orderHistory');
+            let orders = JSON.parse(localStorage.getItem('evaOrders')) || [];
+            
+            if (orders.length === 0) {
+                container.innerHTML = '<p class="empty-cart">No orders yet. Start shopping!</p>';
+                return;
+            }
+            
+            // Sort by newest first
+            orders.reverse();
+            
+            let html = '';
+            orders.forEach(order => {
+                const orderTime = new Date(order.date).getTime();
+                const now = new Date().getTime();
+                const hoursPassed = (now - orderTime) / (1000 * 60 * 60);
+                
+                if (hoursPassed < 1) order.status = 'Pending';
+                else if (hoursPassed < 24) order.status = 'Processing';
+                else if (hoursPassed < 72) order.status = 'Shipped';
+                else order.status = 'Delivered';
+                
+                html += `
+                    <div class="history-item">
+                        <div class="history-header">
+                            <span class="order-id">${order.orderId}</span>
+                            <span class="status-${order.status.toLowerCase()}">${order.status}</span>
+                        </div>
+                        <div class="history-details">
+                            <p><strong>Product:</strong> ${order.product} x${order.quantity}</p>
+                            <p><strong>Total:</strong> UGX ${order.total.toLocaleString()}</p>
+                            <p><strong>Date:</strong> ${order.displayDate}</p>
+                            <p><strong>Payment:</strong> ${order.payment}</p>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        // Newsletter
+        function subscribeNewsletter(e) {
+            e.preventDefault();
+            const email = document.getElementById('newsletterEmail').value;
+            showToast('Thanks for subscribing! 🎉');
+            document.getElementById('newsletterEmail').value = '';
+        }
+
+        // Filter by Category
+        function filterCategory(category) {
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            document.querySelectorAll('.category-group').forEach(group => {
+                if (category === 'all' || group.id === category) {
+                    group.style.display = 'block';
+                } else {
+                    group.style.display = 'none';
+                }
+            });
+        }
+
+        // Search Products
+        function searchProducts() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            
+            if (query.length > 0) {
+                document.querySelectorAll('.category-group').forEach(group => {
+                    const cards = group.querySelectorAll('.product-card');
+                    let hasMatch = false;
+                    cards.forEach(card => {
+                        const name = card.querySelector('h4').textContent.toLowerCase();
+                        if (name.includes(query)) {
+                            card.style.display = 'block';
+                            hasMatch = true;
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                    group.style.display = hasMatch ? 'block' : 'none';
+                });
+            } else {
+                document.querySelectorAll('.category-group').forEach(group => group.style.display = 'block');
+            }
+        }
+
+        // Toast
+        function showToast(msg) {
             const container = document.getElementById('toast-container');
             const toast = document.createElement('div');
             toast.className = 'toast';
-            toast.innerHTML = `<span>${icon}</span> <span>${message}</span>`;
+            toast.innerText = '✅ ' + msg;
             container.appendChild(toast);
-            
-            setTimeout(() => {
-                toast.style.opacity = '0';
-                toast.style.transform = 'translateX(20px)';
-                toast.style.transition = 'all 0.3s ease';
-                setTimeout(() => toast.remove(), 300);
-            }, 3000);
+            setTimeout(() => toast.remove(), 3000);
         }
 
-        // Live Activity Simulator
-        const locations = ['Nakawa', 'Kampala Central', 'Ntinda', 'Kiwatule', 'Bugolobi', 'Kololo', 'Kansanga', 'Muyenga', 'Naalya'];
-        const buyerNames = ['Namono', 'Achieng', 'Nakalema', 'Mbabazi', 'Atwiine', 'Kiconco', 'Tumusiime', 'Aine', 'Kyomugisha'];
-        
-        function simulateActivity() {
-            const container = document.getElementById('activity-simulator');
-            const randomLocation = locations[Math.floor(Math.random() * locations.length)];
-            const randomProduct = products[Math.floor(Math.random() * products.length)];
-            const randomName = buyerNames[Math.floor(Math.random() * buyerNames.length)];
-            
-            const activity = document.createElement('div');
-            activity.className = 'activity-card';
-            activity.innerHTML = `
-                <span class="activity-icon">🛍️</span>
-                <span><strong>${randomName}</strong> from ${randomLocation} just ordered <strong>${randomProduct.name}</strong></span>
-            `;
-            
-            container.appendChild(activity);
-            
-            setTimeout(() => {
-                activity.remove();
-            }, 5000);
+        // Theme Toggle
+        function toggleTheme() {
+            document.body.classList.toggle('dark');
+            localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
         }
 
-        // Start activity simulation after 5 seconds
-        setTimeout(() => {
-            simulateActivity();
-            setInterval(simulateActivity, 15000); // Repeat every 15 seconds
-        }, 5000);
+        // Mobile Menu
+        function toggleMenu() {
+            document.querySelector('.nav-menu').classList.toggle('active');
+        }
 
-        // Order Tracking Functionality
-        const trackOrderBtn = document.getElementById('trackOrderBtn');
-        const orderIDSearch = document.getElementById('orderIDSearch');
+        // Load Theme
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark');
+        }
 
-        if (trackOrderBtn) {
-            trackOrderBtn.addEventListener('click', () => {
-                const orderId = orderIDSearch.value.trim().toUpperCase();
-                if (!orderId) {
-                    showToast("Please enter an Order ID", "⚠️");
-                    return;
-                }
+        // Close modal on click outside
+        window.onclick = function(e) {
+            if (e.target.id === 'cartModal') closeCart();
+            if (e.target.id === 'orderModal') closeOrderModal();
+        }
 
-                const orders = JSON.parse(localStorage.getItem('evasBeautyOrders')) || [];
-                const order = orders.find(o => o.orderId === orderId);
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            initProductDropdown();
+            loadOrderHistory();
+            initCircularCarousel();
+        });
 
-                if (order) {
-                    const currentStatus = getOrderStatus(order.createdTime);
-                    showToast(`Order Found! Status: ${currentStatus}`, "📦");
-                    
-                    // Scroll to the order in the list if it exists
-                    const orderCards = document.querySelectorAll('.order-card');
-                    orderCards.forEach(card => {
-                        const cardHeader = card.querySelector('h3');
-                        if (cardHeader && cardHeader.innerText === orderId) {
-                            card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                            card.classList.add('highlight-order');
-                            setTimeout(() => card.classList.remove('highlight-order'), 3000);
-                        }
-                    });
-                } else {
-                    showToast("Order ID not found. Please check and try again.", "❌");
-                }
+        // 3D Circular Carousel Logic
+        let currentRotation = 0;
+        function initCircularCarousel() {
+            const carousel = document.getElementById('circular-carousel');
+            if (!carousel) return;
+            
+            // Selection of trending products (IDs based on the products array)
+            const trendingIndices = [0, 4, 8, 14, 18, 19, 21, 24];
+            const count = trendingIndices.length;
+            const radius = window.innerWidth < 768 ? 300 : 500; // Orbit radius
+            
+            // Map names to image sources manually or via DOM lookup
+            const productImages = {};
+            document.querySelectorAll('.product-card').forEach(card => {
+                const name = card.querySelector('h4').textContent;
+                const src = card.querySelector('img').src;
+                productImages[name] = src;
+            });
+
+            trendingIndices.forEach((idx, i) => {
+                const product = products[idx];
+                const angle = i * (360 / count);
+                const item = document.createElement('div');
+                item.className = 'carousel-item';
+                
+                // Position in 3D circle
+                item.style.transform = `rotateY(${angle}deg) translateZ(${radius}px)`;
+                
+                const imgSrc = productImages[product.name] || 'images/placeholder.jpeg';
+                
+                item.innerHTML = `
+                    <img src="${imgSrc}" alt="${product.name}">
+                    <h4>${product.name}</h4>
+                    <p class="price">UGX ${product.price.toLocaleString()}</p>
+                    <button onclick="addToCart(${idx})">Add to Cart</button>
+                `;
+                
+                carousel.appendChild(item);
             });
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            populateProductSelect();
-            loadOrders();
-            observeElements();
-            updateCartUI();
+        function rotateCarouselManual(dir) {
+            const carousel = document.getElementById('circular-carousel');
+            carousel.style.animation = 'none'; // Pause auto-rotation
             
-            document.body.style.opacity = '0';
-            setTimeout(() => {
-                document.body.style.opacity = '1';
-                document.body.style.transition = 'opacity 0.5s ease-in';
-            }, 100);
-        });
+            const step = 360 / 8; // Based on 8 items
+            if (dir === 'next') currentRotation -= step;
+            else currentRotation += step;
+            
+            carousel.style.transform = `rotateY(${currentRotation}deg)`;
+            
+            // Resume auto-rotation after some time if desired, or keep manual
+            // For now, keeping it manual once interacted
+        }
     </script>
 </body>
 </html>
