@@ -1693,10 +1693,11 @@ h1, h2, h3, h4, h5, h6 {
     perspective: 2000px;
     padding: 120px 0;
     overflow: visible;
-    background: radial-gradient(circle at center, rgba(233, 30, 99, 0.08) 0%, transparent 70%);
+    background: radial-gradient(circle at center, rgba(233, 30, 99, 0.12) 0%, rgba(253, 242, 245, 0.5) 70%, transparent 100%);
     margin-top: -50px;
     position: relative;
     z-index: 5;
+    min-height: 650px;
 }
 
 .circular-showcase .section-header {
