@@ -835,14 +835,19 @@
         // 3D Circular Carousel Logic
         let currentRotation = 0;
         function initCircularCarousel() {
+            console.log("Initializing 3D Carousel...");
             const carousel = document.getElementById('circular-carousel');
-            if (!carousel) return;
+            if (!carousel) {
+                console.error("Carousel container not found!");
+                return;
+            }
             
             // Selection of trending products (IDs based on the products array)
             const trendingIndices = [0, 4, 8, 14, 18, 19, 21, 24];
             const count = trendingIndices.length;
-            const radius = window.innerWidth < 768 ? 300 : 500; // Orbit radius
+            const radius = window.innerWidth < 768 ? 280 : 450; // Orbit radius
             
+            console.log(`Loading ${count} products into orbit with radius ${radius}px`);
             // Map names to image sources manually or via DOM lookup
             const productImages = {};
             document.querySelectorAll('.product-card').forEach(card => {
@@ -861,6 +866,9 @@
                 item.style.transform = `rotateY(${angle}deg) translateZ(${radius}px)`;
                 
                 const imgSrc = productImages[product.name] || 'images/placeholder.jpeg';
+                if (!productImages[product.name]) {
+                    console.warn(`Image for ${product.name} not found in product-cards! Falling back to placeholder.`);
+                }
                 
                 item.innerHTML = `
                     <img src="${imgSrc}" alt="${product.name}">

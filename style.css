@@ -1718,7 +1718,7 @@ h1, h2, h3, h4, h5, h6 {
     height: 320px;
     transform-style: preserve-3d;
     transition: transform 1s cubic-bezier(0.23, 1, 0.32, 1);
-    animation: rotateCarousel 30s linear infinite;
+    animation: rotateCarousel 20s linear infinite;
 }
 
 .carousel-container:hover {
