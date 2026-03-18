@@ -383,7 +383,7 @@
 
     <!-- Cart Modal -->
     <div id="cartModal" class="modal">
-        <div class="modal-content">
+        <div class="modal-content order-modal">
             <span class="close" onclick="closeCart()">&times;</span>
             <h2>🛒 Your Cart</h2>
             <div id="cart-items">
@@ -392,65 +392,53 @@
             <div class="cart-total">
                 <strong>Total: UGX <span id="cart-total">0</span></strong>
             </div>
-            <div class="cart-actions">
-                <button class="btn-order" onclick="openOrderModal()">📝 Place Order</button>
+
+            <!-- Checkout Form (Initially Hidden) -->
+            <div id="checkoutForm" style="display:none; margin-top: 30px; border-top: 2px solid var(--bg-light); padding-top: 20px;">
+                <h3>📝 Order Details</h3>
+                <form id="orderForm" onsubmit="submitOrder(event)">
+                    <div class="form-group">
+                        <label>Full Name *</label>
+                        <input type="text" id="orderName" required placeholder="Your full name">
+                    </div>
+                    <div class="form-group">
+                        <label>Email *</label>
+                        <input type="email" id="orderEmail" required placeholder="your@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number *</label>
+                        <input type="tel" id="orderPhone" required placeholder="+256 7XX XXX XXX">
+                    </div>
+                    <div class="form-group">
+                        <label>Delivery Address *</label>
+                        <textarea id="orderAddress" required placeholder="Full delivery address"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Payment Method *</label>
+                        <select id="orderPayment" required>
+                            <option value="">-- Select Payment --</option>
+                            <option value="intasend">M-Pesa via IntaSend (STK Push)</option>
+                            <option value="daraja">M-Pesa via Daraja API</option>
+                            <option value="direct">Direct Mobile Money Transfer</option>
+                            <option value="whatsapp">WhatsApp Ordering</option>
+                            <option value="gmail">Email Ordering (Gmail)</option>
+                        </select>
+                    </div>
+                    <div class="payment-instructions" id="paymentInstructions" style="display:none">
+                        <p id="instructionText"></p>
+                    </div>
+                    <div class="form-group">
+                        <label>Special Notes</label>
+                        <textarea id="orderNotes" placeholder="Any special instructions..."></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit" id="orderSubmitBtn">✅ Submit Order</button>
+                </form>
+            </div>
+
+            <div class="cart-actions" id="cartActions">
+                <button class="btn-order" onclick="showCheckout()" id="proceedBtn">📝 Proceed to Checkout</button>
                 <button class="btn-clear" onclick="clearCart()">Clear Cart</button>
             </div>
-        </div>
-    </div>
-
-    <!-- Order Form Modal -->
-    <div id="orderModal" class="modal">
-        <div class="modal-content order-modal">
-            <span class="close" onclick="closeOrderModal()">&times;</span>
-            <h2>📝 Place Your Order</h2>
-            <form id="orderForm" onsubmit="submitOrder(event)">
-                <div class="form-group">
-                    <label>Full Name *</label>
-                    <input type="text" id="orderName" required placeholder="Your full name">
-                </div>
-                <div class="form-group">
-                    <label>Email *</label>
-                    <input type="email" id="orderEmail" required placeholder="your@email.com">
-                </div>
-                <div class="form-group">
-                    <label>Phone Number *</label>
-                    <input type="tel" id="orderPhone" required placeholder="+256 7XX XXX XXX">
-                </div>
-                <div class="form-group">
-                    <label>Select Product *</label>
-                    <select id="orderProduct" required>
-                        <option value="">-- Select Product --</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Quantity *</label>
-                    <input type="number" id="orderQty" required min="1" value="1" placeholder="1">
-                </div>
-                <div class="form-group">
-                    <label>Delivery Address *</label>
-                    <textarea id="orderAddress" required placeholder="Full delivery address"></textarea>
-                </div>
-                <div class="form-group">
-                    <label>Payment Method *</label>
-                    <select id="orderPayment" required>
-                        <option value="">-- Select Payment --</option>
-                        <option value="intasend">M-Pesa via IntaSend (STK Push)</option>
-                        <option value="daraja">M-Pesa via Daraja API</option>
-                        <option value="direct">Direct Mobile Money Transfer</option>
-                        <option value="whatsapp">WhatsApp Ordering</option>
-                        <option value="gmail">Email Ordering (Gmail)</option>
-                    </select>
-                </div>
-                <div class="payment-instructions" id="paymentInstructions">
-                    <p id="instructionText"></p>
-                </div>
-                <div class="form-group">
-                    <label>Special Notes</label>
-                    <textarea id="orderNotes" placeholder="Any special instructions..."></textarea>
-                </div>
-                <button type="submit" class="btn-submit" id="orderSubmitBtn">✅ Submit Order</button>
-            </form>
         </div>
     </div>
 
@@ -487,17 +475,6 @@
             {name: "Beauty Set", price: 50000, category: "Accessories"}
         ];
 
-        // Initialize product dropdown
-        function initProductDropdown() {
-            const select = document.getElementById('orderProduct');
-            products.forEach((p, i) => {
-                const opt = document.createElement('option');
-                opt.value = i;
-                opt.textContent = `${p.name} - UGX ${p.price.toLocaleString()}`;
-                select.appendChild(opt);
-            });
-        }
-
         // Cart
         let cart = JSON.parse(localStorage.getItem('evaCart')) || [];
         document.getElementById('cart-count').innerText = cart.length;
@@ -508,6 +485,7 @@
             localStorage.setItem('evaCart', JSON.stringify(cart));
             document.getElementById('cart-count').innerText = cart.length;
             showToast(products[index].name + ' added to cart!');
+            updateCartDisplay();
         }
 
         // Open Cart
@@ -519,16 +497,28 @@
         // Close Cart
         function closeCart() {
             document.getElementById('cartModal').style.display = 'none';
+            // Reset checkout form when closing
+            document.getElementById('checkoutForm').style.display = 'none';
+            document.getElementById('proceedBtn').style.display = 'block';
+            document.getElementById('orderForm').reset();
         }
 
         // Update Cart Display
         function updateCartDisplay() {
             const container = document.getElementById('cart-items');
+            const totalSpan = document.getElementById('cart-total');
+            const proceedBtn = document.getElementById('proceedBtn');
+            const checkoutForm = document.getElementById('checkoutForm');
+
             if (cart.length === 0) {
                 container.innerHTML = '<p class="empty-cart">Your cart is empty 🛒</p>';
-                document.getElementById('cart-total').innerText = '0';
+                totalSpan.innerText = '0';
+                proceedBtn.style.display = 'none';
+                checkoutForm.style.display = 'none';
                 return;
             }
+
+            proceedBtn.style.display = 'block';
             let total = 0;
             let html = '';
             cart.forEach((item, i) => {
@@ -536,7 +526,7 @@
                 html += '<div class="cart-item"><span>' + item.name + '</span><span>UGX ' + item.price.toLocaleString() + '</span><button onclick="removeItem(' + i + ')">✕</button></div>';
             });
             container.innerHTML = html;
-            document.getElementById('cart-total').innerText = total.toLocaleString();
+            totalSpan.innerText = total.toLocaleString();
         }
 
         // Remove Item
@@ -556,31 +546,12 @@
             showToast('Cart cleared!');
         }
 
-        // Order Modal
-        function openOrderModal() {
-            closeCart();
-            document.getElementById('orderModal').style.display = 'block';
-            // If cart has items, add them to dropdown
-            if (cart.length > 0) {
-                const select = document.getElementById('orderProduct');
-                select.innerHTML = '<option value="">-- Select Product --</option>';
-                cart.forEach((item, i) => {
-                    const idx = products.findIndex(p => p.name === item.name);
-                    const opt = document.createElement('option');
-                    opt.value = idx;
-                    opt.textContent = `${item.name} - UGX ${item.price.toLocaleString()}`;
-                    opt.selected = true;
-                    select.appendChild(opt);
-                });
-                document.getElementById('orderQty').value = cart.length;
-            }
-        }
-
-        function closeOrderModal() {
-            document.getElementById('orderModal').style.display = 'none';
-            document.getElementById('orderForm').reset();
-            document.getElementById('orderSubmitBtn').textContent = "✅ Submit Order";
-            document.getElementById('paymentInstructions').style.display = 'none';
+        // Show Checkout Form
+        function showCheckout() {
+            document.getElementById('checkoutForm').style.display = 'block';
+            document.getElementById('proceedBtn').style.display = 'none';
+            // Scroll to form
+            document.getElementById('checkoutForm').scrollIntoView({ behavior: 'smooth' });
         }
 
         // Payment method instructions
@@ -590,6 +561,12 @@
             const btn = document.getElementById('orderSubmitBtn');
             const method = this.value;
             
+            if (!method) {
+                instructions.style.display = 'none';
+                btn.textContent = "✅ Submit Order";
+                return;
+            }
+
             instructions.style.display = 'block';
             
             if (method === 'intasend') {
@@ -607,9 +584,6 @@
             } else if (method === 'gmail') {
                 text.textContent = "You will be redirected to your email app to send the order details via Gmail.";
                 btn.textContent = "📧 Proceed to Gmail";
-            } else {
-                instructions.style.display = 'none';
-                btn.textContent = "✅ Submit Order";
             }
         });
 
@@ -617,23 +591,21 @@
         function submitOrder(e) {
             e.preventDefault();
             
+            if (cart.length === 0) {
+                showToast('Your cart is empty!');
+                return;
+            }
+
             const orderId = 'ORD-' + Date.now().toString(36).toUpperCase();
             const name = document.getElementById('orderName').value;
             const email = document.getElementById('orderEmail').value;
             const phone = document.getElementById('orderPhone').value;
-            const productIdx = document.getElementById('orderProduct').value;
-            const qty = parseInt(document.getElementById('orderQty').value);
             const address = document.getElementById('orderAddress').value;
             const payment = document.getElementById('orderPayment').value;
             const notes = document.getElementById('orderNotes').value;
             
-            if (!productIdx) {
-                showToast('Please select a product!');
-                return;
-            }
-            
-            const product = products[productIdx];
-            const total = product.price * qty;
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            const itemsSummary = cart.map(item => `- ${item.name} (UGX ${item.price.toLocaleString()})`).join('\n');
             
             // Create order object
             const order = {
@@ -641,9 +613,7 @@
                 name: name,
                 email: email,
                 phone: phone,
-                product: product.name,
-                quantity: qty,
-                price: product.price,
+                items: cart,
                 total: total,
                 address: address,
                 payment: payment,
@@ -658,29 +628,23 @@
             orders.push(order);
             localStorage.setItem('evaOrders', JSON.stringify(orders));
             
-            // Clear cart
-            cart = [];
-            localStorage.setItem('evaCart', JSON.stringify(cart));
-            document.getElementById('cart-count').innerText = '0';
-            
-            closeOrderModal();
-            
-            // Show success
-            alert(`✅ Order Placed Successfully!\n\nOrder ID: ${orderId}\nProduct: ${product.name}\nQuantity: ${qty}\nTotal: UGX ${total.toLocaleString()}\n\nSave your Order ID to track your order!\n\nYou will be contacted for payment confirmation.`);
-            
-            // WhatsApp redirect for certain payments
+            // Prepare messages
+            const msgBody = `New Order from ${name}\nOrder ID: ${orderId}\n\nItems:\n${itemsSummary}\n\nTotal: UGX ${total.toLocaleString()}\nAddress: ${address}\nPhone: ${phone}\nNotes: ${notes}`;
+
+            // WhatsApp/Gmail redirect
             if (payment === 'whatsapp') {
-                let msg = `Hello Eva's Beauty Hub,\n\nI want to order:\n${qty}x ${product.name}\nTotal: UGX ${total.toLocaleString()}\n\nDelivery Address: ${address}`;
-                window.open('https://wa.me/256752546261?text=' + encodeURIComponent(msg), '_blank');
+                window.open('https://wa.me/256752546261?text=' + encodeURIComponent("Hello Eva's Beauty Hub, I want to place an order:\n\n" + msgBody), '_blank');
             } else if (payment === 'gmail') {
-                let subject = `New Order from ${name} - ${orderId}`;
-                let body = `Hello Eva's Beauty Hub,\n\nI want to order:\n${qty}x ${product.name}\nTotal: UGX ${total.toLocaleString()}\n\nOrder ID: ${orderId}\nDelivery Address: ${address}\n\nCustomer Details:\nName: ${name}\nPhone: ${phone}\nEmail: ${email}\n\nNotes: ${notes}`;
-                window.location.href = `mailto:atwiineevalyne@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                let subject = `New Order: ${orderId} - ${name}`;
+                window.location.href = `mailto:atwiineevalyne@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(msgBody)}`;
+            } else {
+                alert(`✅ Order Placed Successfully!\n\nOrder ID: ${orderId}\nTotal: UGX ${total.toLocaleString()}\n\nSave your Order ID to track your order!`);
             }
             
-            // Refresh order history
+            // Clear cart and close
+            clearCart();
+            closeCart();
             loadOrderHistory();
-            
             showToast('Order placed successfully!');
         }
 
