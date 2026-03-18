@@ -439,6 +439,7 @@
                         <option value="daraja">M-Pesa via Daraja API</option>
                         <option value="direct">Direct Mobile Money Transfer</option>
                         <option value="whatsapp">WhatsApp Ordering</option>
+                        <option value="gmail">Email Ordering (Gmail)</option>
                     </select>
                 </div>
                 <div class="payment-instructions" id="paymentInstructions">
@@ -448,7 +449,7 @@
                     <label>Special Notes</label>
                     <textarea id="orderNotes" placeholder="Any special instructions..."></textarea>
                 </div>
-                <button type="submit" class="btn-submit">✅ Submit Order</button>
+                <button type="submit" class="btn-submit" id="orderSubmitBtn">✅ Submit Order</button>
             </form>
         </div>
     </div>
@@ -578,22 +579,37 @@
         function closeOrderModal() {
             document.getElementById('orderModal').style.display = 'none';
             document.getElementById('orderForm').reset();
+            document.getElementById('orderSubmitBtn').textContent = "✅ Submit Order";
+            document.getElementById('paymentInstructions').style.display = 'none';
         }
 
         // Payment method instructions
         document.getElementById('orderPayment').addEventListener('change', function() {
             const instructions = document.getElementById('paymentInstructions');
             const text = document.getElementById('instructionText');
+            const btn = document.getElementById('orderSubmitBtn');
             const method = this.value;
+            
+            instructions.style.display = 'block';
             
             if (method === 'intasend') {
                 text.textContent = "You will receive an STK push on your phone. Enter your M-Pesa PIN to complete payment.";
+                btn.textContent = "✅ Submit Order";
             } else if (method === 'daraja') {
                 text.textContent = "You will receive a prompt on your phone. Enter your M-Pesa PIN to complete payment.";
+                btn.textContent = "✅ Submit Order";
             } else if (method === 'direct') {
                 text.textContent = "Send UGX to +256 0752546261 via M-Pesa. Use your phone number as the reference.";
+                btn.textContent = "✅ Submit Order";
             } else if (method === 'whatsapp') {
                 text.textContent = "You will be redirected to WhatsApp to complete your order with our team.";
+                btn.textContent = "💬 Proceed to WhatsApp";
+            } else if (method === 'gmail') {
+                text.textContent = "You will be redirected to your email app to send the order details via Gmail.";
+                btn.textContent = "📧 Proceed to Gmail";
+            } else {
+                instructions.style.display = 'none';
+                btn.textContent = "✅ Submit Order";
             }
         });
 
@@ -656,6 +672,10 @@
             if (payment === 'whatsapp') {
                 let msg = `Hello Eva's Beauty Hub,\n\nI want to order:\n${qty}x ${product.name}\nTotal: UGX ${total.toLocaleString()}\n\nDelivery Address: ${address}`;
                 window.open('https://wa.me/256752546261?text=' + encodeURIComponent(msg), '_blank');
+            } else if (payment === 'gmail') {
+                let subject = `New Order from ${name} - ${orderId}`;
+                let body = `Hello Eva's Beauty Hub,\n\nI want to order:\n${qty}x ${product.name}\nTotal: UGX ${total.toLocaleString()}\n\nOrder ID: ${orderId}\nDelivery Address: ${address}\n\nCustomer Details:\nName: ${name}\nPhone: ${phone}\nEmail: ${email}\n\nNotes: ${notes}`;
+                window.location.href = `mailto:atwiineevalyne@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
             }
             
             // Refresh order history
