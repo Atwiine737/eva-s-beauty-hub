@@ -396,6 +396,9 @@
             <!-- Checkout Form (Initially Hidden) -->
             <div id="checkoutForm" style="display:none; margin-top: 30px; border-top: 2px solid var(--bg-light); padding-top: 20px;">
                 <h3>📝 Order Details</h3>
+                <div id="checkoutSummary" style="background: var(--bg-light); padding: 15px; border-radius: 8px; margin-bottom: 20px; font-size: 0.9em;">
+                    <!-- Order summary will be injected here -->
+                </div>
                 <form id="orderForm" onsubmit="submitOrder(event)">
                     <div class="form-group">
                         <label>Full Name *</label>
@@ -477,15 +480,33 @@
 
         // Cart
         let cart = JSON.parse(localStorage.getItem('evaCart')) || [];
-        document.getElementById('cart-count').innerText = cart.length;
+        updateCartCount();
+
+        function updateCartCount() {
+            const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cart-count').innerText = count;
+        }
 
         // Add to Cart
         function addToCart(index) {
-            cart.push(products[index]);
-            localStorage.setItem('evaCart', JSON.stringify(cart));
-            document.getElementById('cart-count').innerText = cart.length;
+            const existingItem = cart.find(item => item.productIndex === index);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    productIndex: index,
+                    quantity: 1,
+                    ...products[index]
+                });
+            }
+            saveCart();
+            updateCartCount();
             showToast(products[index].name + ' added to cart!');
             updateCartDisplay();
+        }
+
+        function saveCart() {
+            localStorage.setItem('evaCart', JSON.stringify(cart));
         }
 
         // Open Cart
@@ -522,32 +543,81 @@
             let total = 0;
             let html = '';
             cart.forEach((item, i) => {
-                total += item.price;
-                html += '<div class="cart-item"><span>' + item.name + '</span><span>UGX ' + item.price.toLocaleString() + '</span><button onclick="removeItem(' + i + ')">✕</button></div>';
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                html += `
+                    <div class="cart-item">
+                        <div class="cart-item-info">
+                            <span class="cart-item-name">${item.name}</span>
+                            <span class="cart-item-price">UGX ${item.price.toLocaleString()}</span>
+                        </div>
+                        <div class="cart-item-actions">
+                            <div class="quantity-controls">
+                                <button class="qty-btn" onclick="changeQuantity(${i}, -1)">-</button>
+                                <span class="qty-value">${item.quantity}</span>
+                                <button class="qty-btn" onclick="changeQuantity(${i}, 1)">+</button>
+                            </div>
+                            <span class="item-total">UGX ${itemTotal.toLocaleString()}</span>
+                            <button class="remove-btn" onclick="removeItem(${i})">✕</button>
+                        </div>
+                    </div>`;
             });
             container.innerHTML = html;
             totalSpan.innerText = total.toLocaleString();
         }
 
+        // Change Quantity
+        function changeQuantity(index, delta) {
+            cart[index].quantity += delta;
+            if (cart[index].quantity <= 0) {
+                removeItem(index);
+            } else {
+                saveCart();
+                updateCartCount();
+                updateCartDisplay();
+            }
+        }
+
         // Remove Item
         function removeItem(index) {
             cart.splice(index, 1);
-            localStorage.setItem('evaCart', JSON.stringify(cart));
-            document.getElementById('cart-count').innerText = cart.length;
+            saveCart();
+            updateCartCount();
             updateCartDisplay();
         }
 
         // Clear Cart
         function clearCart() {
             cart = [];
-            localStorage.setItem('evaCart', JSON.stringify(cart));
-            document.getElementById('cart-count').innerText = '0';
+            saveCart();
+            updateCartCount();
             updateCartDisplay();
             showToast('Cart cleared!');
         }
 
         // Show Checkout Form
         function showCheckout() {
+            const summaryContainer = document.getElementById('checkoutSummary');
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const itemsList = cart.map(item => `<div>${item.name} x${item.quantity} - UGX ${(item.price * item.quantity).toLocaleString()}</div>`).join('');
+            
+            summaryContainer.innerHTML = `
+                <div style="margin-bottom: 8px; font-weight: 600;">Order Summary:</div>
+                ${itemsList}
+                <div style="margin-top: 8px; border-top: 1px solid #ddd; padding-top: 5px; font-weight: 700;">
+                    Total: UGX ${total.toLocaleString()}
+                </div>
+            `;
+
+            // Auto-fill from localStorage
+            const savedInfo = JSON.parse(localStorage.getItem('evaCustomerInfo'));
+            if (savedInfo) {
+                document.getElementById('orderName').value = savedInfo.name || '';
+                document.getElementById('orderEmail').value = savedInfo.email || '';
+                document.getElementById('orderPhone').value = savedInfo.phone || '';
+                document.getElementById('orderAddress').value = savedInfo.address || '';
+            }
+
             document.getElementById('checkoutForm').style.display = 'block';
             document.getElementById('proceedBtn').style.display = 'none';
             // Scroll to form
@@ -588,13 +658,18 @@
         });
 
         // Submit Order
-        function submitOrder(e) {
+        async function submitOrder(e) {
             e.preventDefault();
             
             if (cart.length === 0) {
                 showToast('Your cart is empty!');
                 return;
             }
+
+            const btn = document.getElementById('orderSubmitBtn');
+            const originalBtnText = btn.textContent;
+            btn.disabled = true;
+            btn.textContent = "⌛ Processing...";
 
             const orderId = 'ORD-' + Date.now().toString(36).toUpperCase();
             const name = document.getElementById('orderName').value;
@@ -604,48 +679,76 @@
             const payment = document.getElementById('orderPayment').value;
             const notes = document.getElementById('orderNotes').value;
             
-            const total = cart.reduce((sum, item) => sum + item.price, 0);
-            const itemsSummary = cart.map(item => `- ${item.name} (UGX ${item.price.toLocaleString()})`).join('\n');
-            
-            // Create order object
-            const order = {
-                orderId: orderId,
-                name: name,
-                email: email,
-                phone: phone,
-                items: cart,
-                total: total,
-                address: address,
-                payment: payment,
-                notes: notes,
-                status: 'Pending',
-                date: new Date().toISOString(),
-                displayDate: new Date().toLocaleDateString()
-            };
-            
-            // Save to orders
-            let orders = JSON.parse(localStorage.getItem('evaOrders')) || [];
-            orders.push(order);
-            localStorage.setItem('evaOrders', JSON.stringify(orders));
-            
-            // Prepare messages
-            const msgBody = `New Order from ${name}\nOrder ID: ${orderId}\n\nItems:\n${itemsSummary}\n\nTotal: UGX ${total.toLocaleString()}\nAddress: ${address}\nPhone: ${phone}\nNotes: ${notes}`;
+            // Save customer info for next time
+            localStorage.setItem('evaCustomerInfo', JSON.stringify({
+                name, email, phone, address
+            }));
 
-            // WhatsApp/Gmail redirect
-            if (payment === 'whatsapp') {
-                window.open('https://wa.me/256752546261?text=' + encodeURIComponent("Hello Eva's Beauty Hub, I want to place an order:\n\n" + msgBody), '_blank');
-            } else if (payment === 'gmail') {
-                let subject = `New Order: ${orderId} - ${name}`;
-                window.location.href = `mailto:atwiineevalyne@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(msgBody)}`;
-            } else {
-                alert(`✅ Order Placed Successfully!\n\nOrder ID: ${orderId}\nTotal: UGX ${total.toLocaleString()}\n\nSave your Order ID to track your order!`);
-            }
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
             
-            // Clear cart and close
-            clearCart();
-            closeCart();
-            loadOrderHistory();
-            showToast('Order placed successfully!');
+            try {
+                // 1. Create order in backend
+                const response = await fetch('api/create-order.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        orderId,
+                        customerName: name,
+                        customerEmail: email,
+                        customerPhone: phone,
+                        address,
+                        paymentMethod: payment,
+                        totalAmount: total,
+                        notes,
+                        items: cart
+                    })
+                });
+
+                const result = await response.json();
+                if (!result.success) throw new Error(result.message || 'Failed to create order');
+
+                // 2. Handle specific payment methods
+                if (payment === 'intasend') {
+                    const payResp = await fetch('api/intasend-payment.php?action=initiate', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            amount: total,
+                            phone: phone,
+                            email: email,
+                            name: name,
+                            orderId: orderId
+                        })
+                    });
+                    const payResult = await payResp.json();
+                    if (!payResult.success) throw new Error(payResult.message || 'Payment initiation failed');
+                    
+                    alert('✅ STK Push sent! Please check your phone to complete payment.');
+                } else if (payment === 'whatsapp') {
+                    const itemsSummary = cart.map(item => `- ${item.name} x${item.quantity}`).join('\n');
+                    const msgBody = `New Order: ${orderId}\nName: ${name}\nItems:\n${itemsSummary}\nTotal: UGX ${total.toLocaleString()}`;
+                    window.open('https://wa.me/256752546261?text=' + encodeURIComponent("Hello Eva's Beauty Hub, I've placed an order:\n\n" + msgBody), '_blank');
+                } else if (payment === 'gmail') {
+                    const itemsSummary = cart.map(item => `- ${item.name} x${item.quantity}`).join('\n');
+                    const msgBody = `New Order: ${orderId}\nName: ${name}\nItems:\n${itemsSummary}\nTotal: UGX ${total.toLocaleString()}`;
+                    window.location.href = `mailto:atwiineevalyne@gmail.com?subject=New Order ${orderId}&body=${encodeURIComponent(msgBody)}`;
+                } else {
+                    alert(`✅ Order Placed Successfully!\n\nOrder ID: ${orderId}\nTotal: UGX ${total.toLocaleString()}\n\nSave your Order ID to track your order!`);
+                }
+
+                // Success cleanup
+                clearCart();
+                closeCart();
+                loadOrderHistory();
+                showToast('Order processed successfully!');
+
+            } catch (error) {
+                console.error('Order Error:', error);
+                alert('❌ Error: ' + error.message);
+            } finally {
+                btn.disabled = false;
+                btn.textContent = originalBtnText;
+            }
         }
 
         // Track Order
@@ -672,11 +775,14 @@
                 else if (hoursPassed < 72) order.status = 'Shipped';
                 else order.status = 'Delivered';
                 
+                const itemsList = order.items.map(item => `<li>${item.name} x${item.quantity}</li>`).join('');
+                
                 result.innerHTML = `
                     <div class="order-found">
                         <p class="success">✅ Order Found!</p>
                         <p><strong>Order ID:</strong> ${order.orderId}</p>
-                        <p><strong>Product:</strong> ${order.product} x${order.quantity}</p>
+                        <p><strong>Items:</strong></p>
+                        <ul style="list-style: none; margin-bottom: 15px; padding-left: 0;">${itemsList}</ul>
                         <p><strong>Total:</strong> UGX ${order.total.toLocaleString()}</p>
                         <p><strong>Status:</strong> <span class="status-${order.status.toLowerCase()}">${order.status}</span></p>
                         <p><strong>Date:</strong> ${order.displayDate}</p>
@@ -699,10 +805,10 @@
             }
             
             // Sort by newest first
-            orders.reverse();
+            const sortedOrders = [...orders].reverse();
             
             let html = '';
-            orders.forEach(order => {
+            sortedOrders.forEach(order => {
                 const orderTime = new Date(order.date).getTime();
                 const now = new Date().getTime();
                 const hoursPassed = (now - orderTime) / (1000 * 60 * 60);
@@ -712,6 +818,8 @@
                 else if (hoursPassed < 72) order.status = 'Shipped';
                 else order.status = 'Delivered';
                 
+                const itemsSummaryText = order.items.map(item => `${item.name} (x${item.quantity})`).join(', ');
+                
                 html += `
                     <div class="history-item">
                         <div class="history-header">
@@ -719,7 +827,7 @@
                             <span class="status-${order.status.toLowerCase()}">${order.status}</span>
                         </div>
                         <div class="history-details">
-                            <p><strong>Product:</strong> ${order.product} x${order.quantity}</p>
+                            <p><strong>Items:</strong> ${itemsSummaryText}</p>
                             <p><strong>Total:</strong> UGX ${order.total.toLocaleString()}</p>
                             <p><strong>Date:</strong> ${order.displayDate}</p>
                             <p><strong>Payment:</strong> ${order.payment}</p>
@@ -811,13 +919,14 @@
 
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
-            initProductDropdown();
             loadOrderHistory();
             initCircularCarousel();
         });
 
         // 3D Circular Carousel Logic
         let currentRotation = 0;
+        let autoRotateInterval;
+
         function initCircularCarousel() {
             console.log("Initializing 3D Carousel...");
             const carousel = document.getElementById('circular-carousel');
@@ -829,17 +938,19 @@
             // Selection of trending products (IDs based on the products array)
             const trendingIndices = [0, 4, 8, 14, 18, 19, 21, 24];
             const count = trendingIndices.length;
-            const radius = window.innerWidth < 768 ? 280 : 450; // Orbit radius
+            const radius = window.innerWidth < 480 ? 150 : (window.innerWidth < 768 ? 220 : 400); // More dynamic radius
             
             console.log(`Loading ${count} products into orbit with radius ${radius}px`);
             // Map names to image sources manually or via DOM lookup
             const productImages = {};
             document.querySelectorAll('.product-card').forEach(card => {
                 const name = card.querySelector('h4').textContent;
-                const src = card.querySelector('img').src;
+                const src = card.querySelector('img').getAttribute('src');
                 productImages[name] = src;
             });
 
+            carousel.innerHTML = ''; // Clear any existing items
+            
             trendingIndices.forEach((idx, i) => {
                 const product = products[idx];
                 const angle = i * (360 / count);
@@ -850,19 +961,26 @@
                 item.style.transform = `rotateY(${angle}deg) translateZ(${radius}px)`;
                 
                 const imgSrc = productImages[product.name] || 'images/placeholder.jpeg';
-                if (!productImages[product.name]) {
-                    console.warn(`Image for ${product.name} not found in product-cards! Falling back to placeholder.`);
-                }
                 
                 item.innerHTML = `
-                    <img src="${imgSrc}" alt="${product.name}">
-                    <h4>${product.name}</h4>
-                    <p class="price">UGX ${product.price.toLocaleString()}</p>
-                    <button onclick="addToCart(${idx})">Add to Cart</button>
+                    <div class="carousel-item-inner">
+                        <img src="${imgSrc}" alt="${product.name}">
+                        <h4>${product.name}</h4>
+                        <p class="price">UGX ${product.price.toLocaleString()}</p>
+                        <button onclick="addToCart(${idx})">Add to Cart</button>
+                    </div>
                 `;
                 
                 carousel.appendChild(item);
             });
+
+            // Start auto-rotation
+            startAutoRotation();
+        }
+
+        function startAutoRotation() {
+            const carousel = document.getElementById('circular-carousel');
+            carousel.style.animation = 'rotateCarousel 20s linear infinite';
         }
 
         function rotateCarouselManual(dir) {
@@ -875,8 +993,13 @@
             
             carousel.style.transform = `rotateY(${currentRotation}deg)`;
             
-            // Resume auto-rotation after some time if desired, or keep manual
-            // For now, keeping it manual once interacted
+            // Resume auto-rotation after 5 seconds of inactivity
+            clearTimeout(autoRotateInterval);
+            autoRotateInterval = setTimeout(() => {
+                // To resume smoothly, we'd need to sync currentRotation with animation
+                // For simplicity, just restart the animation from current position
+                carousel.style.animation = 'rotateCarousel 20s linear infinite';
+            }, 5000);
         }
     </script>
 </body>
