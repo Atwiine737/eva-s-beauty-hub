@@ -424,6 +424,7 @@
                             <option value="daraja">M-Pesa via Daraja API</option>
                             <option value="direct">Direct Mobile Money Transfer</option>
                             <option value="whatsapp">WhatsApp Ordering</option>
+                            <option value="instagram">Instagram Ordering (Direct DM)</option>
                             <option value="gmail">Email Ordering (Gmail)</option>
                         </select>
                     </div>
@@ -562,8 +563,37 @@
                         </div>
                     </div>`;
             });
+            
+            // Add scroll indicator if cart has items and checkout not already visible
+            if (checkoutForm.style.display === 'none') {
+                html += `
+                    <div class="scroll-indicator" onclick="showCheckout()" title="Proceed to checkout">
+                        <span>📝 Proceed to Order</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>`;
+            } else {
+                // If checkout is visible, update summary dynamically
+                updateCheckoutSummary();
+            }
+
             container.innerHTML = html;
             totalSpan.innerText = total.toLocaleString();
+        }
+
+        // Update Checkout Summary
+        function updateCheckoutSummary() {
+            const summaryContainer = document.getElementById('checkoutSummary');
+            if (!summaryContainer) return;
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const itemsList = cart.map(item => `<div>${item.name} x${item.quantity} - UGX ${(item.price * item.quantity).toLocaleString()}</div>`).join('');
+            
+            summaryContainer.innerHTML = `
+                <div style="margin-bottom: 8px; font-weight: 600;">Order Summary:</div>
+                ${itemsList}
+                <div style="margin-top: 8px; border-top: 1px solid var(--bg-light); padding-top: 8px; font-weight: 700; color: var(--primary);">
+                    Total: UGX ${total.toLocaleString()}
+                </div>
+            `;
         }
 
         // Change Quantity
@@ -597,17 +627,7 @@
 
         // Show Checkout Form
         function showCheckout() {
-            const summaryContainer = document.getElementById('checkoutSummary');
-            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            const itemsList = cart.map(item => `<div>${item.name} x${item.quantity} - UGX ${(item.price * item.quantity).toLocaleString()}</div>`).join('');
-            
-            summaryContainer.innerHTML = `
-                <div style="margin-bottom: 8px; font-weight: 600;">Order Summary:</div>
-                ${itemsList}
-                <div style="margin-top: 8px; border-top: 1px solid #ddd; padding-top: 5px; font-weight: 700;">
-                    Total: UGX ${total.toLocaleString()}
-                </div>
-            `;
+            updateCheckoutSummary();
 
             // Auto-fill from localStorage
             const savedInfo = JSON.parse(localStorage.getItem('evaCustomerInfo'));
@@ -620,6 +640,10 @@
 
             document.getElementById('checkoutForm').style.display = 'block';
             document.getElementById('proceedBtn').style.display = 'none';
+            
+            // Hide the scroll indicator in the list since we're here
+            updateCartDisplay();
+
             // Scroll to form
             document.getElementById('checkoutForm').scrollIntoView({ behavior: 'smooth' });
         }
@@ -651,6 +675,9 @@
             } else if (method === 'whatsapp') {
                 text.textContent = "You will be redirected to WhatsApp to complete your order with our team.";
                 btn.textContent = "💬 Proceed to WhatsApp";
+            } else if (method === 'instagram') {
+                text.textContent = "You will be redirected to our Instagram profile. Please send us a DM with your Order ID.";
+                btn.textContent = "📸 Proceed to Instagram";
             } else if (method === 'gmail') {
                 text.textContent = "You will be redirected to your email app to send the order details via Gmail.";
                 btn.textContent = "📧 Proceed to Gmail";
@@ -685,7 +712,9 @@
             }));
 
             const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            
+            const itemsSummary = cart.map(item => `- ${item.name} x${item.quantity}`).join('\n');
+            const msgBody = `New Order: ${orderId}\nName: ${name}\nItems:\n${itemsSummary}\nTotal: UGX ${total.toLocaleString()}\nAddress: ${address}`;
+
             try {
                 // 1. Create order in backend
                 const response = await fetch('api/create-order.php', {
@@ -725,12 +754,11 @@
                     
                     alert('✅ STK Push sent! Please check your phone to complete payment.');
                 } else if (payment === 'whatsapp') {
-                    const itemsSummary = cart.map(item => `- ${item.name} x${item.quantity}`).join('\n');
-                    const msgBody = `New Order: ${orderId}\nName: ${name}\nItems:\n${itemsSummary}\nTotal: UGX ${total.toLocaleString()}`;
                     window.open('https://wa.me/256752546261?text=' + encodeURIComponent("Hello Eva's Beauty Hub, I've placed an order:\n\n" + msgBody), '_blank');
+                } else if (payment === 'instagram') {
+                    // Instagram profile URL - change to your actual profile
+                    window.open('https://www.instagram.com/evasbeautyhubug/', '_blank');
                 } else if (payment === 'gmail') {
-                    const itemsSummary = cart.map(item => `- ${item.name} x${item.quantity}`).join('\n');
-                    const msgBody = `New Order: ${orderId}\nName: ${name}\nItems:\n${itemsSummary}\nTotal: UGX ${total.toLocaleString()}`;
                     window.location.href = `mailto:atwiineevalyne@gmail.com?subject=New Order ${orderId}&body=${encodeURIComponent(msgBody)}`;
                 } else {
                     alert(`✅ Order Placed Successfully!\n\nOrder ID: ${orderId}\nTotal: UGX ${total.toLocaleString()}\n\nSave your Order ID to track your order!`);
