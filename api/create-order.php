@@ -40,7 +40,7 @@ $conn->begin_transaction();
 try {
     // Insert into orders table
     $stmt = $conn->prepare("INSERT INTO orders (order_id, customer_name, customer_email, customer_phone, delivery_address, payment_method, total_amount, status, notes) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssssss dss", $orderId, $customerName, $customerEmail, $customerPhone, $deliveryAddress, $paymentMethod, $totalAmount, $status, $notes);
+    $stmt->bind_param("ssssssdss", $orderId, $customerName, $customerEmail, $customerPhone, $deliveryAddress, $paymentMethod, $totalAmount, $status, $notes);
     
     if (!$stmt->execute()) {
         throw new Exception("Error inserting order: " . $stmt->error);

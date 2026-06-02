@@ -7,7 +7,7 @@
     <title>Eva's Beauty Hub | Online Beauty Store Uganda</title>
     <link rel="stylesheet" href="style.css?v=2.5">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💄</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 576 512'><path fill='%23d63384' d='M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z'/></svg>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -15,9 +15,12 @@
     <!-- Header -->
     <header class="header">
         <div class="header-container">
-            <a href="#home" class="logo">💄 Eva's Beauty Hub</a>
+            <a href="#home" class="logo"><i class="fas fa-spa"></i> Eva's Beauty Hub</a>
             
             <nav class="nav-menu">
+                <div class="mobile-search">
+                    <input type="text" class="search-input" placeholder="Search products..." onkeyup="searchProducts()">
+                </div>
                 <a href="#home" class="nav-link active">Home</a>
                 <a href="#products" class="nav-link">Products</a>
                 <a href="#services" class="nav-link">Services</a>
@@ -28,29 +31,30 @@
 
             <div class="header-actions">
                 <div class="search-box">
-                    <input type="text" id="searchInput" placeholder="Search products..." onkeyup="searchProducts()">
+                    <input type="text" class="search-input" id="searchInput" placeholder="Search products..." onkeyup="searchProducts()">
                 </div>
-                <a href="https://wa.me/256752546261?text=Welcome%20to%20Eva's%20Beauty%20Hub" class="whatsapp-btn" title="Chat on WhatsApp">
-                    <i class="fab fa-whatsapp"></i>
+                <a href="tel:+256752546261" class="phone-btn" title="Call us">
+                    <i class="fas fa-phone"></i>
                 </a>
-                <button class="theme-btn" onclick="toggleTheme()">🌙</button>
                 <button class="cart-btn" onclick="openCart()">
-                    🛒 <span id="cart-count">0</span>
+                    <i class="fas fa-shopping-cart"></i> <span id="cart-count">0</span>
                 </button>
-                <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+                <button class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
             </div>
         </div>
     </header>
 
     <!-- Hero Section -->
     <section id="home" class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
         <div class="hero-content">
-            <span class="hero-badge">Hello 👋 Welcome to Eva's Beauty Hub</span>
+            <span class="hero-badge">Hello <i class="fas fa-hand-paper"></i> Welcome to Eva's Beauty Hub</span>
             <h1>Discover Your <span class="highlight">Natural Beauty</span></h1>
             <p>Shop premium beauty products, skincare, makeup, hair care, and accessories. Professional makeup services available.</p>
             <div class="hero-btns">
-                <a href="#products" class="btn btn-primary">🛍️ Shop Now</a>
-                <a href="#services" class="btn btn-outline">💅 Our Services</a>
+                <a href="#products" class="btn btn-primary"><i class="fas fa-bag-shopping"></i> Shop Now</a>
+                <a href="#services" class="btn btn-outline"><i class="fas fa-hand-sparkles"></i> Our Services</a>
             </div>
             <div class="hero-stats">
                 <div class="stat"><strong>23</strong><span>Products</span></div>
@@ -62,13 +66,13 @@
 
     <!-- Promo Banner -->
     <div class="promo-bar">
-        🎉 Free delivery on orders UGX 100,000+ | Use code <strong>BEAUTY10</strong> for 10% off!
+        <i class="fas fa-gift"></i> Free delivery on orders UGX 100,000+ | Use code <strong>BEAUTY10</strong> for 10% off!
     </div>
 
     <!-- Circular Showcase Section -->
     <section class="circular-showcase">
         <div class="section-header">
-            <h2>✨ Trending Products</h2>
+            <h2><i class="fas fa-star"></i> Trending Products</h2>
             <p>Experience our premium collection in dynamic 3D motion</p>
         </div>
         <div class="carousel-stage">
@@ -76,8 +80,8 @@
                 <!-- Products will be injected by JavaScript -->
             </div>
             <div class="carousel-controls">
-                <button class="control-btn" onclick="rotateCarouselManual('prev')">←</button>
-                <button class="control-btn" onclick="rotateCarouselManual('next')">→</button>
+                <button class="control-btn" onclick="rotateCarouselManual('prev')"><i class="fas fa-chevron-left"></i></button>
+                <button class="control-btn" onclick="rotateCarouselManual('next')"><i class="fas fa-chevron-right"></i></button>
             </div>
         </div>
     </section>
@@ -91,71 +95,71 @@
 
         <!-- Category Filters -->
         <div class="filter-btns">
-            <button class="filter-btn active" onclick="filterCategory('all')">All</button>
-            <button class="filter-btn" onclick="filterCategory('Skincare')">Skincare</button>
-            <button class="filter-btn" onclick="filterCategory('Makeup')">Makeup</button>
-            <button class="filter-btn" onclick="filterCategory('Hair Care')">Hair Care</button>
-            <button class="filter-btn" onclick="filterCategory('Nails')">Nails</button>
-            <button class="filter-btn" onclick="filterCategory('Accessories')">Accessories</button>
+            <button class="filter-btn active" onclick="filterCategory('all',this)">All</button>
+            <button class="filter-btn" onclick="filterCategory('Skincare',this)">Skincare</button>
+            <button class="filter-btn" onclick="filterCategory('Makeup',this)">Makeup</button>
+            <button class="filter-btn" onclick="filterCategory('Hair Care',this)">Hair Care</button>
+            <button class="filter-btn" onclick="filterCategory('Nails',this)">Nails</button>
+            <button class="filter-btn" onclick="filterCategory('Accessories',this)">Accessories</button>
         </div>
 
         <!-- Skincare -->
         <div class="category-group" id="Skincare">
-            <h3 class="category-title">🧴 Skincare</h3>
+            <h3 class="category-title"><i class="fas fa-flask"></i> Skincare</h3>
             <div class="products-grid">
-                <div class="product-card"><div class="badge">Hot</div><img onclick="openImageModal(this.src)" style="cursor: zoom-in;" src="ace clear spot treatment.jpeg" alt="Sherbet Body Scrub"><h4>Sherbet Body Scrub</h4><p class="price">UGX 45,000</p><button onclick="addToCart(0)">Add to Cart</button><button onclick="quickBuy(0)" class="btn-quick-buy">Buy Now</button></div>
-                <div class="product-card"><img onclick="openImageModal(this.src)" style="cursor: zoom-in;" src="body spray.jpeg" alt="Luxury Body Spray"><h4>Luxury Body Spray</h4><p class="price">UGX 15,000</p><button onclick="addToCart(1)">Add to Cart</button><button onclick="quickBuy(1)" class="btn-quick-buy">Buy Now</button></div>
-                <div class="product-card"><img onclick="openImageModal(this.src)" style="cursor: zoom-in;" src="cotton pads.jpeg" alt="Premium Cotton Pads"><h4>Premium Cotton Pads</h4><p class="price">UGX 8,000</p><button onclick="addToCart(2)">Add to Cart</button><button onclick="quickBuy(2)" class="btn-quick-buy">Buy Now</button></div>
-                <div class="product-card"><img onclick="openImageModal(this.src)" style="cursor: zoom-in;" src="glove sponge.jpeg" alt="Exfoliating Glove"><h4>Exfoliating Glove Sponge</h4><p class="price">UGX 5,000</p><button onclick="addToCart(3)">Add to Cart</button><button onclick="quickBuy(3)" class="btn-quick-buy">Buy Now</button></div>
-                <div class="product-card"><img onclick="openImageModal(this.src)" style="cursor: zoom-in;" src="vc brightening cream.jpeg" alt="Vitamin C Cream"><h4>Vitamin C Brightening Cream</h4><p class="price">UGX 35,000</p><button onclick="addToCart(4)">Add to Cart</button><button onclick="quickBuy(4)" class="btn-quick-buy">Buy Now</button></div>
-                <div class="product-card"><img onclick="openImageModal(this.src)" style="cursor: zoom-in;" src="pearl cleansing milk.jpeg" alt="Pearl Cleansing Milk"><h4>Pearl Cleansing Milk</h4><p class="price">UGX 20,000</p><button onclick="addToCart(5)">Add to Cart</button><button onclick="quickBuy(5)" class="btn-quick-buy">Buy Now</button></div>
-                <div class="product-card"><img onclick="openImageModal(this.src)" style="cursor: zoom-in;" src="wipes.jpeg" alt="Fruit Wipes"><h4>Fruit Wipes</h4><p class="price">UGX 5,000</p><button onclick="addToCart(6)">Add to Cart</button><button onclick="quickBuy(6)" class="btn-quick-buy">Buy Now</button></div>
-                <div class="product-card"><img onclick="openImageModal(this.src)" style="cursor: zoom-in;" src="vc whitening cream.jpeg" alt="Vitamin C Whitening"><h4>Vitamin C Whitening Cream</h4><p class="price">UGX 30,000</p><button onclick="addToCart(7)">Add to Cart</button><button onclick="quickBuy(7)" class="btn-quick-buy">Buy Now</button></div>
-                <div class="product-card"><div class="badge">Sale</div><img onclick="openImageModal(this.src)" style="cursor: zoom-in;" src="44.jpeg" alt="Skin Care Combo"><h4>Skin Care Combo</h4><p class="price">UGX 100,000</p><button onclick="addToCart(8)">Add to Cart</button><button onclick="quickBuy(8)" class="btn-quick-buy">Buy Now</button></div>
+                <div class="product-card"><div class="badge">Hot</div><img onclick="openImageModal(this.src)" style="cursor: zoom-in;" src="ace_clear_spot_treatment.jpeg" alt="Sherbet Body Scrub"><h4>Sherbet Body Scrub</h4><p class="price">UGX 45,000</p><button onclick="addToCart(0)">Add to Cart</button></div>
+                <div class="product-card"><img onclick="openImageModal(this.src)" style="cursor: zoom-in;" src="body_spray.jpeg" alt="Luxury Body Spray"><h4>Luxury Body Spray</h4><p class="price">UGX 15,000</p><button onclick="addToCart(1)">Add to Cart</button></div>
+                <div class="product-card"><img onclick="openImageModal(this.src)" style="cursor: zoom-in;" src="cotton_pads.jpeg" alt="Premium Cotton Pads"><h4>Premium Cotton Pads</h4><p class="price">UGX 8,000</p><button onclick="addToCart(2)">Add to Cart</button></div>
+                <div class="product-card"><img onclick="openImageModal(this.src)" style="cursor: zoom-in;" src="glove_sponge.jpeg" alt="Exfoliating Glove"><h4>Exfoliating Glove Sponge</h4><p class="price">UGX 5,000</p><button onclick="addToCart(3)">Add to Cart</button></div>
+                <div class="product-card"><img onclick="openImageModal(this.src)" style="cursor: zoom-in;" src="vc_brightening_cream.jpeg" alt="Vitamin C Cream"><h4>Vitamin C Brightening Cream</h4><p class="price">UGX 35,000</p><button onclick="addToCart(4)">Add to Cart</button></div>
+                <div class="product-card"><img onclick="openImageModal(this.src)" style="cursor: zoom-in;" src="pearl_cleansing_milk.jpeg" alt="Pearl Cleansing Milk"><h4>Pearl Cleansing Milk</h4><p class="price">UGX 20,000</p><button onclick="addToCart(5)">Add to Cart</button></div>
+                <div class="product-card"><img onclick="openImageModal(this.src)" style="cursor: zoom-in;" src="wipes.jpeg" alt="Fruit Wipes"><h4>Fruit Wipes</h4><p class="price">UGX 5,000</p><button onclick="addToCart(6)">Add to Cart</button></div>
+                <div class="product-card"><img onclick="openImageModal(this.src)" style="cursor: zoom-in;" src="vc_whitening_cream.jpeg" alt="Vitamin C Whitening"><h4>Vitamin C Whitening Cream</h4><p class="price">UGX 30,000</p><button onclick="addToCart(7)">Add to Cart</button></div>
+                <div class="product-card"><div class="badge">Sale</div><img onclick="openImageModal(this.src)" style="cursor: zoom-in;" src="44.jpeg" alt="Skin Care Combo"><h4>Skin Care Combo</h4><p class="price">UGX 100,000</p><button onclick="addToCart(8)">Add to Cart</button></div>
             </div>
         </div>
 
         <!-- Makeup -->
         <div class="category-group" id="Makeup">
-            <h3 class="category-title">💄 Makeup</h3>
+            <h3 class="category-title"><i class="fas fa-spa"></i> Makeup</h3>
             <div class="products-grid">
-                <div class="product-card"><img onclick="openImageModal(this.src)" style="cursor: zoom-in;" src="r2.jpeg" alt="Lip Gloss"><h4>Lip Gloss</h4><p class="price">UGX 6,000</p><button onclick="addToCart(9)">Add to Cart</button><button onclick="quickBuy(9)" class="btn-quick-buy">Buy Now</button></div>
-                <div class="product-card"><img onclick="openImageModal(this.src)" style="cursor: zoom-in;" src="r3.jpeg" alt="Lip Gloss Premium"><h4>Lip Gloss Premium</h4><p class="price">UGX 10,000</p><button onclick="addToCart(10)">Add to Cart</button><button onclick="quickBuy(10)" class="btn-quick-buy">Buy Now</button></div>
-                <div class="product-card"><img onclick="openImageModal(this.src)" style="cursor: zoom-in;" src="r4.jpeg" alt="Lip Gloss"><h4>Lip Gloss</h4><p class="price">UGX 7,000</p><button onclick="addToCart(11)">Add to Cart</button><button onclick="quickBuy(11)" class="btn-quick-buy">Buy Now</button></div>
-                <div class="product-card"><img onclick="openImageModal(this.src)" style="cursor: zoom-in;" src="r6.jpeg" alt="Lip Gloss"><h4>Lip Gloss</h4><p class="price">UGX 7,000</p><button onclick="addToCart(12)">Add to Cart</button><button onclick="quickBuy(12)" class="btn-quick-buy">Buy Now</button></div>
-                <div class="product-card"><img onclick="openImageModal(this.src)" style="cursor: zoom-in;" src="e4.jpeg" alt="Pink Lips"><h4>Pink Lips Lip Gloss</h4><p class="price">UGX 15,000</p><button onclick="addToCart(13)">Add to Cart</button><button onclick="quickBuy(13)" class="btn-quick-buy">Buy Now</button></div>
-                <div class="product-card"><img onclick="openImageModal(this.src)" style="cursor: zoom-in;" src="velvet matte lip stick.jpeg" alt="Matte Lip Gloss"><h4>Matte Lip Gloss Set</h4><p class="price">UGX 20,000</p><button onclick="addToCart(14)">Add to Cart</button><button onclick="quickBuy(14)" class="btn-quick-buy">Buy Now</button></div>
+                <div class="product-card"><img onclick="openImageModal(this.src)" style="cursor: zoom-in;" src="r2.jpeg" alt="Lip Gloss"><h4>Lip Gloss</h4><p class="price">UGX 6,000</p><button onclick="addToCart(9)">Add to Cart</button></div>
+                <div class="product-card"><img onclick="openImageModal(this.src)" style="cursor: zoom-in;" src="r3.jpeg" alt="Lip Gloss Premium"><h4>Lip Gloss Premium</h4><p class="price">UGX 10,000</p><button onclick="addToCart(10)">Add to Cart</button></div>
+                <div class="product-card"><img onclick="openImageModal(this.src)" style="cursor: zoom-in;" src="r4.jpeg" alt="Lip Gloss"><h4>Lip Gloss</h4><p class="price">UGX 7,000</p><button onclick="addToCart(11)">Add to Cart</button></div>
+                <div class="product-card"><img onclick="openImageModal(this.src)" style="cursor: zoom-in;" src="r6.jpeg" alt="Lip Gloss"><h4>Lip Gloss</h4><p class="price">UGX 7,000</p><button onclick="addToCart(12)">Add to Cart</button></div>
+                <div class="product-card"><img onclick="openImageModal(this.src)" style="cursor: zoom-in;" src="e4.jpeg" alt="Pink Lips"><h4>Pink Lips Lip Gloss</h4><p class="price">UGX 15,000</p><button onclick="addToCart(13)">Add to Cart</button></div>
+                <div class="product-card"><img onclick="openImageModal(this.src)" style="cursor: zoom-in;" src="velvet_matte_lip_stick.jpeg" alt="Matte Lip Gloss"><h4>Matte Lip Gloss Set</h4><p class="price">UGX 20,000</p><button onclick="addToCart(14)">Add to Cart</button></div>
             </div>
         </div>
 
         <!-- Hair Care -->
         <div class="category-group" id="Hair Care">
-            <h3 class="category-title">💇 Hair Care</h3>
+            <h3 class="category-title"><i class="fas fa-cut"></i> Hair Care</h3>
             <div class="products-grid">
-                <div class="product-card"><img onclick="openImageModal(this.src)" style="cursor: zoom-in;" src="rr.jpeg" alt="Hair Clips"><h4>Hair Clips</h4><p class="price">UGX 5,000</p><button onclick="addToCart(15)">Add to Cart</button><button onclick="quickBuy(15)" class="btn-quick-buy">Buy Now</button></div>
-                <div class="product-card"><img onclick="openImageModal(this.src)" style="cursor: zoom-in;" src="re.jpeg" alt="Puff Holder"><h4>Puff Holder</h4><p class="price">UGX 2,000</p><button onclick="addToCart(16)">Add to Cart</button><button onclick="quickBuy(16)" class="btn-quick-buy">Buy Now</button></div>
-                <div class="product-card"><img onclick="openImageModal(this.src)" style="cursor: zoom-in;" src="hair clips.jpeg" alt="Ribbon Hair Bows"><h4>Ribbon Hair Bows</h4><p class="price">UGX 5,000</p><button onclick="addToCart(17)">Add to Cart</button><button onclick="quickBuy(17)" class="btn-quick-buy">Buy Now</button></div>
-                <div class="product-card"><img onclick="openImageModal(this.src)" style="cursor: zoom-in;" src="hand funs.jpeg" alt="Mini Fan"><h4>Portable Mini Fan</h4><p class="price">UGX 15,000</p><button onclick="addToCart(18)">Add to Cart</button><button onclick="quickBuy(18)" class="btn-quick-buy">Buy Now</button></div>
+                <div class="product-card"><img onclick="openImageModal(this.src)" style="cursor: zoom-in;" src="rr.jpeg" alt="Hair Clips"><h4>Hair Clips</h4><p class="price">UGX 5,000</p><button onclick="addToCart(15)">Add to Cart</button></div>
+                <div class="product-card"><img onclick="openImageModal(this.src)" style="cursor: zoom-in;" src="re.jpeg" alt="Puff Holder"><h4>Puff Holder</h4><p class="price">UGX 2,000</p><button onclick="addToCart(16)">Add to Cart</button></div>
+                <div class="product-card"><img onclick="openImageModal(this.src)" style="cursor: zoom-in;" src="hair_clips.jpeg" alt="Ribbon Hair Bows"><h4>Ribbon Hair Bows</h4><p class="price">UGX 5,000</p><button onclick="addToCart(17)">Add to Cart</button></div>
+                <div class="product-card"><img onclick="openImageModal(this.src)" style="cursor: zoom-in;" src="hand_funs.jpeg" alt="Mini Fan"><h4>Portable Mini Fan</h4><p class="price">UGX 15,000</p><button onclick="addToCart(18)">Add to Cart</button></div>
             </div>
         </div>
 
         <!-- Nails -->
         <div class="category-group" id="Nails">
-            <h3 class="category-title">💅 Nails</h3>
+            <h3 class="category-title"><i class="fas fa-hand-sparkles"></i> Nails</h3>
             <div class="products-grid">
-                <div class="product-card"><img onclick="openImageModal(this.src)" style="cursor: zoom-in;" src="nails3.jpeg" alt="Luxury Floral Nail Art"><h4>Luxury Floral Nail Art</h4><p class="price">UGX 40,000</p><button onclick="addToCart(19)">Add to Cart</button><button onclick="quickBuy(19)" class="btn-quick-buy">Buy Now</button></div>
-                <div class="product-card"><img onclick="openImageModal(this.src)" style="cursor: zoom-in;" src="nails4.jpeg" alt="Premium Press-on Nails"><h4>Premium Press-on Nails</h4><p class="price">UGX 10,000</p><button onclick="addToCart(20)">Add to Cart</button><button onclick="quickBuy(20)" class="btn-quick-buy">Buy Now</button></div>
-                <div class="product-card"><img onclick="openImageModal(this.src)" style="cursor: zoom-in;" src="nails.jpeg" alt="Nail Art Set"><h4>Nail Art Set</h4><p class="price">UGX 25,000</p><button onclick="addToCart(21)">Add to Cart</button><button onclick="quickBuy(21)" class="btn-quick-buy">Buy Now</button></div>
+                <div class="product-card"><img onclick="openImageModal(this.src)" style="cursor: zoom-in;" src="nails3.jpeg" alt="Luxury Floral Nail Art"><h4>Luxury Floral Nail Art</h4><p class="price">UGX 40,000</p><button onclick="addToCart(19)">Add to Cart</button></div>
+                <div class="product-card"><img onclick="openImageModal(this.src)" style="cursor: zoom-in;" src="nails4.jpeg" alt="Premium Press-on Nails"><h4>Premium Press-on Nails</h4><p class="price">UGX 10,000</p><button onclick="addToCart(20)">Add to Cart</button></div>
+                <div class="product-card"><img onclick="openImageModal(this.src)" style="cursor: zoom-in;" src="nails.jpeg" alt="Nail Art Set"><h4>Nail Art Set</h4><p class="price">UGX 25,000</p><button onclick="addToCart(21)">Add to Cart</button></div>
             </div>
         </div>
 
         <!-- Accessories -->
         <div class="category-group" id="Accessories">
-            <h3 class="category-title">💍 Accessories</h3>
+            <h3 class="category-title"><i class="fas fa-gem"></i> Accessories</h3>
             <div class="products-grid">
-                <div class="product-card"><img onclick="openImageModal(this.src)" style="cursor: zoom-in;" src="r1.jpeg" alt="Earrings"><h4>Earrings</h4><p class="price">UGX 5,000</p><button onclick="addToCart(22)">Add to Cart</button><button onclick="quickBuy(22)" class="btn-quick-buy">Buy Now</button></div>
-                <div class="product-card"><img onclick="openImageModal(this.src)" style="cursor: zoom-in;" src="bracelets.jpeg" alt="Pink Beaded Bracelets"><h4>Pink Beaded Bracelets</h4><p class="price">UGX 5,000</p><button onclick="addToCart(23)">Add to Cart</button><button onclick="quickBuy(23)" class="btn-quick-buy">Buy Now</button></div>
-                <div class="product-card"><img onclick="openImageModal(this.src)" style="cursor: zoom-in;" src="er.jpeg" alt="Beauty Set"><h4>Beauty Set</h4><p class="price">UGX 50,000</p><button onclick="addToCart(24)">Add to Cart</button><button onclick="quickBuy(24)" class="btn-quick-buy">Buy Now</button></div>
+                <div class="product-card"><img onclick="openImageModal(this.src)" style="cursor: zoom-in;" src="r1.jpeg" alt="Earrings"><h4>Earrings</h4><p class="price">UGX 5,000</p><button onclick="addToCart(22)">Add to Cart</button></div>
+                <div class="product-card"><img onclick="openImageModal(this.src)" style="cursor: zoom-in;" src="bracelets.jpeg" alt="Pink Beaded Bracelets"><h4>Pink Beaded Bracelets</h4><p class="price">UGX 5,000</p><button onclick="addToCart(23)">Add to Cart</button></div>
+                <div class="product-card"><img onclick="openImageModal(this.src)" style="cursor: zoom-in;" src="er.jpeg" alt="Beauty Set"><h4>Beauty Set</h4><p class="price">UGX 50,000</p><button onclick="addToCart(24)">Add to Cart</button></div>
             </div>
         </div>
     </section>
@@ -168,25 +172,25 @@
         </div>
         <div class="services-grid">
             <div class="service-card">
-                <div class="service-icon">💄</div>
+                <div class="service-icon"><i class="fas fa-paint-brush"></i></div>
                 <h3>Professional Makeup</h3>
                 <p>Expert makeup application for weddings, parties, photoshoots, and special occasions</p>
                 <span class="service-price">From UGX 50,000</span>
             </div>
             <div class="service-card">
-                <div class="service-icon">🧴</div>
+                <div class="service-icon"><i class="fas fa-flask"></i></div>
                 <h3>Facials & Skincare</h3>
                 <p>Professional facial treatments for all skin types. Rejuvenate your skin with our premium treatments.</p>
                 <span class="service-price">From UGX 50,000</span>
             </div>
             <div class="service-card">
-                <div class="service-icon">💅</div>
+                <div class="service-icon"><i class="fas fa-hand-sparkles"></i></div>
                 <h3>Manicure & Pedicure</h3>
                 <p>Complete nail care and beautiful nail art services. Get perfect nails for any occasion.</p>
                 <span class="service-price">From UGX 30,000</span>
             </div>
             <div class="service-card">
-                <div class="service-icon">💇</div>
+                <div class="service-icon"><i class="fas fa-cut"></i></div>
                 <h3>Makeup Consultation</h3>
                 <p>Personalized advice on makeup techniques and product selection for your skin type</p>
                 <span class="service-price">From UGX 25,000</span>
@@ -204,10 +208,10 @@
             <p>Welcome to <strong>Eva's Beauty Hub</strong> - your sanctuary for premium beauty products and personalized services. Located in Nakawa, Kampala, we believe that true beauty comes from confidence and self-expression.</p>
             <p>Our curated collection features quality skincare, makeup, hair care, and accessories to help you look and feel your best. Whether you visit us in-store or shop online, we're dedicated to providing you with the best beauty experience in Uganda.</p>
             <div class="features">
-                <div class="feature"><span>✨</span><div><h4>Premium Quality</h4><p>Only the finest beauty products</p></div></div>
-                <div class="feature"><span>💕</span><div><h4>Expert Care</h4><p>Professional consultations</p></div></div>
-                <div class="feature"><span>🚚</span><div><h4>Fast Delivery</h4><p>Across Kampala & Uganda</p></div></div>
-                <div class="feature"><span>💬</span><div><h4>24/7 Support</h4><p>We're always here to help</p></div></div>
+                <div class="feature"><span><i class="fas fa-star"></i></span><div><h4>Premium Quality</h4><p>Only the finest beauty products</p></div></div>
+                <div class="feature"><span><i class="fas fa-heart"></i></span><div><h4>Expert Care</h4><p>Professional consultations</p></div></div>
+                <div class="feature"><span><i class="fas fa-truck"></i></span><div><h4>Fast Delivery</h4><p>Across Kampala & Uganda</p></div></div>
+                <div class="feature"><span><i class="fas fa-comment"></i></span><div><h4>24/7 Support</h4><p>We're always here to help</p></div></div>
             </div>
         </div>
     </section>
@@ -219,17 +223,17 @@
         </div>
         <div class="testimonials-grid">
             <div class="testimonial">
-                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                 <p>"Best beauty shop in Kampala! Quality products and amazing service. The staff helped me choose the right skincare for my skin type."</p>
                 <span>- Sarah M., Kampala</span>
             </div>
             <div class="testimonial">
-                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                 <p>"They did my wedding makeup and I looked stunning! Highly recommend Eva's Beauty Hub for any occasion."</p>
                 <span>- Grace K., Entebbe</span>
             </div>
             <div class="testimonial">
-                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                 <p>"Fast delivery and genuine products. My go-to beauty store in Uganda! The online ordering via WhatsApp is so convenient."</p>
                 <span>- Faith N., Jinja</span>
             </div>
@@ -239,7 +243,7 @@
     <!-- FAQ Section -->
     <section class="section">
         <div class="section-header">
-            <h2>❓ Frequently Asked Questions</h2>
+            <h2><i class="fas fa-question-circle"></i> Frequently Asked Questions</h2>
         </div>
         <div class="faq-grid">
             <div class="faq-item">
@@ -248,7 +252,7 @@
             </div>
             <div class="faq-item">
                 <h4>What payment methods do you accept?</h4>
-                <p>We accept M-Pesa via IntaSend, M-Pesa via Daraja API, direct Mobile Money transfer to +256 752546261, or WhatsApp ordering.</p>
+                <p>We accept Mobile Money (M-Pesa) and Cash on Delivery. Pay via M-Pesa to +256 752546261 or pay in cash when your order arrives.</p>
             </div>
             <div class="faq-item">
                 <h4>What are the delivery charges?</h4>
@@ -256,7 +260,7 @@
             </div>
             <div class="faq-item">
                 <h4>How do I pay with M-Pesa?</h4>
-                <p>Select M-Pesa payment at checkout. For IntaSend, you'll receive an STK push on your phone. For Daraja, you'll get a prompt. For direct transfer, send to +256 752546261.</p>
+                <p>Select Mobile Money at checkout. You'll receive instructions to send payment to +256 752546261 via M-Pesa. Use your Order ID as the payment reference.</p>
             </div>
             <div class="faq-item">
                 <h4>How do I track my order?</h4>
@@ -285,42 +289,33 @@
         </div>
         <div class="contact-grid">
             <div class="contact-card">
-                <span>📍</span>
+                <span><i class="fas fa-location-dot"></i></span>
                 <h4>Location</h4>
-                <p>Nakawa, Kampala, Uganda</p>
+                <p><a href="https://maps.google.com/?q=Nakawa+Kampala+Uganda" target="_blank" rel="noopener">Nakawa, Kampala, Uganda</a></p>
             </div>
             <div class="contact-card">
-                <span>📱</span>
-                <h4>Phone/WhatsApp</h4>
-                <p>+256 752546261</p>
+                <span><i class="fas fa-phone"></i></span>
+                <h4>Phone</h4>
+                <p><a href="tel:+256752546261">+256 752546261</a></p>
             </div>
             <div class="contact-card">
-                <span>📧</span>
+                <span><i class="fas fa-envelope"></i></span>
                 <h4>Email</h4>
-                <p>atwiineevalyne@gmail.com</p>
+                <p><a href="mailto:atwiineevalyne@gmail.com">atwiineevalyne@gmail.com</a></p>
             </div>
             <div class="contact-card">
-                <span>💳</span>
+                <span><i class="fas fa-credit-card"></i></span>
                 <h4>Mobile Money</h4>
-                <p>+256 752546261</p>
+                <p><a href="tel:+256752546261">+256 752546261</a></p>
             </div>
         </div>
 
-        <!-- Newsletter -->
-        <div class="newsletter">
-            <h3>📧 Subscribe to Our Newsletter</h3>
-            <p>Get updates on new products, promotions, and beauty tips!</p>
-            <form onsubmit="subscribeNewsletter(event)">
-                <input type="email" id="newsletterEmail" placeholder="Enter your email" required>
-                <button type="submit">Subscribe</button>
-            </form>
-        </div>
-    </section>
+        </section>
 
     <!-- Orders Section -->
     <section id="orders" class="section">
         <div class="section-header">
-            <h2>📦 Order Tracking & History</h2>
+            <h2><i class="fas fa-box"></i> Order Tracking & History</h2>
         </div>
         
         <!-- Track Order -->
@@ -342,7 +337,7 @@
 
         <!-- Place New Order Button -->
         <div class="place-order-section">
-            <button class="btn btn-primary" onclick="openOrderModal()">📝 Place New Order</button>
+            <button class="btn btn-primary" onclick="openOrderModal()"><i class="fas fa-pen"></i> Place New Order</button>
         </div>
     </section>
 
@@ -350,12 +345,10 @@
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-brand">
-                <h3>💄 Eva's Beauty Hub</h3>
+                <h3><i class="fas fa-spa"></i> Eva's Beauty Hub</h3>
                 <p>Your trusted beauty partner in Uganda. Celebrating individuality and self-expression with premium products and professional services.</p>
                 <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="https://wa.me/256752546261?text=Welcome%20to%20Eva's%20Beauty%20Hub"><i class="fab fa-whatsapp"></i></a>
+                    <a href="tel:+256752546261"><i class="fas fa-phone"></i></a>
                 </div>
             </div>
             <div class="footer-links">
@@ -381,11 +374,14 @@
     <!-- Floating WhatsApp -->
     <a href="https://wa.me/256752546261?text=Welcome%20to%20Eva's%20Beauty%20Hub" class="float-whatsapp" target="_blank"><i class="fab fa-whatsapp"></i></a>
 
+    <!-- Back to Top -->
+    <button onclick="window.scrollTo({top:0,behavior:'smooth'})" class="back-to-top" id="backToTop" title="Back to top"><i class="fas fa-chevron-up"></i></button>
+
     <!-- Cart Modal -->
     <div id="cartModal" class="modal">
         <div class="modal-content order-modal">
             <span class="close" onclick="closeCart()">&times;</span>
-            <h2>🛒 Your Cart</h2>
+            <h2><i class="fas fa-shopping-cart"></i> Your Cart</h2>
             <div id="cart-items">
                 <p class="empty-cart">Your cart is empty</p>
             </div>
@@ -395,7 +391,7 @@
 
             <!-- Checkout Form (Initially Hidden) -->
             <div id="checkoutForm" style="display:none; margin-top: 30px; border-top: 2px solid var(--bg-light); padding-top: 20px;">
-                <h3>📝 Order Details</h3>
+                <h3><i class="fas fa-pen"></i> Order Details</h3>
                 <div id="checkoutSummary" style="background: var(--bg-light); padding: 15px; border-radius: 8px; margin-bottom: 20px; font-size: 0.9em;">
                     <!-- Order summary will be injected here -->
                 </div>
@@ -404,10 +400,7 @@
                         <label>Full Name *</label>
                         <input type="text" id="orderName" required placeholder="Your full name">
                     </div>
-                    <div class="form-group">
-                        <label>Email *</label>
-                        <input type="email" id="orderEmail" required placeholder="your@email.com">
-                    </div>
+                    
                     <div class="form-group">
                         <label>Phone Number *</label>
                         <input type="tel" id="orderPhone" required placeholder="+256 7XX XXX XXX">
@@ -420,12 +413,8 @@
                         <label>Payment Method *</label>
                         <select id="orderPayment" required>
                             <option value="">-- Select Payment --</option>
-                            <option value="intasend">M-Pesa via IntaSend (STK Push)</option>
-                            <option value="daraja">M-Pesa via Daraja API</option>
-                            <option value="direct">Direct Mobile Money Transfer</option>
-                            <option value="whatsapp">WhatsApp Ordering</option>
-                            <option value="instagram">Instagram Ordering (Direct DM)</option>
-                            <option value="gmail">Email Ordering (Gmail)</option>
+                            <option value="mobile_money">Mobile Money (M-Pesa)</option>
+                            <option value="cod">Cash on Delivery</option>
                         </select>
                     </div>
                     <div class="payment-instructions" id="paymentInstructions" style="display:none">
@@ -435,12 +424,12 @@
                         <label>Special Notes</label>
                         <textarea id="orderNotes" placeholder="Any special instructions..."></textarea>
                     </div>
-                    <button type="submit" class="btn-submit" id="orderSubmitBtn">✅ Submit Order</button>
+                    <button type="submit" class="btn-submit" id="orderSubmitBtn"><i class="fas fa-check-circle"></i> Submit Order</button>
                 </form>
             </div>
 
             <div class="cart-actions" id="cartActions">
-                <button class="btn-order" onclick="showCheckout()" id="proceedBtn">📝 Proceed to Checkout</button>
+                <button class="btn-order" onclick="showCheckout()" id="proceedBtn"><i class="fas fa-pen"></i> Proceed to Checkout</button>
                 <button class="btn-clear" onclick="clearCart()">Clear Cart</button>
             </div>
         </div>
@@ -541,7 +530,7 @@
             const checkoutForm = document.getElementById('checkoutForm');
 
             if (cart.length === 0) {
-                container.innerHTML = '<p class="empty-cart">Your cart is empty 🛒</p>';
+                container.innerHTML = '<p class="empty-cart">Your cart is empty <i class="fas fa-shopping-cart"></i></p>';
                 totalSpan.innerText = '0';
                 proceedBtn.style.display = 'none';
                 checkoutForm.style.display = 'none';
@@ -567,7 +556,7 @@
                                 <button class="qty-btn" onclick="changeQuantity(${i}, 1)">+</button>
                             </div>
                             <span class="item-total">UGX ${itemTotal.toLocaleString()}</span>
-                            <button class="remove-btn" onclick="removeItem(${i})">✕</button>
+                            <button class="remove-btn" onclick="removeItem(${i})"><i class="fas fa-times"></i></button>
                         </div>
                     </div>`;
             });
@@ -576,7 +565,7 @@
             if (checkoutForm.style.display === 'none') {
                 html += `
                     <div class="scroll-indicator" onclick="showCheckout()" title="Proceed to checkout">
-                        <span>📝 Proceed to Order</span>
+                        <span><i class="fas fa-pen"></i> Proceed to Order</span>
                         <i class="fas fa-chevron-down"></i>
                     </div>`;
             } else {
@@ -641,7 +630,6 @@
             const savedInfo = JSON.parse(localStorage.getItem('evaCustomerInfo'));
             if (savedInfo) {
                 document.getElementById('orderName').value = savedInfo.name || '';
-                document.getElementById('orderEmail').value = savedInfo.email || '';
                 document.getElementById('orderPhone').value = savedInfo.phone || '';
                 document.getElementById('orderAddress').value = savedInfo.address || '';
             }
@@ -665,30 +653,18 @@
             
             if (!method) {
                 instructions.style.display = 'none';
-                btn.textContent = "✅ Submit Order";
+                btn.innerHTML = '<i class="fas fa-check-circle"></i> Submit Order';
                 return;
             }
 
             instructions.style.display = 'block';
             
-            if (method === 'intasend') {
-                text.textContent = "You will receive an STK push on your phone. Enter your M-Pesa PIN to complete payment.";
-                btn.textContent = "✅ Submit Order";
-            } else if (method === 'daraja') {
-                text.textContent = "You will receive a prompt on your phone. Enter your M-Pesa PIN to complete payment.";
-                btn.textContent = "✅ Submit Order";
-            } else if (method === 'direct') {
-                text.textContent = "Send UGX to +256 752546261 via M-Pesa. Use your phone number as the reference.";
-                btn.textContent = "✅ Submit Order";
-            } else if (method === 'whatsapp') {
-                text.textContent = "You will be redirected to WhatsApp to complete your order with our team.";
-                btn.textContent = "💬 Proceed to WhatsApp";
-            } else if (method === 'instagram') {
-                text.textContent = "You will be redirected to our Instagram profile. Please send us a DM with your Order ID.";
-                btn.textContent = "📸 Proceed to Instagram";
-            } else if (method === 'gmail') {
-                text.textContent = "You will be redirected to your email app to send the order details via Gmail.";
-                btn.textContent = "📧 Proceed to Gmail";
+            if (method === 'mobile_money') {
+                text.textContent = "Send payment to +256 752546261 via Mobile Money (M-Pesa). Use your Order ID as the reference.";
+                btn.innerHTML = '<i class="fas fa-check-circle"></i> Submit Order';
+            } else if (method === 'cod') {
+                text.textContent = "Pay in cash when your order is delivered. No advance payment needed.";
+                btn.innerHTML = '<i class="fas fa-check-circle"></i> Submit Order';
             }
         });
 
@@ -702,24 +678,25 @@
             }
 
             const btn = document.getElementById('orderSubmitBtn');
-            const originalBtnText = btn.textContent;
+            const originalBtnText = btn.innerHTML;
             btn.disabled = true;
-            btn.textContent = "⌛ Processing...";
+            btn.innerHTML = '<i class="fas fa-hourglass-half"></i> Processing...';
 
             const orderId = 'ORD-' + Date.now().toString(36).toUpperCase();
             const name = document.getElementById('orderName').value;
-            const email = document.getElementById('orderEmail').value;
             const phone = document.getElementById('orderPhone').value;
             const address = document.getElementById('orderAddress').value;
             const payment = document.getElementById('orderPayment').value;
             const notes = document.getElementById('orderNotes').value;
             
-            const customerInfo = { name, email, phone, address };
+            const customerInfo = { name, phone, address };
             localStorage.setItem('evaCustomerInfo', JSON.stringify(customerInfo));
 
             const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
             const itemsSummary = cart.map(item => `- ${item.name} x${item.quantity}`).join('\n');
-            const msgBody = `New Order: ${orderId}\nName: ${name}\nItems:\n${itemsSummary}\nTotal: UGX ${total.toLocaleString()}\nAddress: ${address}`;
+            const payLabels = {mobile_money: 'Mobile Money', cod: 'Cash on Delivery'};
+            const payLabel = payLabels[payment] || 'Mobile Money';
+            const msgBody = `New Order: ${orderId}\nName: ${name}\nPhone: ${phone}\nPayment: ${payLabel}\nItems:\n${itemsSummary}\nTotal: UGX ${total.toLocaleString()}\nAddress: ${address}`;
 
             // Create order object for local storage
             const order = {
@@ -748,7 +725,6 @@
                     body: JSON.stringify({
                         orderId,
                         customerName: name,
-                        customerEmail: email,
                         customerPhone: phone,
                         address,
                         paymentMethod: payment,
@@ -757,38 +733,32 @@
                         items: cart
                     })
                 });
-
-                // If response is not JSON (e.g., PHP source code on Firebase), this will throw
                 const result = await response.json();
-                
-                // 2. Handle specific payment methods (only if backend succeeded)
-                if (result.success && payment === 'intasend') {
-                    const payResp = await fetch('api/intasend-payment.php?action=initiate', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            amount: total, phone, email, name, orderId
-                        })
-                    });
-                    const payResult = await payResp.json();
-                    if (payResult.success) alert('✅ STK Push sent! Please check your phone.');
+
+                // 2. If backend succeeded and M-Pesa payment, try STK push
+                if (result.success && payment === 'mobile_money') {
+                    try {
+                        await fetch('api/intasend-payment.php?action=initiate', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                amount: total, phone, name, orderId
+                            })
+                        });
+                    } catch (e) {}
                 }
             } catch (error) {
                 console.warn('Backend connection skipped (Firebase Hosting). Order saved locally.');
             }
 
-            // Always handle redirects regardless of backend success (Fallback Mode)
-            if (payment === 'whatsapp') {
-                window.open('https://wa.me/256752546261?text=' + encodeURIComponent("Hello Eva's Beauty Hub, I've placed an order:\n\n" + msgBody), '_blank');
-            } else if (payment === 'instagram') {
-                window.open('https://www.instagram.com/evasbeautyhubug/', '_blank');
-            } else if (payment === 'gmail') {
-                window.location.href = `mailto:atwiineevalyne@gmail.com?subject=New Order ${orderId}&body=${encodeURIComponent(msgBody)}`;
-            } else if (payment === 'intasend' || payment === 'daraja') {
-                // If STK push failed/skipped on Firebase, show manual instructions
-                alert(`✅ Order Placed!\n\nOrder ID: ${orderId}\n\nPlease complete your payment via M-Pesa to +256 752546261 using your Order ID as the reference.`);
+            // Send order notification to shop via WhatsApp
+            const shopMsg = encodeURIComponent(`NEW ORDER: ${orderId}\n\nName: ${name}\nPhone: ${phone}\nAddress: ${address}\nPayment: ${payLabel}\n\nItems:\n${itemsSummary}\n\nTotal: UGX ${total.toLocaleString()}\nNotes: ${notes || 'None'}`);
+            window.open(`https://wa.me/256752546261?text=${shopMsg}`, '_blank');
+
+            if (payment === 'mobile_money') {
+                alert(`Order Placed!\n\nOrder ID: ${orderId}\nTotal: UGX ${total.toLocaleString()}\n\nComplete payment via Mobile Money to +256 752546261 using your Order ID as reference.`);
             } else {
-                alert(`✅ Order Placed Successfully!\n\nOrder ID: ${orderId}\nTotal: UGX ${total.toLocaleString()}\n\nSave your Order ID to track your order!`);
+                alert(`Order Placed!\n\nOrder ID: ${orderId}\nTotal: UGX ${total.toLocaleString()}\n\nPay when your order is delivered. Save your Order ID to track it!`);
             }
 
             // Success cleanup
@@ -797,7 +767,7 @@
             loadOrderHistory();
             showToast('Order placed successfully!');
             btn.disabled = false;
-            btn.textContent = originalBtnText;
+            btn.innerHTML = originalBtnText;
         }
 
         // Track Order
@@ -810,7 +780,7 @@
                 return;
             }
 
-            result.innerHTML = '<p class="loading-status">⌛ Searching database...</p>';
+            result.innerHTML = '<p class="loading-status"><i class="fas fa-hourglass-half"></i> Searching database...</p>';
             
             try {
                 const response = await fetch(`api/get-orders.php?order_id=${orderId}`);
@@ -822,7 +792,7 @@
                     
                     result.innerHTML = `
                         <div class="order-found">
-                            <p class="success">✅ Order Found in Database!</p>
+                            <p class="success"><i class="fas fa-check-circle"></i> Order Found in Database!</p>
                             <p><strong>Order ID:</strong> ${order.orderId}</p>
                             <p><strong>Customer:</strong> ${order.customerName}</p>
                             <p><strong>Items:</strong></p>
@@ -842,7 +812,7 @@
                         const itemsList = order.items.map(item => `<li>${item.name} x${item.quantity}</li>`).join('');
                         result.innerHTML = `
                             <div class="order-found">
-                                <p class="success">✅ Order Found (Local Cache)</p>
+                                <p class="success"><i class="fas fa-check-circle"></i> Order Found (Local Cache)</p>
                                 <p><strong>Order ID:</strong> ${order.orderId}</p>
                                 <p><strong>Status:</strong> <span class="status-${order.status.toLowerCase()}">${order.status}</span></p>
                                 <ul style="list-style: none; margin-bottom: 15px; padding-left: 0;">${itemsList}</ul>
@@ -851,12 +821,12 @@
                             </div>
                         `;
                     } else {
-                        result.innerHTML = '<p class="error">❌ Order not found. Please check your Order ID.</p>';
+                        result.innerHTML = '<p class="error"><i class="fas fa-times-circle"></i> Order not found. Please check your Order ID.</p>';
                     }
                 }
             } catch (error) {
                 console.error("Track error:", error);
-                result.innerHTML = '<p class="error">❌ Error connecting to tracking service.</p>';
+                result.innerHTML = '<p class="error"><i class="fas fa-times-circle"></i> Error connecting to tracking service.</p>';
             }
         }
 
@@ -896,7 +866,7 @@
                             <p><strong>Items:</strong> ${itemsSummaryText}</p>
                             <p><strong>Total:</strong> UGX ${order.total.toLocaleString()}</p>
                             <p><strong>Date:</strong> ${order.displayDate}</p>
-                            <p><strong>Payment:</strong> ${order.payment}</p>
+                            <p><strong>Payment:</strong> ${order.paymentMethod === 'mobile_money' ? 'Mobile Money' : order.paymentMethod === 'cod' ? 'Cash on Delivery' : order.paymentMethod}</p>
                         </div>
                     </div>
                 `;
@@ -905,18 +875,10 @@
             container.innerHTML = html;
         }
 
-        // Newsletter
-        function subscribeNewsletter(e) {
-            e.preventDefault();
-            const email = document.getElementById('newsletterEmail').value;
-            showToast('Thanks for subscribing! 🎉');
-            document.getElementById('newsletterEmail').value = '';
-        }
-
         // Filter by Category
-        function filterCategory(category) {
+        function filterCategory(category, el) {
             document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+            (el || event.target).classList.add('active');
             
             document.querySelectorAll('.category-group').forEach(group => {
                 if (category === 'all' || group.id === category) {
@@ -929,7 +891,11 @@
 
         // Search Products
         function searchProducts() {
-            const query = document.getElementById('searchInput').value.toLowerCase();
+            const inputs = document.querySelectorAll('.search-input');
+            let query = '';
+            inputs.forEach(inp => { if (inp.value.length > query.length) query = inp.value; });
+            query = query.toLowerCase();
+            inputs.forEach(inp => { inp.value = query; });
             
             if (query.length > 0) {
                 document.querySelectorAll('.category-group').forEach(group => {
@@ -969,7 +935,7 @@
             const container = document.getElementById('toast-container');
             const toast = document.createElement('div');
             toast.className = 'toast';
-            toast.innerText = '✅ ' + msg;
+            toast.innerHTML = '<i class="fas fa-check-circle"></i> ' + msg;
             container.appendChild(toast);
             setTimeout(() => toast.remove(), 3000);
         }
@@ -990,6 +956,19 @@
             document.body.classList.add('dark');
         }
 
+        // Global image error fallback (handles dynamically created images too)
+        document.addEventListener('error', function(e) {
+            if (e.target.tagName === 'IMG' && (e.target.closest('.product-card') || e.target.closest('.carousel-item'))) {
+                e.target.style.display = 'none';
+                if (!e.target.nextElementSibling || !e.target.nextElementSibling.classList.contains('img-fallback')) {
+                    const fallback = document.createElement('div');
+                    fallback.className = 'img-fallback';
+                    fallback.textContent = e.target.alt || 'Product';
+                    e.target.parentNode.insertBefore(fallback, e.target.nextSibling);
+                }
+            }
+        }, true);
+
         // Image Preview Modal Functions
         function openImageModal(src) {
             const modal = document.getElementById('imageModal');
@@ -1008,12 +987,12 @@
         // Close modal on click outside
         window.onclick = function(e) {
             if (e.target.id === 'cartModal') closeCart();
-            if (e.target.id === 'orderModal') closeOrderModal();
             if (e.target.id === 'imageModal') closeImageModal();
         }
 
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
+            window.scrollTo(0, 0);
             loadOrderHistory();
             initCircularCarousel();
         });
@@ -1055,7 +1034,7 @@
                 // Position in 3D circle
                 item.style.transform = `rotateY(${angle}deg) translateZ(${radius}px)`;
                 
-                const imgSrc = productImages[product.name] || 'images/placeholder.jpeg';
+                const imgSrc = productImages[product.name] || '';
                 
                 item.innerHTML = `
                     <div class="carousel-item-inner">
@@ -1064,7 +1043,6 @@
                         <p class="price">UGX ${product.price.toLocaleString()}</p>
                         <div class="carousel-btns">
                             <button onclick="addToCart(${idx})">Add to Cart</button>
-                            <button onclick="quickBuy(${idx})" class="btn-quick-buy">Buy Now</button>
                         </div>
                     </div>
                 `;
@@ -1099,6 +1077,13 @@
                 carousel.style.animation = 'rotateCarousel 20s linear infinite';
             }, 5000);
         }
+    window.addEventListener('scroll', function() {
+            const btn = document.getElementById('backToTop');
+            if (btn) {
+                if (window.scrollY > 400) btn.classList.add('visible');
+                else btn.classList.remove('visible');
+            }
+        });
     </script>
 </body>
 </html>

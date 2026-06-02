@@ -222,23 +222,24 @@
             100% { transform: rotate(360deg); }
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <div class="container">
-        <h1>🛍️ M-Pesa Integration Tester</h1>
+        <h1><i class="fas fa-flask"></i> M-Pesa Integration Tester</h1>
         <p class="subtitle">Test M-Pesa STK Push, Validation & Payment Queries</p>
 
         <div class="alert alert-warning">
-            ⚠️ <strong>Important:</strong> Before testing, make sure you have filled in your credentials in <code>mpesa-config.php</code>
+            <i class="fas fa-exclamation-triangle"></i> <strong>Important:</strong> Before testing, make sure you have filled in your credentials in <code>mpesa-config.php</code>
         </div>
 
         <div class="alert alert-info">
-            ℹ️ <strong>Sandbox Testing:</strong> Use phone number <code>254708374149</code> for testing. Any amount works: 1-1,000,000 UGX
+            <i class="fas fa-info-circle"></i> <strong>Sandbox Testing:</strong> Use phone number <code>254708374149</code> for testing. Any amount works: 1-1,000,000 UGX
         </div>
 
         <form id="testForm">
             <div class="test-scenarios">
-                <h4>📋 Test Scenarios</h4>
+                <h4><i class="fas fa-list"></i> Test Scenarios</h4>
                 <ul>
                     <li><strong>Test Phone:</strong> <code>0708374149</code> (add any country code)</li>
                     <li><strong>Test Amount:</strong> Any amount between 1-1,000,000 UGX</li>
@@ -284,13 +285,13 @@
         </form>
 
         <div id="responseSection" class="response-section" style="display: none;">
-            <h3>📊 API Response</h3>
+            <h3><i class="fas fa-chart-bar"></i> API Response</h3>
             <div id="responseBox" class="response-box">Ready for testing...</div>
             <div id="statusBadge"></div>
         </div>
 
         <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; font-size: 0.85rem; color: #999;">
-            <p>💡 <strong>Tips:</strong></p>
+            <p><i class="fas fa-lightbulb"></i> <strong>Tips:</strong></p>
             <ul style="margin-left: 20px; line-height: 1.8;">
                 <li>Test phone validation first to ensure your number format is correct</li>
                 <li>Check browser console for any errors during testing</li>
