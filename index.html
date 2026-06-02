@@ -1084,6 +1084,15 @@
                 if (window.scrollY > 400) btn.classList.add('visible');
                 else btn.classList.remove('visible');
             }
+            const sections = ['home', 'products', 'services', 'about', 'orders', 'contact'];
+            let current = 'home';
+            sections.forEach(id => {
+                const el = document.getElementById(id);
+                if (el && el.getBoundingClientRect().top <= 200) current = id;
+            });
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+            });
         });
     </script>
 </body>
