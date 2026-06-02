@@ -992,6 +992,7 @@
 
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
+            history.replaceState(null, '', window.location.pathname);
             window.scrollTo(0, 0);
             loadOrderHistory();
             initCircularCarousel();
