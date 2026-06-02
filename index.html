@@ -1085,18 +1085,23 @@
                 if (window.scrollY > 400) btn.classList.add('visible');
                 else btn.classList.remove('visible');
             }
-            const sections = ['home', 'products', 'services', 'about', 'orders', 'contact'];
-            const scrollTop = window.scrollY + 200;
+            const sections = ['home', 'products', 'services', 'about', 'contact', 'orders'];
+            const scrollPos = window.scrollY + 200;
             for (let i = sections.length - 1; i >= 0; i--) {
                 const el = document.getElementById(sections[i]);
                 if (el) {
                     const top = el.offsetTop;
                     const bottom = top + el.offsetHeight;
-                    if (scrollTop >= top && scrollTop < bottom) {
+                    if (scrollPos >= top && scrollPos < bottom) {
                         activeSection = sections[i];
                         break;
                     }
                 }
+            }
+            const curEl = document.getElementById(activeSection);
+            if (curEl && window.scrollY >= curEl.offsetTop + curEl.offsetHeight) {
+                const idx = sections.indexOf(activeSection);
+                if (idx < sections.length - 1) activeSection = sections[idx + 1];
             }
             document.querySelectorAll('.nav-link').forEach(link => {
                 link.classList.toggle('active', link.getAttribute('href') === '#' + activeSection);
