@@ -1078,6 +1078,7 @@
                 carousel.style.animation = 'rotateCarousel 20s linear infinite';
             }, 5000);
         }
+    let activeSection = 'home';
     window.addEventListener('scroll', function() {
             const btn = document.getElementById('backToTop');
             if (btn) {
@@ -1085,17 +1086,20 @@
                 else btn.classList.remove('visible');
             }
             const sections = ['home', 'products', 'services', 'about', 'orders', 'contact'];
-            let current = sections[0];
-            let closest = Infinity;
-            sections.forEach(id => {
-                const el = document.getElementById(id);
+            const scrollTop = window.scrollY + 200;
+            for (let i = sections.length - 1; i >= 0; i--) {
+                const el = document.getElementById(sections[i]);
                 if (el) {
-                    const dist = Math.abs(el.getBoundingClientRect().top);
-                    if (dist < closest) { closest = dist; current = id; }
+                    const top = el.offsetTop;
+                    const bottom = top + el.offsetHeight;
+                    if (scrollTop >= top && scrollTop < bottom) {
+                        activeSection = sections[i];
+                        break;
+                    }
                 }
-            });
+            }
             document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+                link.classList.toggle('active', link.getAttribute('href') === '#' + activeSection);
             });
         });
     </script>
