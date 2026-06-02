@@ -1085,10 +1085,14 @@
                 else btn.classList.remove('visible');
             }
             const sections = ['home', 'products', 'services', 'about', 'orders', 'contact'];
-            let current = 'home';
+            let current = sections[0];
+            let closest = Infinity;
             sections.forEach(id => {
                 const el = document.getElementById(id);
-                if (el && el.getBoundingClientRect().top <= 200) current = id;
+                if (el) {
+                    const dist = Math.abs(el.getBoundingClientRect().top);
+                    if (dist < closest) { closest = dist; current = id; }
+                }
             });
             document.querySelectorAll('.nav-link').forEach(link => {
                 link.classList.toggle('active', link.getAttribute('href') === '#' + current);
